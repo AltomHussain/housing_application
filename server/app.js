@@ -2,9 +2,9 @@ import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
-
 import router from "./api";
 import { httpsOnly, logErrors, pushStateRouting } from "./middleware";
+
 
 const apiRoot = "/api";
 const staticDir = path.join(__dirname, "static");
