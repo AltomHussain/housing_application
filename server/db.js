@@ -14,11 +14,12 @@ if (process.env.DATABASE_URL) { //it's set in Heroku
   }
 } else { //default local config
   config = {
-    host: 'localhost',
-    database: 'cyf_hotel',
-    password: '',
-    port: 5432
-  }
+    host: "localhost",
+    user: "postgres",
+    database: "housing_application",
+    password: "123",
+    port: 5432,
+  };
 }
 pool = new Pool(config)  
 

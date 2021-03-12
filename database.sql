@@ -23,11 +23,14 @@ CREATE TABLE houses(
     house_price INT,
     house_city varchar(255),
     house_image varchar(500)
-)
+);
 CREATE TABLE biddings(
     id serial primary key,
     user_bidding_id INTEGER REFERENCES users(user_id),
     house_bid_id INTEGER REFERENCES houses(house_id),
     date_added  DATE NOT NULL,
     bid INT
-)
+);
+INSERT INTO users(user_id, user_name, user_surmane, user_email, user_password, user_github_id, user_city, user_google_id, user_facebook_id, user_phone_number ) values(1, 'Altom', 'Hussain', 'altom@gmail.com', '123456', 123, 'Manchester', 123, 123, 078456516)
+
+INSERT INTO houses( house_id, house_type, house_description, house_sold, house_address, house_postcode, house_price, house_city, house_image) values(1, 'family house', 'my house is in grown floor', true,'13 Brinkclow colse', 'M11 1HN', 5000, 'Manchester', 'https://static8.depositphotos.com/1404193/893/i/600/depositphotos_8931575-stock-photo-nice-house-in-california.jpg' )
