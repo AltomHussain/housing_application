@@ -11,12 +11,27 @@ router.get("/", (_, res, next) => {
     res.json({ message: "Hello, world!" });
   });
 });
+//Get all houes
 router.get("/houses", async (req, res) => {
   const query = ` select * from houses;`;
   const results = await Connection.query(query);
   res.json(results.rows);
 });
-
+//Get one by id
+router.get("/house/:id", async(req, res)=>{
+	try {
+		const houseId = Number(req.params.id);
+		const selectQuery= `select * from houses where house_id = $1`
+		const result = await Connection.query(selectQuery, [houseId])
+		if(result.rows.length !==0){
+			res.status(200).json(result.rows)
+		}else{
+			res.status(404).json(`Sorry, the house with id: ${houseId} does not exist :(`)
+		}
+	} catch (error) {
+		
+	}
+})
 //Post a new house
 router.post("/house", async (req, res) => {
   const {
