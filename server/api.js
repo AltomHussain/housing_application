@@ -11,6 +11,49 @@ router.get("/", (_, res, next) => {
     res.json({ message: "Hello, world!" });
   });
 });
+//Register enpoint
+
+router.post("/register", async (req, res) => {
+  try {
+    const {
+      userName,
+      userSurname,
+      userEmail,
+      userPassword,
+      userGithubId,
+      userCity,
+      userGoogleId,
+      userFacebookId,
+      userPhone,
+    } = req.body;
+    let selectEmeilQuery = `select user_email from users where user_email= $1`;
+    const user = await Connection.query(selectEmeilQuery, [userEmail]);
+    if (user.rows.length > 0) {
+      return res.json("User email already exist try another email");
+    }
+
+    let insertQuery = `INSERT INTO users(user_name, user_surmane, user_email, user_password, user_github_id, user_city, user_google_id, user_facebook_id, user_phone_number ) values($1, $2, $3,$4, $5, $6, $7,$8, $9) RETURNING *`;
+    const reslust = await Connection.query(insertQuery, [
+      userName,
+      userSurname,
+      userEmail,
+      userPassword,
+      userGithubId,
+      userCity,
+      userGoogleId,
+      userFacebookId,
+      userPhone,
+    ]);
+    if (reslust) {
+      res.status(200).json({
+        success: "Success",
+        reslust: reslust.rows,
+      });
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+});
 //Get all houes
 router.get("/houses", async (req, res) => {
   const query = ` select * from houses;`;
@@ -18,20 +61,20 @@ router.get("/houses", async (req, res) => {
   res.json(results.rows);
 });
 //Get one by id
-router.get("/house/:id", async(req, res)=>{
-	try {
-		const houseId = Number(req.params.id);
-		const selectQuery= `select * from houses where house_id = $1`
-		const result = await Connection.query(selectQuery, [houseId])
-		if(result.rows.length !==0){
-			res.status(200).json(result.rows)
-		}else{
-			res.status(404).json(`Sorry, the house with id: ${houseId} does not exist :(`)
-		}
-	} catch (error) {
-		
-	}
-})
+router.get("/house/:id", async (req, res) => {
+  try {
+    const houseId = Number(req.params.id);
+    const selectQuery = `select * from houses where house_id = $1`;
+    const result = await Connection.query(selectQuery, [houseId]);
+    if (result.rows.length !== 0) {
+      res.status(200).json(result.rows);
+    } else {
+      res
+        .status(404)
+        .json(`Sorry, the house with id: ${houseId} does not exist :(`);
+    }
+  } catch (error) {}
+});
 //Post a new house
 router.post("/house", async (req, res) => {
   const {
