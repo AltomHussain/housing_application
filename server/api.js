@@ -26,7 +26,7 @@ router.post("/register", async (req, res) => {
       userFacebookId,
       userPhone,
     } = req.body;
-    let selectEmeilQuery = `select user_email from users where user_email= $1`;
+    let selectEmeilQuery = `select * from users where user_email= $1`;
     const user = await Connection.query(selectEmeilQuery, [userEmail]);
     if (user.rows.length > 0) {
       return res.json("User email already exist try another email");
@@ -44,6 +44,11 @@ router.post("/register", async (req, res) => {
       userFacebookId,
       userPhone,
     ]);
+
+    req.session.user = {
+      id: reslust.rows[0].user_id
+    };
+
     if (reslust) {
       res.status(200).json({
         success: "Success",
@@ -53,6 +58,8 @@ router.post("/register", async (req, res) => {
   } catch (error) {
     console.log(error.message);
   }
+
+
 });
 //Get all houes
 router.get("/houses", async (req, res) => {
