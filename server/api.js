@@ -1,7 +1,7 @@
 import { Router } from "express";
 
 import { Connection } from "./db";
-
+import bcrypt from "bcrypt"
 const router = new Router();
 router.get("/", (_, res, next) => {
   Connection.connect((err) => {
@@ -26,6 +26,8 @@ router.post("/register", async (req, res) => {
       userFacebookId,
       userPhone,
     } = req.body;
+    const salt = await bcrypt.genSalt(10);
+    const bcryptPassword = await bcrypt.hash(userPassword.toString(), salt);
     let selectEmeilQuery = `select * from users where user_email= $1`;
     const user = await Connection.query(selectEmeilQuery, [userEmail]);
     if (user.rows.length > 0) {
@@ -37,7 +39,7 @@ router.post("/register", async (req, res) => {
       userName,
       userSurname,
       userEmail,
-      userPassword,
+      bcryptPassword,
       userGithubId,
       userCity,
       userGoogleId,
@@ -61,6 +63,30 @@ router.post("/register", async (req, res) => {
 
 
 });
+//Login endpoint
+router.post("/login", async(req, res)=>{
+  try {
+    const {userEmail, userPassword} = req.body;
+    let user =  await Connection.query(`select * from users where user_email = $1`, [userEmail])
+    if(user.rows.length===0){
+      res.status(401).json({error: "Email is not registered :("})
+    }
+    const validPassword = await bcrypt.compare(userPassword.toString(), user.rows[0].user_password)
+    console.log(validPassword);
+    if(!validPassword){
+      res.status(401).json({error: "Password or email is not valid"})
+    }
+  
+res.status(200).json({
+  success: "Success",
+  id: user.rows[0].user_id,
+  name: user.rows[0].user_name
+})
+
+  } catch (error) {
+    console.log(error.message);
+  }
+})
 //Get all houes
 router.get("/houses", async (req, res) => {
   const query = ` select * from houses;`;
