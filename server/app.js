@@ -8,9 +8,11 @@ import { httpsOnly, logErrors, pushStateRouting } from "./middleware";
 
 const apiRoot = "/api";
 const staticDir = path.join(__dirname, "static");
-
 const app = express();
-
+// app.get("/yooo", (req, res)=>{
+// 	res.send("youooooo")
+// 	console.log("hello there");
+// })
 app.use(express.json());
 app.use(helmet());
 app.use(logErrors());
@@ -27,3 +29,4 @@ app.use(express.static(staticDir));
 app.use(pushStateRouting(apiRoot, staticDir));
 
 export default app;
+
