@@ -1,5 +1,5 @@
 import { Router } from "express";
-
+import authorization from "./middleware/authorization"
 import { Connection } from "./db";
 import bcrypt from "bcrypt"
 const router = new Router();
@@ -88,13 +88,13 @@ res.status(200).json({
   }
 })
 //Get all houes
-router.get("/houses", async (req, res) => {
+router.get("/houses",authorization,  async (req, res) => {
   const query = ` select * from houses;`;
   const results = await Connection.query(query);
   res.json(results.rows);
 });
 //Get one by id
-router.get("/house/:id", async (req, res) => {
+router.get("/house/:id", authorization,  async (req, res) => {
   try {
     const houseId = Number(req.params.id);
     const selectQuery = `select * from houses where house_id = $1`;
@@ -109,7 +109,8 @@ router.get("/house/:id", async (req, res) => {
   } catch (error) {}
 });
 //Post a new house
-router.post("/house", async (req, res) => {
+router.post("/house", authorization,  async (req, res) => {
+  
   const {
     houseType,
     houseDescription,
@@ -145,7 +146,7 @@ router.post("/house", async (req, res) => {
 });
 
 //Upate existing house
-router.put("/house/:id", async (req, res) => {
+router.put("/house/:id", authorization,  async (req, res) => {
   try {
     const houseId = Number(req.params.id);
     const {
@@ -182,7 +183,7 @@ router.put("/house/:id", async (req, res) => {
 });
 
 //Delete a house
-router.delete("/house/:id", async (req, res) => {
+router.delete("/house/:id",authorization,  async (req, res) => {
   try {
     const houseId = Number(req.params.id);
 
