@@ -1,5 +1,6 @@
 import { Router } from "express";
 import authorization from "./middleware/authorization"
+import validInfo from "./middleware/validInfo"
 import { Connection } from "./db";
 import bcrypt from "bcrypt"
 const router = new Router();
@@ -13,7 +14,7 @@ router.get("/", (_, res, next) => {
 });
 //Register enpoint
 
-router.post("/register", async (req, res) => {
+router.post("/register", validInfo, async (req, res) => {
   try {
     const {
       userName,
@@ -48,7 +49,7 @@ router.post("/register", async (req, res) => {
     ]);
 
     req.session.user = {
-      id: reslust.rows[0].user_id
+      id: reslust.rows[0].user_id,
     };
 
     if (reslust) {
@@ -60,33 +61,37 @@ router.post("/register", async (req, res) => {
   } catch (error) {
     console.log(error.message);
   }
-
-
 });
-//Login endpoint
-router.post("/login", async(req, res)=>{
-  try {
-    const {userEmail, userPassword} = req.body;
-    let user =  await Connection.query(`select * from users where user_email = $1`, [userEmail])
-    if(user.rows.length===0){
-      res.status(401).json({error: "Email is not registered :("})
-    }
-    const validPassword = await bcrypt.compare(userPassword.toString(), user.rows[0].user_password)
-    console.log(validPassword);
-    if(!validPassword){
-      res.status(401).json({error: "Password or email is not valid"})
-    }
-  
-res.status(200).json({
-  success: "Success",
-  id: user.rows[0].user_id,
-  name: user.rows[0].user_name
-})
 
+//Login endpoint
+router.post("/login", validInfo, async (req, res) => {
+  try {
+    const { userEmail, userPassword } = req.body;
+    let user = await Connection.query(
+      `select * from users where user_email = $1`,
+      [userEmail]
+    );
+    if (user.rows.length === 0) {
+      res.status(401).json({ error: "Email is not registered :(" });
+    }
+    const validPassword = await bcrypt.compare(
+      userPassword.toString(),
+      user.rows[0].user_password
+    );
+    console.log(validPassword);
+    if (!validPassword) {
+      res.status(401).json({ error: "Password or email is not valid" });
+    }
+
+    res.status(200).json({
+      success: "Success",
+      id: user.rows[0].user_id,
+      name: user.rows[0].user_name,
+    });
   } catch (error) {
     console.log(error.message);
   }
-})
+});
 //Get all houes
 router.get("/houses",authorization,  async (req, res) => {
   const query = ` select * from houses;`;
