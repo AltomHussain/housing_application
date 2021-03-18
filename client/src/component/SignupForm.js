@@ -1,27 +1,38 @@
-import React, {useState} from "react";
-import "./SignupForm.css"
+import React, { useState } from "react";
+import "./SignupForm.css";
 export default function SignupForm() {
-    const initialValues = {
-        firstName:"dd",
-        surname: "ff",
-        email: "",
-        confirmEmail: "",
-        city: "",
-        phoneNumber: ""
+  const initialValues = {
+    firstName: "dd",
+    surname: "ff",
+    email: "",
+    confirmEmail: "",
+    city: "",
+    phoneNumber: "",
+  };
+  const [input, setInput] = useState(initialValues);
+  const { firstName, surname, email, confirmEmail, city, phoneNumber } = input;
+  const handleChange = (e) => {
+      const updateValues = {
+          ...input,
+          [e.target.name]: e.target.value,
+        };
+        setInput(updateValues);
+    };
+    const handleSubmit = (e) =>{
+        e.preventDefault();
+        console.log("hello there");
     }
-    const [input, setInput] = useState(initialValues);
-const { firstName, surname, email, confirmEmail, city, phoneNumber } = input;
-
-  return (
+    
+    return (
     <div className="form-container">
-      <form className="form-group">
+      <form className="form-group" onSubmit={handleSubmit}>
         <label>First Name</label>
         <input
           type="text"
           placeholder="First name"
           className="form-control"
           value={firstName}
-          onChange={}
+          onChange={handleChange}
           name="firstName"
         />
         <label>Surname</label>
@@ -30,7 +41,7 @@ const { firstName, surname, email, confirmEmail, city, phoneNumber } = input;
           placeholder="Surname"
           className="form-control"
           value={surname}
-          onChange={}
+          onChange={handleChange}
           name="surname"
         />
         <label>Email Address</label>
@@ -39,7 +50,7 @@ const { firstName, surname, email, confirmEmail, city, phoneNumber } = input;
           placeholder="Email address"
           className="form-control"
           value={email}
-          onChange={}
+          onChange={handleChange}
           name="email"
         />
         <label>Confirm Email address</label>
@@ -48,7 +59,7 @@ const { firstName, surname, email, confirmEmail, city, phoneNumber } = input;
           placeholder="Confirm email address"
           className="form-control"
           value={confirmEmail}
-          onChange={}
+          onChange={handleChange}
           name="confirmEmail"
         />
         <label>City</label>
@@ -57,16 +68,16 @@ const { firstName, surname, email, confirmEmail, city, phoneNumber } = input;
           placeholder="City"
           className="form-control"
           value={city}
-          onChange={}
+          onChange={handleChange}
           name="city"
         />
         <label>Phone number</label>
         <input
-          type="text"
+          type="number"
           placeholder=""
           className="form-control"
           value={phoneNumber}
-          onChange={}
+          onChange={handleChange}
           name="phoneNumber"
         />
         <button className="btn btn-success form-control">Submit</button>
