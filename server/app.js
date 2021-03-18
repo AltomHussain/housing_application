@@ -4,7 +4,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import router from "./api";
-import { httpsOnly, logErrors, pushStateRouting } from "./middleware";
+import { httpsOnly, logErrors, pushStateRouting } from "./middleware/middleware";
 import cookieSession from "cookie-session"
 const app = express();
 
