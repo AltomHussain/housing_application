@@ -1,29 +1,49 @@
 import React, { useState } from "react";
 import "./SignupForm.css";
+import { sendErrors } from "./Errors";
 export default function SignupForm() {
   const initialValues = {
-    firstName: "dd",
-    surname: "ff",
+    firstName: "",
+    surname: "",
     email: "",
     confirmEmail: "",
     city: "",
     phoneNumber: "",
   };
   const [input, setInput] = useState(initialValues);
+  const [firstNameError, setFirstNameError] = useState("");
+  const [surnameError, setSurnameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+    const [confirmError, setConfirmError] = useState("")
+   const [cityError, setcityError] = useState("")
+  const [phoneError, setPhoneError] = useState("")
   const { firstName, surname, email, confirmEmail, city, phoneNumber } = input;
   const handleChange = (e) => {
-      const updateValues = {
-          ...input,
-          [e.target.name]: e.target.value,
-        };
-        setInput(updateValues);
+    const updateValues = {
+      ...input,
+      [e.target.name]: e.target.value,
     };
-    const handleSubmit = (e) =>{
-        e.preventDefault();
-        console.log("hello there");
+    setInput(updateValues);
+  };
+  const handleSubmit = (e) => {
+    const fill = "Please fill the field";
+    e.preventDefault();
+    if (!firstName) {
+      setFirstNameError(fill);
     }
-    
-    return (
+    if (!surname) {
+      setSurnameError(fill);
+    }if(!email){
+        setEmailError(fill)
+    }if(!confirmEmail){
+    setConfirmError(fill)
+    }if(!city){
+setcityError(fill)
+    }if(!phoneNumber){
+        setPhoneError(fill)
+    }
+  };
+  return (
     <div className="form-container">
       <form className="form-group" onSubmit={handleSubmit}>
         <label>First Name</label>
@@ -35,6 +55,7 @@ export default function SignupForm() {
           onChange={handleChange}
           name="firstName"
         />
+        {<p>{firstNameError}</p>}
         <label>Surname</label>
         <input
           type="text"
@@ -44,6 +65,7 @@ export default function SignupForm() {
           onChange={handleChange}
           name="surname"
         />
+        {<p>{surnameError}</p>}
         <label>Email Address</label>
         <input
           type="text"
@@ -53,6 +75,8 @@ export default function SignupForm() {
           onChange={handleChange}
           name="email"
         />
+        {<p>{emailError}</p>}
+        {<p>{firstNameError && firstNameError}</p>}
         <label>Confirm Email address</label>
         <input
           type="text"
@@ -62,6 +86,7 @@ export default function SignupForm() {
           onChange={handleChange}
           name="confirmEmail"
         />
+        {<p>{confirmError}</p>}
         <label>City</label>
         <input
           type="text"
@@ -71,6 +96,7 @@ export default function SignupForm() {
           onChange={handleChange}
           name="city"
         />
+        {<p>{cityError}</p>}
         <label>Phone number</label>
         <input
           type="number"
@@ -80,6 +106,7 @@ export default function SignupForm() {
           onChange={handleChange}
           name="phoneNumber"
         />
+        {<p>{phoneError}</p>}
         <button className="btn btn-success form-control">Submit</button>
       </form>
     </div>
