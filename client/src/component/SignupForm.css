@@ -5,3 +5,6 @@
 .form-container input{
     margin-bottom: 10px;
 }
+.form-container p{
+    color: red;
+}
