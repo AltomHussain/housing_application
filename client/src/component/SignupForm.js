@@ -1,22 +1,20 @@
 import React, { useState } from "react";
 import "./SignupForm.css";
-import { sendErrors } from "./Errors";
 export default function SignupForm() {
-  const initialValues = {
+  const [input, setInput] = useState({
     firstName: "",
     surname: "",
     email: "",
     confirmEmail: "",
     city: "",
     phoneNumber: "",
-  };
-  const [input, setInput] = useState(initialValues);
+  });
   const [firstNameError, setFirstNameError] = useState("");
   const [surnameError, setSurnameError] = useState("");
   const [emailError, setEmailError] = useState("");
-    const [confirmError, setConfirmError] = useState("")
-   const [cityError, setcityError] = useState("")
-  const [phoneError, setPhoneError] = useState("")
+  const [confirmError, setConfirmError] = useState("");
+  const [cityError, setcityError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
   const { firstName, surname, email, confirmEmail, city, phoneNumber } = input;
   const handleChange = (e) => {
     const updateValues = {
@@ -25,23 +23,29 @@ export default function SignupForm() {
     };
     setInput(updateValues);
   };
+  console.log(input.firstName);
   const handleSubmit = (e) => {
     const fill = "Please fill the field";
-    e.preventDefault();
     if (!firstName) {
-      setFirstNameError(fill);
+        setFirstNameError(fill);
     }
     if (!surname) {
-      setSurnameError(fill);
-    }if(!email){
-        setEmailError(fill)
-    }if(!confirmEmail){
-    setConfirmError(fill)
-    }if(!city){
-setcityError(fill)
-    }if(!phoneNumber){
-        setPhoneError(fill)
+        setSurnameError(fill);
     }
+    if (!email) {
+        setEmailError(fill);
+    }
+    if (!confirmEmail) {
+        setConfirmError(fill);
+    }
+    if (!city) {
+        setcityError(fill);
+    }
+    if (!phoneNumber) {
+        setPhoneError(fill);
+    }
+    setInput("");
+    e.preventDefault();
   };
   return (
     <div className="form-container">
