@@ -101,8 +101,7 @@ export default function SignupForm() {
           onChange={handleChange}
           name="email"
         />
-
-        {firstNameError && <p>{firstNameError}*</p>}
+        {emailError && <p>{emailError}*</p>}
         <label>Confirm Email address</label>
         <input
           type="text"
@@ -112,7 +111,7 @@ export default function SignupForm() {
           onChange={handleChange}
           name="confirmEmail"
         />
-        {confirmError&& <p>{confirmError}</p>}
+        {confirmError && <p>{confirmError}*</p>}
         <label>City</label>
         <input
           type="text"
@@ -122,7 +121,7 @@ export default function SignupForm() {
           onChange={handleChange}
           name="city"
         />
-        {cityError&& <p>{cityError}</p>}
+        {cityError && <p>{cityError}*</p>}
         <label>Phone number</label>
         <input
           type="text"
@@ -132,7 +131,7 @@ export default function SignupForm() {
           onChange={handleChange}
           name="phoneNumber"
         />
-        {phoneError&& <p>{phoneError}</p>}
+        {phoneError && <p>{phoneError}*</p>}
         <button className="btn btn-success form-control">Submit</button>
       </form>
     </div>
