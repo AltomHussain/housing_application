@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./SignupForm.css";
+import { sendErrors } from "./Errors";
 export default function SignupForm() {
   const [input, setInput] = useState({
     firstName: "",
@@ -15,7 +16,9 @@ export default function SignupForm() {
   const [confirmError, setConfirmError] = useState("");
   const [cityError, setcityError] = useState("");
   const [phoneError, setPhoneError] = useState("");
-  //   const { firstName, surname, email, confirmEmail, city, phoneNumber } = input;
+    const { firstName, surname, email, confirmEmail, city, phoneNumber } = input;
+ 
+
   const handleChange = (e) => {
     const updateValues = {
       ...input,
@@ -23,51 +26,26 @@ export default function SignupForm() {
     };
     setInput(updateValues);
   };
-  console.log(input.firstName === "");
+  console.log(firstName);
   const handleSubmit = (e) => {
     e.preventDefault();
-    const fill = "Please fill the field";
-    if (input.firstName === "") {
-     return setFirstNameError(fill);
-    } else {
-      setFirstNameError("");
-    }
-
-    if (input.surname === "") {
-     return setSurnameError(fill);
-    } else {
-      setSurnameError("");
-    }
-
-    if (input.email === "") {
-     return setEmailError(fill);
-    } else {
-      setEmailError("");
-    }
-    if (input.confirmEmail === "") {
-     return setConfirmError(fill);
-    } else {
-      setConfirmError("");
-    }
-    if (input.city === "") {
-     return setcityError(fill);
-    } else {
-      setcityError("");
-    }
-    if (input.phoneNumber === "") {
-     return setPhoneError(fill);
-    } else {
-      setPhoneError("");
-    }
-    return setInput({
-      firstName: "",
-      surname: "",
-      email: "",
-      confirmEmail: "",
-      city: "",
-      phoneNumber: "",
-    });
-  };
+   return sendErrors(
+     firstName,
+     surname,
+     email,
+     confirmEmail,
+     city,
+     phoneNumber,
+     setFirstNameError,
+     setSurnameError,
+     setEmailError,
+     setConfirmError,
+     setcityError,
+     setPhoneError,
+     setInput
+   );
+    
+   };
 
   return (
     <div className="form-container">
