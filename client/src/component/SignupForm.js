@@ -9,19 +9,21 @@ import * as yup from "yup";
 export default function SignupForm() {
   console.log(useForm());
   let schema = yup.object().shape({
-    firstName: yup.string().required("s;lakfdj"),
-    surname: yup.string().required(),
-    email: yup.string().required(),
-    password: yup.string().required().min(5),
-    confirmEmail: yup.string().required(),
-    city: yup.string().required(),
+    firstName: yup.string().required("Field is required please fill it !"),
+    surname: yup.string().required("Field is required please fill it !"),
+    email: yup.string().required("Field is required please fill it !"),
+    password: yup
+      .string()
+      .required("Field is required please fill it !")
+      .min(5),
+    confirmEmail: yup.string().required("Field is required please fill it !"),
+    city: yup.string().required("field is required please fill it !"),
     phoneNumber: yup.number().required().positive(),
   });
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
   });
 
-  
   // console.log(content.inputs);
   // const test = () => {
   //   fetch("/api/register", {
