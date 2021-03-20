@@ -1,94 +1,128 @@
 import React, { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import "./SignupForm.css";
 import { sendErrors } from "./Errors";
+import content from "./statics/InputsData";
+import * as yup from "yup";
 
 export default function SignupForm() {
-  const [input, setInput] = useState({
-    firstName: "",
-    surname: "",
-    email: "",
-    confirmEmail: "",
-    password: "",
-    city: "",
-    phoneNumber: "",
+
+  console.log(useForm());
+  let schema = yup.object().shape({
+    firstName: yup.string().required("s;lakfdj"),
+    surname: yup.string().required(),
+     email: yup.string().required(),
+     password: yup.string().required().min(5),
+  confirmEmail: yup.string().required(),
+    // city: yup.string().required(),
+    // phoneNumber: yup.number().required().positive().integer(),
   });
-  const [firstNameError, setFirstNameError] = useState("");
-  const [surnameError, setSurnameError] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [confirmError, setConfirmError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [cityError, setcityError] = useState("");
-  const [phoneError, setPhoneError] = useState("");
-  const {
-    firstName,
-    surname,
-    email,
-    confirmEmail,
-    city,
-    phoneNumber,
-    password,
-  } = input;
-  console.log(
-    firstName,
-    surname,
-    email,
-    confirmEmail,
-    city,
-    phoneNumber,
-    password
-  );
+  const { register, handleSubmit, errors } = useForm({
+    resolver: yupResolver(schema),
+  });
 
+  // const [input, setInput] = useState({
+  //   firstName: "",
+  //   surname: "",
+  //   email: "",
+  //   confirmEmail: "",
+  //   password: "",
+  //   city: "",
+  //   phoneNumber: "",
+  // });
 
-  const handleChange = (e) => {
-    const updateValues = {
-      ...input,
-      [e.target.name]: e.target.value,
-    };
-    setInput(updateValues);
-  };
+  // const [firstNameError, setFirstNameError] = useState("");
+  // const [surnameError, setSurnameError] = useState("");
+  // const [emailError, setEmailError] = useState("");
+  // const [confirmError, setConfirmError] = useState("");
+  // const [passwordError, setPasswordError] = useState("");
+  // const [cityError, setcityError] = useState("");
+  // const [phoneError, setPhoneError] = useState("");
+  // const [isValid, setIsValid] = useState(false);
+  // const {
+  //   firstName,
+  //   surname,
+  //   email,
+  //   confirmEmail,
+  //   city,
+  //   phoneNumber,
+  //   password,
+  // } = input;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    sendErrors(
-      firstName,
-      surname,
-      email,
-      confirmEmail,
-      password,
-      city,
-      phoneNumber,
-      setFirstNameError,
-      setSurnameError,
-      setEmailError,
-      setConfirmError,
-      setcityError,
-      setPhoneError,
-      setPasswordError,
-      setInput
-    );
-    fetch("/api/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userName: firstName,
-        userSurname: surname,
-        userEmail: email,
-        userPassword: password,
-        userCity: city,
-        userPhone: phoneNumber,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.log(error));
-  };
+  // console.log(isValid === true);
+  // const handleChange = (e) => {
+  //   const updateValues = {
+  //     ...input,
+  //     [e.target.name]: e.target.value,
+  //   };
+  //   setInput(updateValues);
+  // };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   sendErrors(
+  //     firstName,
+  //     surname,
+  //     email,
+  //     confirmEmail,
+  //     password,
+  //     city,
+  //     phoneNumber,
+  //     setFirstNameError,
+  //     setSurnameError,
+  //     setEmailError,
+  //     setConfirmError,
+  //     setcityError,
+  //     setPhoneError,
+  //     setPasswordError,
+  //     setInput,
+  //     setIsValid
+  //   );
 
+  //   test();
+  // };
+  // console.log(content.inputs);
+  // const test = () => {
+  //   fetch("/api/register", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       userName: firstName,
+  //       userSurname: surname,
+  //       userEmail: email,
+  //       userPassword: password,
+  //       userCity: city,
+  //       userPhone: phoneNumber,
+  //     }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => console.log(data))
+  //     .catch((error) => console.log(error));
+  // };
+  const onSubmit = (data) => console.log(data);
+ console.log(errors);
   return (
     <div className="form-container">
-      <form className="form-group" onSubmit={handleSubmit}>
-        <label>First Name</label>
+      <form className="form-group" onSubmit={handleSubmit(onSubmit)}>
+        {content.inputs.map((input, index) => {
+          return (
+            <div key={index}>
+              <label>{input.label}</label>
+              <input
+                type={input.type}
+                placeholder={input.label}
+                name={input.name}
+                className="form-control"
+                ref={register}
+              />
+           
+            </div>
+          );
+        })}
+
+        {/* <label>First Name</label>
         <input
           type="text"
           placeholder="First name"
@@ -157,8 +191,10 @@ export default function SignupForm() {
           onChange={handleChange}
           name="phoneNumber"
         />
-        {phoneError && <p>{phoneError}*</p>}
-        <button className="btn btn-success form-control">Submit</button>
+        {phoneError && <p>{phoneError}*</p>} */}
+        <button type="submit" className="btn btn-success form-control">
+          Submit
+        </button>
       </form>
     </div>
   );

@@ -45,6 +45,7 @@ router.post("/register", validInfo, async (req, res) => {
     if (user.rows.length > 0) {
       return res.json("User email already exist try another email");
     }
+    
 
     let insertQuery = `INSERT INTO users(user_name, user_surmane, user_email, user_password, user_github_id, user_city, user_google_id, user_facebook_id, user_phone_number ) values($1, $2, $3,$4, $5, $6, $7,$8, $9) RETURNING *`;
     const reslust = await Connection.query(insertQuery, [

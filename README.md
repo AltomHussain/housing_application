@@ -1,5 +1,8 @@
 # Starter Kit
-
+##Dependecies been used for the project
+-useForm() hook to control the form
+-@hookform/resolvers for validation of the form
+-yup also for validation
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
  - [x] Full stack ES8+ with [Babel]
