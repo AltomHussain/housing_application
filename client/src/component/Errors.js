@@ -12,6 +12,7 @@ export const sendErrors = (
   setConfirmError,
   setcityError,
   setPhoneError,
+  setPasswordError,
   setInput
 ) => {
   const fill = "Please fill the field";
@@ -37,6 +38,15 @@ export const sendErrors = (
   } else {
     setConfirmError("");
   }
+if(password===""){
+  return setPasswordError(fill)
+}else if(password.length <3){
+  return setPasswordError("password not log enough")
+}
+else{
+  setPasswordError("")
+}
+
   if (city === "") {
     return setcityError(fill);
   } else {

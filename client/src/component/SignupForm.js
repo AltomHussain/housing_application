@@ -15,6 +15,7 @@ export default function SignupForm() {
   const [surnameError, setSurnameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [confirmError, setConfirmError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [cityError, setcityError] = useState("");
   const [phoneError, setPhoneError] = useState("");
     const {
@@ -76,6 +77,7 @@ useEffect(()=>sendInfo , [])
      setConfirmError,
      setcityError,
      setPhoneError,
+     setPasswordError,
      setInput
    );
     
@@ -133,6 +135,7 @@ useEffect(()=>sendInfo , [])
           onChange={handleChange}
           name="city"
         />
+        {cityError && <p>{cityError}*</p>}
         <label>Password</label>
         <input
           type="text"
@@ -142,7 +145,7 @@ useEffect(()=>sendInfo , [])
           onChange={handleChange}
           name="password"
         />
-        {cityError && <p>{cityError}*</p>}
+        {passwordError && <p>{passwordError}*</p>}
         <label>Phone number</label>
         <input
           type="text"
