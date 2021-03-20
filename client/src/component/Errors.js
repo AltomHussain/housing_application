@@ -41,7 +41,7 @@ export const sendErrors = (
 if(password===""){
   return setPasswordError(fill)
 }else if(password.length <3){
-  return setPasswordError("password not log enough")
+  return setPasswordError("password must be 5 characters at least")
 }
 else{
   setPasswordError("")

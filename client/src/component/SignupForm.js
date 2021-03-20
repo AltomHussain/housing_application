@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./SignupForm.css";
 import { sendErrors } from "./Errors";
+
 export default function SignupForm() {
   const [input, setInput] = useState({
     firstName: "",
@@ -18,40 +19,26 @@ export default function SignupForm() {
   const [passwordError, setPasswordError] = useState("");
   const [cityError, setcityError] = useState("");
   const [phoneError, setPhoneError] = useState("");
-    const {
-      firstName,
-      surname,
-      email,
-      confirmEmail,
-      city,
-      phoneNumber,
-      password,
-    } = input;
- const sendInfo =async ()=>{
-try {
-  const res = await fetch("/lsldfk", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      userName: firstName,
-      userSurname: surname,
-      userEmail: email,
-      userPassword,
-      userGithubId,
-      userCity,
-      userGoogleId,
-      userFacebookId,
-      userPhone,
-    }),
-  });
-  
-} catch (error) {
-  console.log(error);
-}
- }
-useEffect(()=>sendInfo , [])
+  const {
+    firstName,
+    surname,
+    email,
+    confirmEmail,
+    city,
+    phoneNumber,
+    password,
+  } = input;
+  console.log(
+    firstName,
+    surname,
+    email,
+    confirmEmail,
+    city,
+    phoneNumber,
+    password
+  );
+
+
   const handleChange = (e) => {
     const updateValues = {
       ...input,
@@ -60,28 +47,43 @@ useEffect(()=>sendInfo , [])
     setInput(updateValues);
   };
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
-   return sendErrors(
-     firstName,
-     surname,
-     email,
-     confirmEmail,
-     password,
-     city,
-     phoneNumber,
-     setFirstNameError,
-     setSurnameError,
-     setEmailError,
-     setConfirmError,
-     setcityError,
-     setPhoneError,
-     setPasswordError,
-     setInput
-   );
-    
-   };
+    sendErrors(
+      firstName,
+      surname,
+      email,
+      confirmEmail,
+      password,
+      city,
+      phoneNumber,
+      setFirstNameError,
+      setSurnameError,
+      setEmailError,
+      setConfirmError,
+      setcityError,
+      setPhoneError,
+      setPasswordError,
+      setInput
+    );
+    fetch("/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userName: firstName,
+        userSurname: surname,
+        userEmail: email,
+        userPassword: password,
+        userCity: city,
+        userPhone: phoneNumber,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
+  };
 
   return (
     <div className="form-container">

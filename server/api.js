@@ -27,6 +27,17 @@ router.post("/register", validInfo, async (req, res) => {
       userFacebookId,
       userPhone,
     } = req.body;
+    console.log(
+      userName,
+      userSurname,
+      userEmail,
+      userPassword,
+      userGithubId,
+      userCity,
+      userGoogleId,
+      userFacebookId,
+      userPhone
+    );
     const salt = await bcrypt.genSalt(10);
     const bcryptPassword = await bcrypt.hash(userPassword.toString(), salt);
     let selectEmeilQuery = `select * from users where user_email= $1`;
