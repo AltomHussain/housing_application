@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./SignupForm.css";
 import { sendErrors } from "./Errors";
 export default function SignupForm() {
@@ -7,6 +7,7 @@ export default function SignupForm() {
     surname: "",
     email: "",
     confirmEmail: "",
+    password: "",
     city: "",
     phoneNumber: "",
   });
@@ -16,9 +17,40 @@ export default function SignupForm() {
   const [confirmError, setConfirmError] = useState("");
   const [cityError, setcityError] = useState("");
   const [phoneError, setPhoneError] = useState("");
-    const { firstName, surname, email, confirmEmail, city, phoneNumber } = input;
- 
-
+    const {
+      firstName,
+      surname,
+      email,
+      confirmEmail,
+      city,
+      phoneNumber,
+      password,
+    } = input;
+ const sendInfo =async ()=>{
+try {
+  const res = await fetch("/lsldfk", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      userName: firstName,
+      userSurname: surname,
+      userEmail: email,
+      userPassword,
+      userGithubId,
+      userCity,
+      userGoogleId,
+      userFacebookId,
+      userPhone,
+    }),
+  });
+  
+} catch (error) {
+  console.log(error);
+}
+ }
+useEffect(()=>sendInfo , [])
   const handleChange = (e) => {
     const updateValues = {
       ...input,
@@ -26,7 +58,8 @@ export default function SignupForm() {
     };
     setInput(updateValues);
   };
-  console.log(firstName);
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
    return sendErrors(
@@ -34,6 +67,7 @@ export default function SignupForm() {
      surname,
      email,
      confirmEmail,
+     password,
      city,
      phoneNumber,
      setFirstNameError,
@@ -55,7 +89,7 @@ export default function SignupForm() {
           type="text"
           placeholder="First name"
           className="form-control"
-          value={input.firstName}
+          value={firstName}
           onChange={handleChange}
           name="firstName"
         />
@@ -65,7 +99,7 @@ export default function SignupForm() {
           type="text"
           placeholder="Surname"
           className="form-control"
-          value={input.surname}
+          value={surname}
           onChange={handleChange}
           name="surname"
         />
@@ -75,7 +109,7 @@ export default function SignupForm() {
           type="text"
           placeholder="Email address"
           className="form-control"
-          value={input.email}
+          value={email}
           onChange={handleChange}
           name="email"
         />
@@ -85,7 +119,7 @@ export default function SignupForm() {
           type="text"
           placeholder="Confirm email address"
           className="form-control"
-          value={input.confirmEmail}
+          value={confirmEmail}
           onChange={handleChange}
           name="confirmEmail"
         />
@@ -95,9 +129,18 @@ export default function SignupForm() {
           type="text"
           placeholder="City"
           className="form-control"
-          value={input.city}
+          value={city}
           onChange={handleChange}
           name="city"
+        />
+        <label>Password</label>
+        <input
+          type="text"
+          placeholder="Password"
+          className="form-control"
+          value={password}
+          onChange={handleChange}
+          name="password"
         />
         {cityError && <p>{cityError}*</p>}
         <label>Phone number</label>
@@ -105,7 +148,7 @@ export default function SignupForm() {
           type="text"
           placeholder=""
           className="form-control"
-          value={input.phoneNumber}
+          value={phoneNumber}
           onChange={handleChange}
           name="phoneNumber"
         />

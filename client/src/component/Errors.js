@@ -3,6 +3,7 @@ export const sendErrors = (
   surname,
   email,
   confirmEmail,
+  password,
   city,
   phoneNumber,
   setFirstNameError,
@@ -51,6 +52,7 @@ export const sendErrors = (
     surname: "",
     email: "",
     confirmEmail: "",
+    password: "",
     city: "",
     phoneNumber: "",
   });
