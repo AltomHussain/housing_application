@@ -15,29 +15,30 @@ let schema = formValidation()
   });
 
   // console.log(content.inputs);
-  // const test = () => {
-  //   fetch("/api/register", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       userName: firstName,
-  //       userSurname: surname,
-  //       userEmail: email,
-  //       userPassword: password,
-  //       userCity: city,
-  //       userPhone: phoneNumber,
-  //     }),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => console.log(data))
-  //     .catch((error) => console.log(error));
-  // };
+  const test = (data) => {
+    fetch("/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userName: data.firstName,
+        userSurname: data.surname,
+        userEmail: data.email,
+        userPassword: data.password,
+        userCity: data.city,
+        userPhone:data.phoneNumber,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
+  };
   const onSubmit = (data) =>{
     console.log("befor", data);
+
+test(data)
     reset();
-    console.log("after", data);
   } 
 
   return (
@@ -55,7 +56,7 @@ let schema = formValidation()
                 className="form-control"
                 ref={register}
               />
-              <p>{errors[name]?.message}</p>
+              <p className="text-center">{errors[name]?.message}</p>
             </div>
           );
         })}

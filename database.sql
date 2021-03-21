@@ -1,16 +1,17 @@
 CREATE DATABASE housing_application;
 CREATE TABLE users
 (
-    user_id serial primary key,
+    user_id bigint primary key,
     user_name varchar(255) NOT NULL,
     user_surmane varchar(255) NOT NULL,
     user_email varchar(255) NOT NULL UNIQUE,
     user_password varchar(255) NOT NULL,
-    user_github_id INT,
+    user_github_id varchar(255),
     user_city varchar(255),
     user_google_id INT,
     user_facebook_id INT,
     user_phone_number INT
+
 )
 CREATE TABLE houses(
     house_id serial primary key,
