@@ -31,7 +31,7 @@ export default function SignupForm() {
     city: yup.string().required("City is required!"),
     phoneNumber: yup.number().required().positive(),
   });
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors, reset } = useForm({
     resolver: yupResolver(schema),
   });
 
@@ -55,7 +55,11 @@ export default function SignupForm() {
   //     .then((data) => console.log(data))
   //     .catch((error) => console.log(error));
   // };
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) =>{
+    console.log("befor", data);
+    reset();
+    console.log("after", data);
+  } 
 
   return (
     <div className="form-container">
