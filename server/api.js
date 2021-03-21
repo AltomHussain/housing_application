@@ -43,7 +43,7 @@ router.post("/register", validInfo, async (req, res) => {
     let selectEmeilQuery = `select * from users where user_email= $1`;
     const user = await Connection.query(selectEmeilQuery, [userEmail]);
     if (user.rows.length > 0) {
-      return res.json("User email already exist try another email");
+      return res.status(401).json("User email already exist try another email");
     }
     
 
