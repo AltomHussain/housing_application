@@ -90,10 +90,11 @@ router.post("/login", validInfo, async (req, res) => {
       userPassword.toString(),
       user.rows[0].user_password
     );
-    console.log(validPassword);
+  
     if (!validPassword) {
       res.status(401).json({ error: "Password or email is not valid" });
     }
+    
 
     res.status(200).json({
       success: "Success",
@@ -217,6 +218,10 @@ router.delete("/house/:id",authorization,  async (req, res) => {
     }
   } catch (error) {
     console.log(error.message);
+    
   }
+});
+router.get('*', function(req, res) {
+ res.sendFile(path.resolve(__dirname, "index.html"));
 });
 export default router;
