@@ -92,7 +92,7 @@ router.post("/login", validInfo, async (req, res) => {
     );
   
     if (!validPassword) {
-      res.status(401).json({ error: "Password or email is not valid" });
+      res.status(401).json({ error: "Password does not match sorry😏 :(" });
     }
     
 
