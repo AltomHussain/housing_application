@@ -2,19 +2,19 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import "./SignupForm.css";
+import { useHistory } from "react-router-dom";
 import { formValidation } from "./statics/FormValidation";
 import content from "./statics/InputsData";
 
 export default function SignupForm() {
-  const [dbError, setDbError] = useState("");
-  const [dbData, setDbData] = useState("")
-  const [resCode, setRescode] = useState(false)
+  let history = useHistory();
+  const [dbData, setDbData] = useState("");
   let schema = formValidation();
   const { register, handleSubmit, errors, reset } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const test = (data) => {
+  const sendData = (data) => {
     fetch("/api/register", {
       method: "POST",
       headers: {
@@ -30,29 +30,25 @@ export default function SignupForm() {
       }),
     })
       .then((res) => {
-        setRescode(res);
+        if (res.ok) {
+          reset();
+          history.push("/home")
+        }
         return res.json();
       })
       .then((data) => setDbData(data))
-      .catch((error) => setDbError(error))
-
-
+      .catch((error) => console.log(error));
   };
+
   const onSubmit = (data) => {
-    test(data);
-    console.log("data ", dbData.success);
-    if (dbData.success !== undefined) {
-    return   reset();
-    } else{
-    return  console.log("hello");
-    }
+    sendData(data);
+    
   };
-
 
   return (
     <div className="form-container">
       <form className="form-group" onSubmit={handleSubmit(onSubmit)}>
-        <h5 className="text-center">{!dbData.success? dbData: null}</h5>
+        <h5 className="text-center">{!dbData.success ? dbData : null}</h5>
         {content.inputs.map(({ type, id, label, name }) => {
           return (
             <div key={id}>
