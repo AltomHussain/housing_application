@@ -50,4 +50,20 @@ const content = {
     },
   ],
 };
+export const loginContent ={
+  inputs: [
+    {
+      id: 1,
+      type: "email",
+      label: "Email Address",
+      name: "email"
+    },
+    {
+      id: 2,
+      type: "password",
+      label: "Password",
+      name: "password"
+    }
+  ]
+}
 export default content;
