@@ -12,17 +12,17 @@ export default function LoginForm() {
   let schema = yup.object().shape({
     email: yup
       .string()
-      .required("Email is required !")
-      .email("Email is invalid"),
+      .required("*Email is required !")
+      .email("*Email is invalid !"),
     password: yup
       .string()
-      .required("Password is required")
-      .min(6, "Password must be at least 6 characters"),
+      .required("*Password is required !")
+      .min(6, "*Password must be at least 6 characters !"),
   });
   const { register, handleSubmit, errors, reset } = useForm({
     resolver: yupResolver(schema),
   });
-  console.log(loginContent);
+
   const onSubmit = (data) => {
     fetch("/api/login", {
       method: "POST",
@@ -35,6 +35,10 @@ export default function LoginForm() {
       }),
     })
       .then((res) => {
+        if(res.ok){
+          reset();
+          history.push("/home")
+        }
         return res.json();
       })
       .then((data) => setData(data))
@@ -45,9 +49,10 @@ export default function LoginForm() {
   return (
     <div className="login-container">
       <form onSubmit={handleSubmit(onSubmit)}>
+        <p className="text-center">{data? data.error: null}</p>
         {loginContent.inputs.map(({id, type, name, label})=>{
           return (
-            <div>
+            <div key={id}>
               <label>{label}</label>
               <input
                 type={type}
@@ -55,7 +60,7 @@ export default function LoginForm() {
                 name={name}
                 ref={register}
               />
-              <p>{errors[name]?.message}</p>
+              <p className="text-center">{errors[name]?.message}</p>
             </div>
           );
         })}
