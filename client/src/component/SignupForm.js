@@ -8,7 +8,7 @@ import content from "./statics/InputsData";
 export default function SignupForm() {
   const [dbError, setDbError] = useState("");
   const [dbData, setDbData] = useState("")
-  const [resCode, setRescode] = useState("")
+  const [resCode, setRescode] = useState(false)
   let schema = formValidation();
   const { register, handleSubmit, errors, reset } = useForm({
     resolver: yupResolver(schema),
@@ -40,16 +40,15 @@ export default function SignupForm() {
   };
   const onSubmit = (data) => {
     test(data);
-    if (resCode.status === 200) {
-     return  reset();
+    console.log("data ", dbData.success);
+    if (dbData.success !== undefined) {
+    return   reset();
     } else{
     return  console.log("hello");
     }
   };
-console.log(dbError.success === "Success");
-console.log("error", dbError);
-console.log("data", dbData);
-console.log("res", resCode.status===200);
+
+
   return (
     <div className="form-container">
       <form className="form-group" onSubmit={handleSubmit(onSubmit)}>

@@ -17,7 +17,7 @@ if (process.env.DATABASE_URL) { //it's set in Heroku
     host: "localhost",
     user: "postgres",
     database: "housing_application",
-    password: "123",
+    password: "altom",
     port: 5432,
   };
 }
