@@ -45,10 +45,10 @@ export default function SignupForm() {
     sendData(data);
     
   };
-
+    let back=  <i className="fas fa-long-arrow-alt-left me-2">Back</i>;
   return (
     <>
-    <Header back="Back"/>
+    <Header back={back}/>
     <div className="form-container">
       <form className="form-group" onSubmit={handleSubmit(onSubmit)}>
         <h5 className="text-center">{!dbData.success ? dbData : null}</h5>
