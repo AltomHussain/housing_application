@@ -1,9 +1,11 @@
 import React from 'react'
 import { Link } from "react-router-dom";
+import Header from '../component/Header';
 import "./HomePage.css"
 export default function HomePage() {
     return (
       <div>
+        <Header home="Home"/>
         <article className="room">
           <div className="img-container">
             <img

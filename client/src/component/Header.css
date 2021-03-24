@@ -1,0 +1,15 @@
+.dark-theme{
+  color: #eee;
+  background: #121212;
+}
+.dark{
+     color: #eee;
+  background: #121212; 
+}
+.light-theme{
+    color: black;
+    background: white;
+}
+/* body.dark{
+    background: red;
+} */

@@ -5,6 +5,7 @@ import "./SignupForm.css";
 import { useHistory } from "react-router-dom";
 import { formValidation } from "./statics/FormValidation";
 import content from "./statics/InputsData";
+import Header from "./Header";
 
 export default function SignupForm() {
   let history = useHistory();
@@ -44,8 +45,10 @@ export default function SignupForm() {
     sendData(data);
     
   };
-
+    let back=  <i className="fas fa-long-arrow-alt-left me-2">Back</i>;
   return (
+    <>
+    <Header back={back}/>
     <div className="form-container">
       <form className="form-group" onSubmit={handleSubmit(onSubmit)}>
         <h5 className="text-center">{!dbData.success ? dbData : null}</h5>
@@ -69,5 +72,5 @@ export default function SignupForm() {
         </button>
       </form>
     </div>
-  );
+ </> );
 }

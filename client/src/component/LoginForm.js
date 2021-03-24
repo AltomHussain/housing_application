@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import {loginContent} from "./statics/InputsData"
 import * as yup from "yup";
 import "./LoginForm.css";
+import Header from "./Header";
 export default function LoginForm() {
     let history = useHistory();
   const [data, setData] = useState(null);
@@ -47,6 +48,8 @@ export default function LoginForm() {
 
 
   return (
+    <>
+    <Header login="Login" signup="Signup"/>
     <div className="login-container">
       <form onSubmit={handleSubmit(onSubmit)}>
         <p className="text-center">{data? data.error: null}</p>
@@ -72,5 +75,5 @@ export default function LoginForm() {
       <Link to="/signup">Sing Up</Link>
       <Link to="/home">home</Link>
     </div>
-  );
+  </>);
 }
