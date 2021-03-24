@@ -49,7 +49,7 @@ export default function LoginForm() {
 
   return (
     <>
-    <Header />
+    <Header login="Login" signup="Signup"/>
     <div className="login-container">
       <form onSubmit={handleSubmit(onSubmit)}>
         <p className="text-center">{data? data.error: null}</p>
