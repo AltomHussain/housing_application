@@ -1,16 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Header.css"
+import "./Header.css";
 export default function Header({ login, signup, back, home }) {
-  const handleTheme = () =>{
-    const moon = document.querySelector(".fa-moon");
-   moon.addEventListener("click", ()=>{
-     document.body.classList.toggle("dark-theme")
-   })
 
-  }
+  const handleTheme = () => {
+    const moon = document.querySelector(".fa-moon");
+    moon.addEventListener("click", () => {
+      document.body.classList.toggle("dark-theme");
+    });
+   }; 
+
+ 
+
   return (
-    <div>
+    <div >
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
@@ -37,15 +40,16 @@ export default function Header({ login, signup, back, home }) {
             </ul>
             <div className="d-flex me-4">
               <Link to="/">
-                {" "}
                 <p className="me-5">{login}</p>
               </Link>
               <Link to="/signup">
-                {" "}
                 <p className="me-5">{signup}</p>
               </Link>
-            <button className="btn btn-warning" onClick={()=>handleTheme()}> <i className="fas fa-moon"></i></button> 
+              <button className="btn btn-warning" onClick={() => handleTheme()}>
+                <i className="fas fa-moon"></i>
+              </button>
             </div>
+            
           </div>
         </div>
       </nav>
