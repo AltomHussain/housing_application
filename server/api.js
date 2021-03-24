@@ -27,13 +27,25 @@ router.post("/register", validInfo, async (req, res) => {
       userFacebookId,
       userPhone,
     } = req.body;
+    console.log(
+      userName,
+      userSurname,
+      userEmail,
+      userPassword,
+      userGithubId,
+      userCity,
+      userGoogleId,
+      userFacebookId,
+      userPhone
+    );
     const salt = await bcrypt.genSalt(10);
     const bcryptPassword = await bcrypt.hash(userPassword.toString(), salt);
     let selectEmeilQuery = `select * from users where user_email= $1`;
     const user = await Connection.query(selectEmeilQuery, [userEmail]);
     if (user.rows.length > 0) {
-      return res.json("User email already exist try another email");
+      return res.status(401).json("User email already exist try another email");
     }
+    
 
     let insertQuery = `INSERT INTO users(user_name, user_surmane, user_email, user_password, user_github_id, user_city, user_google_id, user_facebook_id, user_phone_number ) values($1, $2, $3,$4, $5, $6, $7,$8, $9) RETURNING *`;
     const reslust = await Connection.query(insertQuery, [
@@ -78,10 +90,11 @@ router.post("/login", validInfo, async (req, res) => {
       userPassword.toString(),
       user.rows[0].user_password
     );
-    console.log(validPassword);
+  
     if (!validPassword) {
-      res.status(401).json({ error: "Password or email is not valid" });
+      res.status(401).json({ error: "Password does not match sorry😏 :(" });
     }
+    
 
     res.status(200).json({
       success: "Success",
@@ -205,6 +218,10 @@ router.delete("/house/:id",authorization,  async (req, res) => {
     }
   } catch (error) {
     console.log(error.message);
+    
   }
+});
+router.get('*', function(req, res) {
+ res.sendFile(path.resolve(__dirname, "index.html"));
 });
 export default router;

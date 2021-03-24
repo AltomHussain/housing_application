@@ -1,0 +1,10 @@
+.form-container{
+  width: 50%;
+  margin: 20px auto;
+}
+.form-container input{
+    margin-bottom: 10px;
+}
+.form-container p{
+    color: red;
+}

@@ -6,12 +6,13 @@ CREATE TABLE users
     user_surmane varchar(255) NOT NULL,
     user_email varchar(255) NOT NULL UNIQUE,
     user_password varchar(255) NOT NULL,
-    user_github_id INT,
+    user_github_id varchar(255),
     user_city varchar(255),
     user_google_id INT,
     user_facebook_id INT,
-    user_phone_number INT
-)
+    user_phone_number varchar(255)
+
+);
 CREATE TABLE houses(
     house_id serial primary key,
     house_type varchar(255) NOT NULL,
@@ -34,3 +35,7 @@ CREATE TABLE biddings(
 INSERT INTO users(user_id, user_name, user_surmane, user_email, user_password, user_github_id, user_city, user_google_id, user_facebook_id, user_phone_number ) values(1, 'Altom', 'Hussain', 'altom@gmail.com', '123456', 123, 'Manchester', 123, 123, 078456516)
 
 INSERT INTO houses( house_id, house_type, house_description, house_sold, house_address, house_postcode, house_price, house_city, house_image) values(1, 'family house', 'my house is in grown floor', true,'13 Brinkclow colse', 'M11 1HN', 5000, 'Manchester', 'https://static8.depositphotos.com/1404193/893/i/600/depositphotos_8931575-stock-photo-nice-house-in-california.jpg' )
+
+
+
+--to alter a column if needed:  alter table users alter column user_phone_number type varchar(255);

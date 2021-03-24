@@ -1,5 +1,12 @@
 # Starter Kit
+##Dependecies been used for the project
+-useForm() hook to control the form
+-@hookform/resolvers for validation of the form
+-yup also for validation
 
+
+#Useful link used in the project:
+1-Hooks-form for validation: https://jasonwatmore.com/post/2020/10/04/react-form-validation-example-with-react-hook-form
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
  - [x] Full stack ES8+ with [Babel]

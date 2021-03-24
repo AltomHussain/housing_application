@@ -1,24 +1,21 @@
-import React, { useEffect, useState } from "react";
-
+import React from "react";
+import { BrowserRouter as Router, Route, Switch, Link, BrowserRouter } from "react-router-dom";
+import HomePage from "./pages/HomePage"
 import "./App.css";
-import { getMessage } from "./service";
-import logo from "./logo.svg";
-
+import SignupForm from "./component/SignupForm";
+import LoginForm from "./component/LoginForm"
 export function App() {
-	const [message, setMessage] = useState("Loading...");
-
-	useEffect(() => {
-		getMessage().then((message) => setMessage(message));
-	}, []);
 
 	return (
-		<main role="main">
-			<div>
-				<img className="logo" data-qa="logo" src={logo} alt="Just the React logo" />
-				<h1 className="message" data-qa="message">{message}</h1>
-			</div>
-		</main>
-	);
+		<BrowserRouter>
+<Router>
+   <Switch>
+	<Route exact path="/" component={LoginForm} />
+	<Route exact path="/home" component={HomePage} />
+	<Route exact path="/signup" component={SignupForm} />
+   </Switch>
+</Router>
+	</BrowserRouter>);
 }
 
 export default App;
