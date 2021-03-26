@@ -13,11 +13,13 @@ export default function Header({ login, signup, back, home }) {
  
 
   return (
-    <div >
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <div>
+      <nav className="navbar navbar-expand-lg navbar-light ">
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
-            <Link to="/">{back}</Link>
+            <Link to="/" className="text-white">
+              {back}
+            </Link>
           </a>
           <button
             className="navbar-toggler"
@@ -39,17 +41,16 @@ export default function Header({ login, signup, back, home }) {
               </li>
             </ul>
             <div className="d-flex me-4">
-              <Link to="/">
+              <Link to="/" className="text-white">
                 <p className="me-5">{login}</p>
               </Link>
-              <Link to="/signup">
+              <Link to="/signup" className="text-white">
                 <p className="me-5">{signup}</p>
               </Link>
               <button className="btn btn-warning" onClick={() => handleTheme()}>
                 <i className="fas fa-moon"></i>
               </button>
             </div>
-            
           </div>
         </div>
       </nav>

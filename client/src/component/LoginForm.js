@@ -3,12 +3,12 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import {loginContent} from "./statics/InputsData"
+import { loginContent } from "./statics/InputsData";
 import * as yup from "yup";
 import "./LoginForm.css";
 import Header from "./Header";
 export default function LoginForm() {
-    let history = useHistory();
+  let history = useHistory();
   const [data, setData] = useState(null);
   let schema = yup.object().shape({
     email: yup
@@ -36,9 +36,9 @@ export default function LoginForm() {
       }),
     })
       .then((res) => {
-        if(res.ok){
+        if (res.ok) {
           reset();
-          history.push("/home")
+          history.push("/home");
         }
         return res.json();
       })
@@ -46,34 +46,34 @@ export default function LoginForm() {
       .catch((error) => console.log(error));
   };
 
-
   return (
     <>
-    <Header login="Login" signup="Signup"/>
-    <div className="login-container">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <p className="text-center">{data? data.error: null}</p>
-        {loginContent.inputs.map(({id, type, name, label})=>{
-          return (
-            <div key={id}>
-              <label>{label}</label>
-              <input
-                type={type}
-                className="form-control"
-                name={name}
-                ref={register}
-              />
-              <p className="text-center">{errors[name]?.message}</p>
-            </div>
-          );
-        })}
+      <div className="container-big">
+      <Header login="Login" signup="Signup" />
+        <div className="login-container">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <p className="text-center">{data ? data.error : null}</p>
+            {loginContent.inputs.map(({ id, type, name, label }) => {
+              return (
+                <div key={id}>
+                  <label>{label}</label>
+                  <input
+                    type={type}
+                    className="form-control"
+                    name={name}
+                    ref={register}
+                  />
+                  <p className="text-center">{errors[name]?.message}</p>
+                </div>
+              );
+            })}
 
-        <button className="btn btn-success form-control" type="submit">
-          Submit
-        </button>
-      </form>
-      <Link to="/signup">Sing Up</Link>
-      <Link to="/home">home</Link>
-    </div>
-  </>);
+            <button className="btn btn-success form-control" type="submit">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </>
+  );
 }
