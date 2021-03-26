@@ -63,7 +63,7 @@ router.post("/register", validInfo, async (req, res) => {
     req.session.user = {
       id: reslust.rows[0].user_id,
     };
-
+console.log(req.session.user);
     if (reslust) {
       res.status(200).json({
         success: "Success",
@@ -77,6 +77,7 @@ router.post("/register", validInfo, async (req, res) => {
 
 //Login endpoint
 router.post("/login", validInfo, async (req, res) => {
+   console.log(req.session.user);
   try {
     const { userEmail, userPassword } = req.body;
     let user = await Connection.query(
@@ -94,7 +95,9 @@ router.post("/login", validInfo, async (req, res) => {
     if (!validPassword) {
       res.status(401).json({ error: "Password does not match sorry😏 :(" });
     }
-    
+     req.session.user = {
+       id: req.session.user.id,
+     };
 
     res.status(200).json({
       success: "Success",
@@ -126,9 +129,10 @@ router.get("/house/:id", authorization,  async (req, res) => {
     }
   } catch (error) {}
 });
-//Post a new house
-router.post("/house", authorization,  async (req, res) => {
-  
+//Post a new house  
+router.post("/house", authorization, async (req, res) => {
+
+  console.log("hello");
   const {
     houseType,
     houseDescription,
@@ -140,6 +144,7 @@ router.post("/house", authorization,  async (req, res) => {
     houseImage,
     houseNumber,
   } = req.body;
+
 
   try {
     const insertQuery = `INSERT INTO houses(house_type, house_description, house_sold, street_name, house_postcode, house_price, house_city, house_image, house_number) values($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`;
