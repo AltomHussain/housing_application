@@ -108,8 +108,8 @@ router.post("/login", validInfo, async (req, res) => {
     console.log(error.message);
   }
 });
-//Get all houes
-router.get("/houses",authorization,  async (req, res) => {
+//Get all houes  authorization
+router.get("/houses",  async (req, res) => {
   const query = ` select * from houses;`;
   const results = await Connection.query(query);
   res.json(results.rows);
