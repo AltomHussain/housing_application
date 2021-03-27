@@ -9,10 +9,9 @@ import {
 import HomePage from "./pages/HomePage";
 import "./App.css";
 import SignupForm from "./component/SignupForm";
-
+import GetOneHouse from "./component/GetOneHouse"
 import LoginForm from "./component/LoginForm";
 import { HousesContextProvider } from "./component/Context/GetAllHouses";
-
 
   import { ToastContainer, toast } from "react-toastify";
   import "react-toastify/dist/ReactToastify.css";
@@ -27,6 +26,7 @@ export function App() {
             <Route exact path="/" component={LoginForm} />
             <Route exact path="/home" component={HomePage} />
             <Route exact path="/signup" component={SignupForm} />
+            <Route exact path="/getonehouse/:id" component={GetOneHouse} />
           </Switch>
         </Router>
       </BrowserRouter>

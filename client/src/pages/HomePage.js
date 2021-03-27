@@ -1,11 +1,17 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Header from "../component/Header";
 import { GetAllHouses } from "../component/Context/GetAllHouses";
 import "./HomePage.css";
+import GetOneHouse from "../component/GetOneHouse";
+
 export default function HomePage() {
   const { allHouses } = useContext(GetAllHouses);
-  console.log(allHouses);
+  let history = useHistory();
+const handleGetone = (e, id)=>{
+    e.stopPropagation();
+    history.push(`getonehouse/${id}`);
+}
   return (
     <div>
         <Header home="Home" />
@@ -38,7 +44,10 @@ export default function HomePage() {
                     <h6>{house_price}</h6>
                     <p>per night</p>
                   </div>
-                  <Link to="/signup" className="btn-primary room-link">
+                  <Link
+                    onClick={(e) => handleGetone(e, house_id)}
+                    className="btn-primary room-link"
+                  >
                     features
                   </Link>
                 </div>
