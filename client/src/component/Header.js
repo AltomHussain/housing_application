@@ -13,8 +13,10 @@ export default function Header({ login, signup, back, home }) {
  
 
   return (
+
   
       <nav className="navbar navbar-expand-lg navbar-light ">
+
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
             <Link to="/" className="text-white">
@@ -48,7 +50,7 @@ export default function Header({ login, signup, back, home }) {
                 <p className="me-5">{signup}</p>
               </Link>
               <button className="btn btn-warning" onClick={() => handleTheme()}>
-                <i className="fas fa-moon"></i>
+              <i className="fas fa-moon">double click</i> 
               </button>
             </div>
           </div>
