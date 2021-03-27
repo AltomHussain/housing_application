@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import {loginContent} from "./statics/InputsData"
+  import {toast } from "react-toastify";
 import * as yup from "yup";
 import "./LoginForm.css";
 import Header from "./Header";
@@ -39,6 +40,7 @@ export default function LoginForm() {
         if(res.ok){
           reset();
           history.push("/home")
+          toast.success("Login successfully 😄");
         }
         return res.json();
       })

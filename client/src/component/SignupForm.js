@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import { formValidation } from "./statics/FormValidation";
 import content from "./statics/InputsData";
 import Header from "./Header";
+  import { toast } from "react-toastify";
 
 export default function SignupForm() {
   let history = useHistory();
@@ -33,7 +34,8 @@ export default function SignupForm() {
       .then((res) => {
         if (res.ok) {
           reset();
-          history.push("/home")
+          history.push("/home");
+          toast.success("Registered Successfully 😄");
         }
         return res.json();
       })
