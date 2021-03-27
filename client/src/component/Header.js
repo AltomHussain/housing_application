@@ -13,7 +13,7 @@ export default function Header({ login, signup, back, home }) {
  
 
   return (
-    <div>
+  
       <nav className="navbar navbar-expand-lg navbar-light ">
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
@@ -54,6 +54,6 @@ export default function Header({ login, signup, back, home }) {
           </div>
         </div>
       </nav>
-    </div>
+   
   );
 }

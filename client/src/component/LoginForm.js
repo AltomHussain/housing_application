@@ -51,12 +51,12 @@ export default function LoginForm() {
       <div className="container-big">
       <Header login="Login" signup="Signup" />
         <div className="login-container">
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)} className="form-group">
             <p className="text-center">{data ? data.error : null}</p>
             {loginContent.inputs.map(({ id, type, name, label }) => {
               return (
                 <div key={id}>
-                  <label>{label}</label>
+                  <label className="text-dark">{label}</label>
                   <input
                     type={type}
                     className="form-control"
