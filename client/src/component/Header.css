@@ -10,6 +10,11 @@
     color: black;
     background: white;
 }
-/* body.dark{
-    background: red;
-} */
+.navbar{
+  background-color: #005A6C;
+  color: white;
+}
+a:link{
+  color: white;
+  text-decoration: none;
+}
