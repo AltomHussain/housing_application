@@ -36,30 +36,39 @@ export default function GetOneHouse() {
                 <div className="middle-div">
                   <h3>Comfortable House</h3>
                   <a href="/home" className="go-home">
-                    <button className="btn btn-warning">
-                      Back To Home
-                    </button>
+                    <button className="btn btn-warning">Back To Home</button>
                   </a>
                 </div>
               </div>
-              <article className="description">
-                <h3>Details:</h3>
-                <p>{house_description}</p>
-              </article>
-              <article className="info">
-                <h3>Info:</h3>
-                <h6>Price: £{house_price}</h6>
-                <h6>Pets: (allowed)</h6>
-                <h6>House Type: {house_type}</h6>
-                <h6>Is this house sold: {house_sold?"Yes": "No"}</h6>
-              </article>
+              <div className="des-info">
+                <article className="description">
+                  <h3>Details:</h3>
+                  <p>{house_description}</p>
+                </article>
+                <article className="info">
+                  <h3>Info:</h3>
+                  <h6>Price: £{house_price}</h6>
+                  <h6>Pets: (allowed)</h6>
+                  <h6>House Type: {house_type}</h6>
+                  <h6>Is this house sold: {house_sold ? "Yes" : "No"}</h6>
+                </article>
+              </div>
+              <div className="address-bid"> 
               <article className="address-house">
-                  <h3>Address:</h3>
-                  <h6>House Number: {house_number}</h6>
-                  <h6>Street Name: {street_name}</h6>
-                  <h6>Located In: {house_city}</h6>
-                  <h6>Postcode: {house_postcode}</h6>
+                <h3>Address:</h3>
+                <h6>House Number: {house_number}</h6>
+                <h6>Street Name: {street_name}</h6>
+                <h6>Located In: {house_city}</h6>
+                <h6>Postcode: {house_postcode}</h6>
               </article>
+              <article className="biddings">
+                <h3>Beddings:</h3>
+                <h6>
+                  Bid The house:{" "}
+                  <button className="btn btn-success bed">Bid</button>
+                </h6>
+              </article>
+              </div>
             </div>
           );
         }
