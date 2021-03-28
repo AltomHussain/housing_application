@@ -65,7 +65,7 @@ export default function GetOneHouse() {
                 <h3>Beddings:</h3>
                 <h6>
                   Bid The house:{" "}
-                  <button className="btn btn-success bed">Bid</button>
+                  <button className="btn btn-success btn-bid">Bid</button>
                 </h6>
               </article>
               </div>
