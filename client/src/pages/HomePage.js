@@ -44,14 +44,14 @@ const handleGetone = (e, id)=>{
                     <h6>{house_price}</h6>
                     <p>per night</p>
                   </div>
-                  <Link
+                  <button
                     onClick={(e) => handleGetone(e, house_id)}
-                    className="btn-primary room-link"
+                    className="btn btn-success room-link"
                   >
-                    features
-                  </Link>
+                    Features
+                  </button>
                 </div>
-                <p className="room-info">Hello</p>
+                <p className="room-info">Nice {house_type}</p>
               </article>
             );
           }

@@ -34,9 +34,9 @@ export default function GetOneHouse() {
               <div className="house-image">
                 <img src={house_image} alt="house-image" />
                 <div className="middle-div">
-                  <h3>Comfortable room</h3>
-                  <a href="#" className="go-home">
-                    <button className="btn btn-success my-color">
+                  <h3>Comfortable House</h3>
+                  <a href="/home" className="go-home">
+                    <button className="btn btn-warning">
                       Back To Home
                     </button>
                   </a>
