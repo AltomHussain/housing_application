@@ -22,13 +22,15 @@
   display: inline-block;
   background-color: black;
   opacity: 0.6;
-
   color: white;
   padding: 2rem 1rem;
   text-align: center;
   text-transform: capitalize;
   letter-spacing: 3px;
 
+}
+.onehouse-container h3{
+    margin: 13px 0px;
 }
 /* styling for information container */
 .des-info{
@@ -39,7 +41,10 @@
 }
 .description{
   width:60% ;
-
+}
+.description p{
+    font-size: 17px;
+    font-family: monospace;
 }
 .info{
        width: 25%;
@@ -55,4 +60,19 @@
 }
 .biddings{
          width: 25%;
+}
+/* Media querys */
+@media only screen and (max-width: 600px){
+.middle-div {
+  position: absolute;
+  top: 35%;
+  left: 20%;
+}
+}
+@media only screen and (max-width: 400px){
+.middle-div {
+  position: absolute;
+  top: 35%;
+  left: 6%;
+}
 }
