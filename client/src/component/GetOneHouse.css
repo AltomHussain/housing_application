@@ -1,0 +1,32 @@
+.house-image {
+  width: 100%;
+  /* height: 100%; */
+}
+.house-image img {
+  width: 100%;
+  height: 400px;
+  position: relative;
+}
+.onehouse-container {
+}
+.my-color {
+  background-color: #005a6c;
+  color: white;
+}
+.middle-div {
+  position: absolute;
+  position: absolute;
+  top: 35%;
+  left: 35%;
+  transform: translate(0, -50%);
+  display: inline-block;
+  background-color: black;
+  opacity: 0.6;
+
+  color: white;
+  padding: 2rem 1rem;
+  text-align: center;
+  text-transform: capitalize;
+  letter-spacing: 3px;
+  /* opacity: 0.5 */
+}

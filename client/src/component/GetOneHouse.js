@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { useHistory, useParams } from "react-router-dom";
+import "./GetOneHouse.css"
 export default function GetOneHouse() {
     const [oneHouse, setOneHouse] = useState([])
     const {id} = useParams()
@@ -29,9 +30,16 @@ export default function GetOneHouse() {
             house_number,
           }) => {
             return (
-              <div>
+              <div className="onehouse-container">
                 <div className="house-image">
-                  <img src={house_image} alt="house-image" />{" "}
+                  <img src={house_image} alt="house-image" />
+                     <div className="middle-div"> 
+                      <h3>Comfortable room</h3> 
+                      <a href="#" className="go-home" >
+                          <button className="btn btn-success my-color">Back To Home</button>
+                      </a>
+                     </div>
+ 
                 </div>
               </div>
             );
