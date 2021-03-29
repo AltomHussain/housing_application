@@ -1,10 +1,33 @@
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-export default function UpdateModal() {
+export default function UpdateModal({
+  id,
+  houseType,
+  Description,
+  houseSold,
+  streetName,
+  postcode,
+  price,
+  city,
+  image,
+  houseNumber,
+}) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  console.log(Modal.Label);
+  const [updateInputs, setUpdateInputs] = useState({
+    id,
+    houseType,
+    Description,
+    houseSold,
+    streetName,
+    postcode,
+    price,
+    city,
+    image,
+    houseNumber,
+  });
+  console.log(updateInputs);
   return (
     <div>
       <Button variant="warning" onClick={handleShow}>
@@ -19,6 +42,8 @@ export default function UpdateModal() {
           <h6>Description</h6>
           <textarea className="form-control"></textarea>
           <h6>Price</h6>
+          <input type="text" placeholder="name" className="form-control" />
+          <h6>House Image</h6>
           <input type="text" placeholder="name" className="form-control" />
           <h6>House Type</h6>
           <input type="text" placeholder="name" className="form-control" />
@@ -45,7 +70,7 @@ export default function UpdateModal() {
 
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            Cancel
           </Button>
           <Button variant="primary" onClick={handleClose}>
             Save Changes
