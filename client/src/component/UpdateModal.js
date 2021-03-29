@@ -27,7 +27,7 @@ export default function UpdateModal({
     image,
     houseNumber,
   });
-  console.log(updateInputs);
+
   return (
     <div>
       <Button variant="warning" onClick={handleShow}>
