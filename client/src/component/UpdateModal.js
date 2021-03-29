@@ -3,7 +3,7 @@ import { Button, Modal } from "react-bootstrap";
 export default function UpdateModal({
   id,
   houseType,
-  Description,
+  description,
   houseSold,
   streetName,
   postcode,
@@ -18,7 +18,7 @@ export default function UpdateModal({
   const [updateInputs, setUpdateInputs] = useState({
     id,
     houseType,
-    Description,
+    description,
     houseSold,
     streetName,
     postcode,
@@ -27,7 +27,7 @@ export default function UpdateModal({
     image,
     houseNumber,
   });
-
+console.log(updateInputs.postcode);
   return (
     <div>
       <Button variant="warning" onClick={handleShow}>
@@ -40,32 +40,32 @@ export default function UpdateModal({
         </Modal.Header>
         <Modal.Body>
           <h6>Description</h6>
-          <textarea className="form-control"></textarea>
+          <textarea className="form-control" value={updateInputs.description}></textarea>
           <h6>Price</h6>
-          <input type="text" placeholder="name" className="form-control" />
+          <input type="text" value={updateInputs.price} placeholder="name" className="form-control" />
           <h6>House Image</h6>
-          <input type="text" placeholder="name" className="form-control" />
+          <input type="text" value={updateInputs.image} placeholder="name" className="form-control" />
           <h6>House Type</h6>
-          <input type="text" placeholder="name" className="form-control" />
+          <input type="text" value={updateInputs.houseType} placeholder="name" className="form-control" />
           <h6>Is this house sold</h6>
-          <input type="text" placeholder="name" className="form-control" />
+          <input type="text" value={updateInputs.houseSold} placeholder="name" className="form-control" />
           <h4>Address</h4>
           <h6>House Number</h6>
-          <input type="text" placeholder="name" className="form-control" />
+          <input type="text" value={updateInputs.houseNumber} placeholder="name" className="form-control" />
           <h6>Street Name</h6>
           <input
-            type="text"
+            value={updateInputs.streetName} type="text"
             placeholder="Street Name"
             className="form-control"
           />
           <h6>Located In</h6>
           <input
-            type="text"
+            value={updateInputs.city} type="text"
             placeholder="Located In"
             className="form-control"
           />
           <h6>Postcode</h6>
-          <input type="text" placeholder="Postcode" className="form-control" />
+          <input type="text" value={updateInputs.postcode} placeholder="Postcode" className="form-control" />
         </Modal.Body>
 
         <Modal.Footer>
