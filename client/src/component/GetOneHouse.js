@@ -65,10 +65,10 @@ export default function GetOneHouse() {
               <article className="biddings">
                 <h3>Beddings:</h3>
                 <h6>
-                  Bid The house:{" "}
+                  Bid This House:
                   <button className="btn btn-success btn-bid">Bid</button>
                 </h6>
-                <h6>Update house details 
+                <h6>Update This House Details: 
                     <UpdateModal/>
                 </h6>
               </article>
