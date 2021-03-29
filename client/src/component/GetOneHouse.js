@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import "./GetOneHouse.css";
+import UpdateModal from "./UpdateModal";
 export default function GetOneHouse() {
   const [oneHouse, setOneHouse] = useState([]);
   const { id } = useParams();
@@ -66,6 +67,9 @@ export default function GetOneHouse() {
                 <h6>
                   Bid The house:{" "}
                   <button className="btn btn-success btn-bid">Bid</button>
+                </h6>
+                <h6>Update house details 
+                    <UpdateModal/>
                 </h6>
               </article>
               </div>
