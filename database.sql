@@ -37,5 +37,11 @@ INSERT INTO users(user_id, user_name, user_surmane, user_email, user_password, u
 INSERT INTO houses( house_id, house_type, house_description, house_sold, house_address, house_postcode, house_price, house_city, house_image) values(1, 'family house', 'my house is in grown floor', true,'13 Brinkclow colse', 'M11 1HN', 5000, 'Manchester', 'https://static8.depositphotos.com/1404193/893/i/600/depositphotos_8931575-stock-photo-nice-house-in-california.jpg' )
 
 
-
 --to alter a column if needed:  alter table users alter column user_phone_number type varchar(255);
+
+
+
+
+
+--Add pet allowed in table of houses
+--add more images for bedroom, livingroon, kitchenimage
