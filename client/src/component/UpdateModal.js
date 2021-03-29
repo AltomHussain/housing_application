@@ -8,19 +8,41 @@ export default function UpdateModal() {
   return (
     <div>
       <Button variant="warning" onClick={handleShow}>
-       Edit Details
+        Edit Details
       </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Updating House Details</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!
-            <h6>Price</h6>
-            <input type="text" placeholder="name" className="form-control"/>
-            <h6>Description</h6>
-            <textarea className="form-control"></textarea>
+        <Modal.Body>
+          <h6>Description</h6>
+          <textarea className="form-control"></textarea>
+          <h6>Price</h6>
+          <input type="text" placeholder="name" className="form-control" />
+          <h6>House Type</h6>
+          <input type="text" placeholder="name" className="form-control" />
+          <h6>Is this house sold</h6>
+          <input type="text" placeholder="name" className="form-control" />
+          <h4>Address</h4>
+          <h6>House Number</h6>
+          <input type="text" placeholder="name" className="form-control" />
+          <h6>Street Name</h6>
+          <input
+            type="text"
+            placeholder="Street Name"
+            className="form-control"
+          />
+          <h6>Located In</h6>
+          <input
+            type="text"
+            placeholder="Located In"
+            className="form-control"
+          />
+          <h6>Postcode</h6>
+          <input type="text" placeholder="Postcode" className="form-control" />
         </Modal.Body>
+
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
