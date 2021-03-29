@@ -81,6 +81,7 @@ export default function GetOneHouse() {
                       city={house_city}
                       image={house_image}
                       houseNumber={house_number}
+                      GetOneHouseDetail={GetOneHouseDetail}
                     />
                   </h6>
                 </article>

@@ -168,8 +168,8 @@ router.post("/house", authorization, async (req, res) => {
   }
 });
 
-//Upate existing house
-router.put("/house/:id", authorization,  async (req, res) => {
+//Upate existing house authorization
+router.put("/house/:id",  async (req, res) => {
   try {
     const houseId = Number(req.params.id);
     const {
@@ -183,7 +183,17 @@ router.put("/house/:id", authorization,  async (req, res) => {
       houseImage,
       houseNumber,
     } = req.body;
-
+console.log(
+  houseType,
+  houseDescription,
+  houseSold,
+  streetName,
+  housePostcode,
+  housePrice,
+  houseCity,
+  houseImage,
+  houseNumber
+);
     let updateQuery = `update houses set house_type=$1, house_description=$2, house_sold=$3, street_name=$4, house_postcode=$5, house_price=$6, house_city=$7, house_image=$8 , house_number=$9 where house_id=$10 `;
     await Connection.query(updateQuery, [
       houseType,
