@@ -43,19 +43,8 @@ export const newHouseInputs1 = {
     export const newHouseInputs2 = {
       inputs: [
         {
-          id: 1,
-          valOne: true,
-          valTwo: false,
-          label: "Is the house is been sold",
-          name: "houseSold,",
-        },
-        {
           id: 2,
-          valOne: "flat",
-          valTwo: "Studio Flats",
-          valThree: "Cottages",
-          valFour: "Bungalows",
-          valFour: "Other",
+          values: ["Flat","Studio Flats", "Cottages", "Bungalows",  "Other" ],
           label: "select the type of your house",
           name: "houseType",
         },
