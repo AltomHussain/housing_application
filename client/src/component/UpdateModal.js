@@ -34,34 +34,32 @@ export default function UpdateModal({
       [e.target.name]: e.target.value,
     };
     setUpdateInputs(updateData);
-    console.log(updateData);
   };
-  console.log(updateInputs.postcode);
-
+  
   const editText = async (id) => {
-    try {
-      const res = await fetch(`/api/house/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          houseType: updateInputs.houseType,
-          houseDescription: updateInputs.description,
-          houseSold: updateInputs.houseSold,
-          streetName: updateInputs.streetName,
-          housePostcode: updateInputs.postcode,
-          housePrice: updateInputs.price,
-          houseCity: updateInputs.city,
-          houseImage: updateInputs.image,
-          houseNumber: updateInputs.houseNumber,
-        }),
-      });
-      handleClose();
-      GetOneHouseDetail();
-      console.log(res);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+      try {
+          const res = await fetch(`/api/house/${id}`, {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                  houseType: updateInputs.houseType,
+                  houseDescription: updateInputs.description,
+                  houseSold: updateInputs.houseSold,
+                  streetName: updateInputs.streetName,
+                  housePostcode: updateInputs.postcode,
+                  housePrice: updateInputs.price,
+                  houseCity: updateInputs.city,
+                  houseImage: updateInputs.image,
+                  houseNumber: updateInputs.houseNumber,
+                }),
+            });
+            GetOneHouseDetail();
+            handleClose();
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
 
   const cancelUpdates = () => {
     setUpdateInputs({
@@ -79,6 +77,7 @@ export default function UpdateModal({
     handleClose();
   };
 
+}
   return (
     <div>
       <Button
@@ -89,7 +88,12 @@ export default function UpdateModal({
         Edit Details
       </Button>
 
-      <Modal show={show} onHide={handleClose} id={`id${updateInputs.id}`}>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        id={`id${updateInputs.id}`}
+
+      >
         <Modal.Header closeButton onClick={() => cancelUpdates()}>
           <Modal.Title>Updating House Details</Modal.Title>
         </Modal.Header>
@@ -128,7 +132,11 @@ export default function UpdateModal({
             placeholder="name"
             className="form-control"
           />
-          <h6>Is this house sold</h6>
+          <h6>
+            Is this house sold? if <strong className="text-danger">YES</strong>{" "}
+            please write <strong className="text-danger">true</strong>
+            otherwise write <strong className="text-danger">false</strong>
+          </h6>
           <input
             type="text"
             name="houseSold"
@@ -137,6 +145,7 @@ export default function UpdateModal({
             placeholder="name"
             className="form-control"
           />
+          <p></p>
           <h4>Address</h4>
           <h6>House Number</h6>
           <input
