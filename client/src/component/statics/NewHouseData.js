@@ -32,7 +32,7 @@ export const newHouseInputs1 = {
             name: "streetName"
         },
         {
-            id: 6,
+            id: 6 ,
             type: "text",
             label: "House Postcode",
             name: "housePostcode"
@@ -43,14 +43,19 @@ export const newHouseInputs1 = {
     export const newHouseInputs2 = {
       inputs: [
         {
-          id: 3,
-          type: "text",
+          id: 1,
+          valOne: true,
+          valTwo: false,
           label: "Is the house is been sold",
           name: "houseSold,",
         },
         {
           id: 2,
-          type: "text",
+          valOne: "flat",
+          valTwo: "Studio Flats",
+          valThree: "Cottages",
+          valFour: "Bungalows",
+          valFour: "Other",
           label: "select the type of your house",
           name: "houseType",
         },

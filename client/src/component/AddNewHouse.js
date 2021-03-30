@@ -8,13 +8,25 @@ export default function AddNewHouse() {
         <textarea className="form-control" name="houseDescription">
           {" "}
         </textarea>
-        {newHouseInputs1.inputs.map(({id, type, name, label})=>{
+        {newHouseInputs2.inputs.map(({id, type, name, label})=>{
             return(
-                <div className="" key={id}> 
-                <label>{label}</label>
-                <input type={type} placeholder={label} name={name} className="form-control" />
-                </div>
+<select>
+    <option
+</select>
             )
+        })}
+        {newHouseInputs1.inputs.map(({ id, type, name, label }) => {
+          return (
+            <div className="" key={id}>
+              <label>{label}</label>
+              <input
+                type={type}
+                placeholder={label}
+                name={name}
+                className="form-control"
+              />
+            </div>
+          );
         })}
       </div>
     );
