@@ -32,7 +32,7 @@ export const newHouseInputs1 = {
             name: "streetName"
         },
         {
-            id: 5,
+            id: 6,
             type: "text",
             label: "House Postcode",
             name: "housePostcode"
@@ -40,7 +40,7 @@ export const newHouseInputs1 = {
     ]
 }
 
-    export const newHouseInputs12 = {
+    export const newHouseInputs2 = {
       inputs: [
         {
           id: 3,

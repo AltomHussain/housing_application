@@ -1,6 +1,7 @@
 import React from 'react'
-import {newHouseInputs1} from "./statics/NewHouseData"
+import { newHouseInputs1, newHouseInputs2 } from "./statics/NewHouseData";
 export default function AddNewHouse() {
+    console.log(newHouseInputs2);
     return (
       <div>
         <label>Write a description about the house.</label>
