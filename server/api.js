@@ -129,8 +129,8 @@ router.get("/house/:id", authorization,  async (req, res) => {
     }
   } catch (error) {}
 });
-//Post a new house  
-router.post("/house", authorization, async (req, res) => {
+//Post a new house authorization 
+router.post("/house",  async (req, res) => {
 
   console.log("hello");
   const {
