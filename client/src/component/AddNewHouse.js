@@ -15,6 +15,12 @@ export default function AddNewHouse() {
             <option value="true">Yes</option>
             <option value="false">No</option>
           </select>
+            <label>What is purpose of your house</label>
+          <select className="form-control" name="housePurpose">
+            <option>Select</option>
+            <option value="rent">Rent</option>
+            <option value="for sale">For Sale</option>
+          </select>
           {newHouseInputs2.inputs.map(({ id, values, name, label }) => {
             return (
               <div key={id}>
