@@ -16,23 +16,41 @@ export const newHouseInputs1 = {
         {
             id: 3,
             type: "text",
+            label: "Living Room Image",
+            name: "livingRoomImage"
+        },
+        {
+            id: 4,
+            type: "text",
+            label: "Bed Room Image",
+            name: "bedRoomImage"
+        },
+        {
+            id: 5,
+            type: "text",
+            label: "Kitchen Image",
+            name: "kitchenImage"
+        },
+        {
+            id: 6,
+            type: "text",
             label: "In which city is your house?",
             name: "houseCity"
         },
         {
-            id: 4,
+            id: 7,
             type: "number",
             label: "House Number",
             name: "houseNumber"
         },
         {
-            id: 5,
+            id: 8,
             type: "text",
             label: "Street Name",
             name: "streetName"
         },
         {
-            id: 6 ,
+            id: 9 ,
             type: "text",
             label: "House Postcode",
             name: "housePostcode"
