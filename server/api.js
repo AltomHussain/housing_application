@@ -1,8 +1,8 @@
 import { Router } from "express";
-import authorization from "./middleware/authorization"
-import validInfo from "./middleware/validInfo"
+import authorization from "./middleware/authorization";
+import validInfo from "./middleware/validInfo";
 import { Connection } from "./db";
-import bcrypt from "bcrypt"
+import bcrypt from "bcrypt";
 const router = new Router();
 router.get("/", (_, res, next) => {
   Connection.connect((err) => {
@@ -45,7 +45,6 @@ router.post("/register", validInfo, async (req, res) => {
     if (user.rows.length > 0) {
       return res.status(401).json("User email already exist try another email");
     }
-    
 
     let insertQuery = `INSERT INTO users(user_name, user_surmane, user_email, user_password, user_github_id, user_city, user_google_id, user_facebook_id, user_phone_number ) values($1, $2, $3,$4, $5, $6, $7,$8, $9) RETURNING *`;
     const reslust = await Connection.query(insertQuery, [
@@ -63,7 +62,7 @@ router.post("/register", validInfo, async (req, res) => {
     req.session.user = {
       id: reslust.rows[0].user_id,
     };
-console.log(req.session.user);
+    console.log(req.session.user);
     if (reslust) {
       res.status(200).json({
         success: "Success",
@@ -77,7 +76,7 @@ console.log(req.session.user);
 
 //Login endpoint
 router.post("/login", validInfo, async (req, res) => {
-   console.log(req.session.user);
+  console.log(req.session.user);
   try {
     const { userEmail, userPassword } = req.body;
     let user = await Connection.query(
@@ -91,13 +90,13 @@ router.post("/login", validInfo, async (req, res) => {
       userPassword.toString(),
       user.rows[0].user_password
     );
-  
+
     if (!validPassword) {
       res.status(401).json({ error: "Password does not match sorry😏 :(" });
     }
-     req.session.user = {
-       id: req.session.user.id,
-     };
+    req.session.user = {
+      id: req.session.user.id,
+    };
 
     res.status(200).json({
       success: "Success",
@@ -109,13 +108,13 @@ router.post("/login", validInfo, async (req, res) => {
   }
 });
 //Get all houes  authorization
-router.get("/houses",  async (req, res) => {
+router.get("/houses", async (req, res) => {
   const query = ` select * from houses;`;
   const results = await Connection.query(query);
   res.json(results.rows);
 });
 //Get one by id
-router.get("/house/:id", authorization,  async (req, res) => {
+router.get("/house/:id", authorization, async (req, res) => {
   try {
     const houseId = Number(req.params.id);
     const selectQuery = `select * from houses where house_id = $1`;
@@ -129,9 +128,8 @@ router.get("/house/:id", authorization,  async (req, res) => {
     }
   } catch (error) {}
 });
-//Post a new house authorization 
-router.post("/house",  async (req, res) => {
-
+//Post a new house authorization
+router.post("/house", async (req, res) => {
   console.log("hello");
   const {
     houseType,
@@ -143,11 +141,13 @@ router.post("/house",  async (req, res) => {
     houseCity,
     houseImage,
     houseNumber,
+    livingRoomImage,
+    bedRoomImage,
+    kitchenImage
   } = req.body;
 
-
   try {
-    const insertQuery = `INSERT INTO houses(house_type, house_description, house_sold, street_name, house_postcode, house_price, house_city, house_image, house_number) values($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`;
+    const insertQuery = `INSERT INTO houses(house_type, house_description, house_sold, street_name, house_postcode, house_price, house_city, house_image, house_number,  living_room_image,bed_room_image, kitchen_image  ) values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *`;
     const results = await Connection.query(insertQuery, [
       houseType,
       houseDescription,
@@ -158,6 +158,9 @@ router.post("/house",  async (req, res) => {
       houseCity,
       houseImage,
       houseNumber,
+      livingRoomImage,
+      bedRoomImage,
+      kitchenImage,
     ]);
     res.json({
       sucess: "Success",
@@ -169,7 +172,7 @@ router.post("/house",  async (req, res) => {
 });
 
 //Upate existing house
-router.put("/house/:id", authorization,  async (req, res) => {
+router.put("/house/:id", authorization, async (req, res) => {
   try {
     const houseId = Number(req.params.id);
     const {
@@ -206,7 +209,7 @@ router.put("/house/:id", authorization,  async (req, res) => {
 });
 
 //Delete a house
-router.delete("/house/:id",authorization,  async (req, res) => {
+router.delete("/house/:id", authorization, async (req, res) => {
   try {
     const houseId = Number(req.params.id);
 
@@ -223,10 +226,9 @@ router.delete("/house/:id",authorization,  async (req, res) => {
     }
   } catch (error) {
     console.log(error.message);
-    
   }
 });
-router.get('*', function(req, res) {
- res.sendFile(path.resolve(__dirname, "index.html"));
+router.get("*", function (req, res) {
+  res.sendFile(path.resolve(__dirname, "index.html"));
 });
 export default router;
