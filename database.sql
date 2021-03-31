@@ -18,6 +18,7 @@ CREATE TABLE houses(
     house_type varchar(255) NOT NULL,
     house_description varchar(500) NOT NULL,
     house_sold  BOOLEAN,
+    house_purpose varchar(255),
    street_name varchar(255) NOT NULL,
     house_number INT,
     house_postcode varchar(255) NOT NULL,
