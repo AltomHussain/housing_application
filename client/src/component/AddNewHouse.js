@@ -4,22 +4,45 @@ import { newHouseInputs1, newHouseInputs2 } from "./statics/NewHouseData";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AddNewHouseValidation } from "./statics/AddNewHouseValidation";
-import e from "express";
+
 export default function AddNewHouse() {
   let schema = AddNewHouseValidation();
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
   });
-  // const [houseInputs, setHouseInputs] = useState({
-  //   houseSold: "Select",
-  //   housePurpose: "Select",
-  // })
+  const [houseInputs, setHouseInputs] = useState({
+    houseSold: "Select",
+    housePurpose: "Select",
+  })
 
  
  
  
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async(data) => {
+try {
+  const res = await fetch("/api/house", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      houseType: data.houseType,
+      houseDescription: data.houseDescription,
+      houseSold: data.houseSold,
+      streetName: data.streetName,
+      housePostcode: data.housePostcode,
+      housePrice: data.housePrice,
+      houseCity: data.houseCity,
+      houseImage: data.houseImage,
+      houseNumber: data.houseNumber,
+      livingRoomImage: data.livingRoomImage,
+      bedRoomImage: data.bedRoomImage,
+      kitchenImage: data.kitchenImage,
+      housePurpose: data.housePurpose,
+    }),
+  });
+  console.log(res);
+} catch (error) {
+  
+}
   };
   return (
     <div className="new-house-container">
@@ -30,21 +53,15 @@ export default function AddNewHouse() {
             className="form-control"
             name="houseDescription"
             ref={register}
-         
-         
           ></textarea>
           <p className="text-center">
             {errors.houseDescription && errors.houseDescription.message}
           </p>
           <label>Is the house is been sold</label>
-          <select
-            className="form-control"
-            name="houseSold"
-            ref={register}
-          
-          
-          >
-            <option disabled>Select</option>
+          <select className="form-control" name="houseSold"  ref={register}>
+            <option disabled>
+              Select
+            </option>
             <option value="true">Yes</option>
             <option value="false">No</option>
           </select>
@@ -53,13 +70,7 @@ export default function AddNewHouse() {
           </p>
 
           <label>What is purpose of your house</label>
-          <select
-            className="form-control"
-            name="housePurpose"
-            ref={register}
-          
-           
-          >
+          <select className="form-control" name="housePurpose" ref={register}>
             <option>Select</option>
             <option value="rent">Rent</option>
             <option value="for sale">For Sale</option>
@@ -88,8 +99,6 @@ export default function AddNewHouse() {
                   name={name}
                   className="form-control"
                   ref={register}
-                
-               
                 />
                 <p className="text-center">{errors[name]?.message}</p>
               </div>
