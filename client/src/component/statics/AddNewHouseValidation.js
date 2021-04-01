@@ -21,6 +21,11 @@ export const AddNewHouseValidation = () => {
       .required(
         "Please add any image link that your bed room might look lik !"
       ),
+    kitchenImage: yup
+      .string()
+      .required(
+        "Please add any image link that your kitchen room might look lik !"
+      ),
     houseCity: yup
       .string()
       .required("Please add add a city where the house is located !"),
