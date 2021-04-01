@@ -5,7 +5,10 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {AddNewHouseValidation} from "./statics/AddNewHouseValidation"
 export default function AddNewHouse() {
-  const { register, handleSubmit, errors } = useForm();
+  let schema = AddNewHouseValidation()
+  const { register, handleSubmit, errors } = useForm({
+    resolver: yupResolver(schema),
+  });
   console.log(newHouseInputs2);
   const onSubmit = (data)=>{
     console.log(data);
