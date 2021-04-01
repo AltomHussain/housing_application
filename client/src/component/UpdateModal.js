@@ -77,7 +77,7 @@ export default function UpdateModal({
     handleClose();
   };
 
-}
+
   return (
     <div>
       <Button
