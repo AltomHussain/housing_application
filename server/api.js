@@ -109,7 +109,7 @@ router.post("/login", validInfo, async (req, res) => {
 });
 //Get all houes  authorization
 router.get("/houses", async (req, res) => {
-  const query = ` select * from houses;`;
+  const query = ` select * from houses ORDER BY house_id;`;
   const results = await Connection.query(query);
   res.json(results.rows);
 });

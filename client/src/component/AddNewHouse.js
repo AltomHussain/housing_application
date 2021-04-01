@@ -4,10 +4,12 @@ import { newHouseInputs1, newHouseInputs2 } from "./statics/NewHouseData";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AddNewHouseValidation } from "./statics/AddNewHouseValidation";
-
+  import { toast } from "react-toastify";
+  import { useHistory } from "react-router-dom";
 export default function AddNewHouse() {
+   let history = useHistory();
   let schema = AddNewHouseValidation();
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors, reset } = useForm({
     resolver: yupResolver(schema),
   });
   const [houseInputs, setHouseInputs] = useState({
@@ -18,9 +20,8 @@ export default function AddNewHouse() {
  
  
  
-  const onSubmit = async(data) => {
-try {
-  const res = await fetch("/api/house", {
+  const onSubmit = (data) => {
+ fetch("/api/house", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -38,11 +39,21 @@ try {
       kitchenImage: data.kitchenImage,
       housePurpose: data.housePurpose,
     }),
-  });
-  console.log(res);
-} catch (error) {
-  
-}
+  })
+  .then((res)=>{
+    if (res.ok) {
+          reset();
+          toast.success("Your house been added Successfully 😄");
+          history.push("/home");
+        }
+        
+        return res.json()})
+        .then((data)=>{
+      console.log(data);
+     
+  })
+ 
+
   };
   return (
     <div className="new-house-container">
