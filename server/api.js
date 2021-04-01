@@ -94,10 +94,10 @@ router.post("/login", validInfo, async (req, res) => {
     if (!validPassword) {
       res.status(401).json({ error: "Password does not match sorry😏 :(" });
     }
-    req.session.user = {
-      id: req.session.user.id,
-    };
-
+   req.session.user = {
+     id: reslust.rows[0].user_id,
+   };
+ 
     res.status(200).json({
       success: "Success",
       id: user.rows[0].user_id,
