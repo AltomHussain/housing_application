@@ -61,7 +61,7 @@ export const newHouseInputs1 = {
     export const newHouseInputs2 = {
       inputs: [
         {
-          id: 2,
+          id: 1,
           values: ["Flat","Studio Flats", "Cottages", "Bungalows",  "Other" ],
           label: "select the type of your house",
           name: "houseType",
