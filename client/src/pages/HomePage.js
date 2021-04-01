@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+import {  useHistory } from "react-router-dom";
 import Header from "../component/Header";
 import { GetAllHouses } from "../component/Context/GetAllHouses";
 import "./HomePage.css";
-import GetOneHouse from "../component/GetOneHouse";
+
 
 export default function HomePage() {
   const { allHouses } = useContext(GetAllHouses);
@@ -30,7 +30,7 @@ const handleGetone = (e, id)=>{
             house_number,
           }) => {
             return (
-              <article className="room">
+              <article className="room" key={house_id}>
                 <div className="img-container">
                   <img
                     src={

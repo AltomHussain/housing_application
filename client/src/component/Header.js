@@ -3,23 +3,20 @@ import { Link } from "react-router-dom";
 import AddNewHouse from "./AddNewHouse";
 import "./Header.css";
 export default function Header({ login, signup, back, home }) {
-
   const handleTheme = () => {
     const moon = document.querySelector(".fa-moon");
     moon.addEventListener("click", () => {
       document.body.classList.toggle("dark-theme");
     });
-   }; 
-
- 
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light ">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
-          <Link to="/" className="text-white">
-            {back}
-          </Link>
+
+<a className="navbar-brand text-white" href="/">
+          {back}
+
         </a>
         <button
           className="navbar-toggler"
@@ -44,6 +41,7 @@ export default function Header({ login, signup, back, home }) {
                 <button className="btn btn-success">Add A House</button>
               </a>
             </li>
+
           </ul>
           <div className="d-flex me-4">
             <Link to="/" className="text-white">
