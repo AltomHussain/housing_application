@@ -18,12 +18,16 @@ CREATE TABLE houses(
     house_type varchar(255) NOT NULL,
     house_description varchar(500) NOT NULL,
     house_sold  BOOLEAN,
+    house_purpose varchar(255),
    street_name varchar(255) NOT NULL,
     house_number INT,
     house_postcode varchar(255) NOT NULL,
     house_price INT,
     house_city varchar(255),
-    house_image varchar(500)
+    house_image varchar(500),
+   living_room_image varchar(500),
+   bed_room_image varchar(500),
+   kitchen_image values(500)
 );
 CREATE TABLE biddings(
     id serial primary key,
