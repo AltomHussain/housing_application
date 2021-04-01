@@ -6,19 +6,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { AddNewHouseValidation } from "./statics/AddNewHouseValidation";
   import { toast } from "react-toastify";
   import { useHistory } from "react-router-dom";
+
 export default function AddNewHouse() {
    let history = useHistory();
   let schema = AddNewHouseValidation();
   const { register, handleSubmit, errors, reset } = useForm({
     resolver: yupResolver(schema),
   });
-  const [houseInputs, setHouseInputs] = useState({
-    houseSold: "Select",
-    housePurpose: "Select",
-  })
 
- 
- 
  
   const onSubmit = (data) => {
  fetch("/api/house", {
@@ -77,7 +72,7 @@ export default function AddNewHouse() {
             <option value="false">No</option>
           </select>
           <p className="text-center">
-            {/* {errors.houseSold && errors.houseSold.message} */}
+          
           </p>
 
           <label>What is purpose of your house</label>
@@ -92,8 +87,8 @@ export default function AddNewHouse() {
               <div key={id}>
                 <label>{label}</label>
                 <select name={name} className="form-control" ref={register}>
-                  {values.map((val) => (
-                    <option value={val}>{val}</option>
+                  {values.map((val, index) => (
+                    <option key={index} value={val}>{val}</option>
                   ))}
                 </select>
                 <p className="text-center">{errors[name]?.message}</p>

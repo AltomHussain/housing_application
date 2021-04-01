@@ -8,9 +8,9 @@ export const fetchAllHouse = (setAllHouses) => {
 export const HousesContextProvider = (props)=>{
     const [allHouses, setAllHouses] = useState([]);
 
-useEffect(()=>{
-    fetchAllHouse(setAllHouses);
-}, [])
+useEffect(() => {
+  fetchAllHouse(setAllHouses);
+}, [allHouses]);
 
     return(
         <GetAllHouses.Provider value={{allHouses}}>
