@@ -1,34 +1,65 @@
-import React from "react";
-import "./AddNewHouse.css"
+import React, { useState } from "react";
+import "./AddNewHouse.css";
 import { newHouseInputs1, newHouseInputs2 } from "./statics/NewHouseData";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import {AddNewHouseValidation} from "./statics/AddNewHouseValidation"
+import { AddNewHouseValidation } from "./statics/AddNewHouseValidation";
+import e from "express";
 export default function AddNewHouse() {
-  let schema = AddNewHouseValidation()
+  let schema = AddNewHouseValidation();
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
   });
-  console.log(newHouseInputs2);
-  const onSubmit = (data)=>{
+  // const [houseInputs, setHouseInputs] = useState({
+  //   houseSold: "Select",
+  //   housePurpose: "Select",
+  // })
+
+ 
+ 
+ 
+  const onSubmit = (data) => {
     console.log(data);
-  }
+  };
   return (
     <div className="new-house-container">
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <label>Write a description about the house.</label>
-          <textarea className="form-control" name="houseDescription"></textarea>
-          {errors.houseDescription && "description is required."}
+          <textarea
+            className="form-control"
+            name="houseDescription"
+            ref={register}
+         
+         
+          ></textarea>
+          <p className="text-center">
+            {errors.houseDescription && errors.houseDescription.message}
+          </p>
           <label>Is the house is been sold</label>
-          <select className="form-control" name="houseSold" ref={register}>
-            <option>Select</option>
+          <select
+            className="form-control"
+            name="houseSold"
+            ref={register}
+          
+          
+          >
+            <option disabled>Select</option>
             <option value="true">Yes</option>
             <option value="false">No</option>
           </select>
-          {errors.houseSold && "Select is required."}
+          <p className="text-center">
+            {/* {errors.houseSold && errors.houseSold.message} */}
+          </p>
+
           <label>What is purpose of your house</label>
-          <select className="form-control" name="housePurpose" ref={register}>
+          <select
+            className="form-control"
+            name="housePurpose"
+            ref={register}
+          
+           
+          >
             <option>Select</option>
             <option value="rent">Rent</option>
             <option value="for sale">For Sale</option>
@@ -57,6 +88,8 @@ export default function AddNewHouse() {
                   name={name}
                   className="form-control"
                   ref={register}
+                
+               
                 />
                 <p className="text-center">{errors[name]?.message}</p>
               </div>

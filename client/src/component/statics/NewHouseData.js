@@ -68,3 +68,4 @@ export const newHouseInputs1 = {
         },
       ],
     };
+  
