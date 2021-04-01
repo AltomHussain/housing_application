@@ -9,7 +9,7 @@ export default function AddNewHouse() {
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
   });
-  console.log(newHouseInputs2);
+  console.log(errors);
   const onSubmit = (data)=>{
     console.log(data);
   }
@@ -18,15 +18,28 @@ export default function AddNewHouse() {
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <label>Write a description about the house.</label>
-          <textarea className="form-control" name="houseDescription"></textarea>
-          {errors.houseDescription && "description is required."}
+          <textarea
+            className="form-control"
+            name="houseDescription"
+            ref={register}
+          ></textarea>
+          <p className="text-center">
+            {errors.houseDescription && errors.houseDescription.message}
+          </p>
           <label>Is the house is been sold</label>
-          <select className="form-control" name="houseSold" ref={register}>
+          <select
+            className="form-control"
+            name="houseSold"
+            ref={register}
+          >
             <option>Select</option>
             <option value="true">Yes</option>
             <option value="false">No</option>
           </select>
-          {errors.houseSold && "Select is required."}
+          <p className="text-center">
+            {errors.houseSold && "Required brooooooooooo"}
+          </p>
+
           <label>What is purpose of your house</label>
           <select className="form-control" name="housePurpose" ref={register}>
             <option>Select</option>

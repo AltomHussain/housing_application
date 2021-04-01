@@ -3,7 +3,7 @@ export const AddNewHouseValidation = () => {
   let schema = yup.object().shape({
     houseDescription: yup
       .string()
-      .required("Please a description of your house !"),
+      .required("Please write a description of your house !"),
     houseSold: yup.string().required("Please select an option from above !"),
     housePurpose: yup.string().required("Please select an option!"),
     housePrice: yup.string().required("Please write price of the house!"),
