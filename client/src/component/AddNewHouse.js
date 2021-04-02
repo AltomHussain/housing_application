@@ -39,7 +39,7 @@ export default function AddNewHouse() {
     if (res.ok) {
           reset();
           toast.success("Your house been added Successfully 😄");
-          history.push("/home");
+           window.location = "/home";
         }
         
         return res.json()})

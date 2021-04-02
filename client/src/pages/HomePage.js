@@ -8,6 +8,7 @@ import "./HomePage.css";
 export default function HomePage() {
   const { allHouses } = useContext(GetAllHouses);
   let history = useHistory();
+  console.log(allHouses);
 const handleGetone = (e, id)=>{
     e.stopPropagation();
     history.push(`getonehouse/${id}`);
