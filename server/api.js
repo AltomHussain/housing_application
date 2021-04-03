@@ -239,7 +239,7 @@ console.log(
 router.delete("/house/:id", authorization, async (req, res) => {
   try {
     const houseId = Number(req.params.id);
-
+console.log("traaaaaaaaaaaaaa");
     const selectQuery = `select * from houses where house_id= $1`;
     const deleteQuery = `delete from houses where house_id=$1`;
 
