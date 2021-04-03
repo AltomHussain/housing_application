@@ -1,4 +1,5 @@
 import { Router } from "express";
+// require("dotenv").config();
 import authorization from "./middleware/authorization";
 import validInfo from "./middleware/validInfo";
 import { Connection } from "./db";
@@ -256,11 +257,11 @@ console.log("traaaaaaaaaaaaaa");
   }
 });
 
-router.get("/github-client-id", (req, res)=>{
-  res.json({
-    github_client_id: process.env.GITHUB_CLIENT_ID,
-  });
-});
+// router.get("/github-client-id", (req, res)=>{
+//   res.json({
+//     github_client_id: process.env.GITHUB_CLIENT_ID,
+//   });
+// });
 router.get("*", function (req, res) {
   res.sendFile(path.resolve(__dirname, "index.html"));
 });
