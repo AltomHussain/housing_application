@@ -255,7 +255,14 @@ console.log("traaaaaaaaaaaaaa");
     console.log(error.message);
   }
 });
+
+router.get("/github-client-id", (req, res)=>{
+  res.json({
+    github_client_id: process.env.GITHUB_CLIENT_ID,
+  });
+});
 router.get("*", function (req, res) {
   res.sendFile(path.resolve(__dirname, "index.html"));
 });
+
 export default router;
