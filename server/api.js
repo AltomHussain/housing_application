@@ -80,6 +80,7 @@ router.post("/login", validInfo, async (req, res) => {
    console.log("hello");
   try {
     const { userEmail, userPassword } = req.body;
+    console.log(userEmail, userPassword);
     let user = await Connection.query(
       `select * from users where user_email = $1`,
       [userEmail]
@@ -96,7 +97,7 @@ router.post("/login", validInfo, async (req, res) => {
       res.status(401).json({ error: "Password does not match sorry😏 :(" });
     }
    req.session.user = {
-     id: reslust.rows[0].user_id,
+     id: user.rows[0].user_id,
    };
  
     res.status(200).json({
