@@ -11,7 +11,13 @@ import * as yup from "yup";
 import "./LoginForm.css";
 import Header from "./Header";
 export default function LoginForm() {
+  const [clientId, setClientId] = useState()
   let history = useHistory();
+  const githubClientId =()=>{
+    fetch("/api/github-client-id")
+    .then(res =>res.json())
+    .then(data=>setClientId(data.github_client_id))
+  }
   const [data, setData] = useState(null);
   let schema = yup.object().shape({
     email: yup
