@@ -55,7 +55,7 @@ export default function LoginForm() {
   return (
     <>
       <div className="container-big">
-      <Header login="Login" signup="Signup" />
+        <Header login="Login" signup="Signup" />
         <div className="login-container">
           <form onSubmit={handleSubmit(onSubmit)} className="form-group">
             <p className="text-center">{data ? data.error : null}</p>
@@ -78,6 +78,9 @@ export default function LoginForm() {
               Submit
             </button>
           </form>
+          <a href={`https://github.com/login/oauth/authorize?client_id${clientId}`}>
+            <button className="btn btn-dark">login wit github</button>
+          </a>
         </div>
       </div>
     </>
