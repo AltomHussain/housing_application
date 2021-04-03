@@ -11,14 +11,14 @@ import * as yup from "yup";
 import "./LoginForm.css";
 import Header from "./Header";
 export default function LoginForm() {
-  // const [clientId, setClientId] = useState()
-  // let history = useHistory();
-  // const githubClientId =()=>{
-  //   fetch("/api/github-client-id")
-  //   .then(res =>res.json())
-  //   .then(data=>setClientId(data.github_client_id))
-  // }
-  // useEffect(githubClientId, []);
+  const [clientId, setClientId] = useState()
+  let history = useHistory();
+  const githubClientId =()=>{
+    fetch("/api/github-client-id")
+    .then(res =>res.json())
+    .then(data=>setClientId(data.github_client_id))
+  }
+  useEffect(githubClientId, []);
   console.log(clientId);
   const [data, setData] = useState(null);
   let schema = yup.object().shape({
@@ -86,9 +86,9 @@ export default function LoginForm() {
               Submit
             </button>
           </form>
-          {/* <a href={`https://github.com/login/oauth/authorize?client_id=${clientId}`}>
+          <a href={`https://github.com/login/oauth/authorize?client_id=${clientId}`}>
             <button className="btn btn-dark">login wit github</button>
-          </a> */}
+          </a>
         </div>
       </div>
     </>

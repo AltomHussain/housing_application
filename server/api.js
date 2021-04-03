@@ -1,9 +1,10 @@
 import { Router } from "express";
-// require("dotenv").config();
+require("dotenv").config();
 import authorization from "./middleware/authorization";
 import validInfo from "./middleware/validInfo";
 import { Connection } from "./db";
 import bcrypt from "bcrypt";
+import exchangeGithubCode from "./utils/exchangeGithubCode"
 const router = new Router();
 router.get("/", (_, res, next) => {
   Connection.connect((err) => {
@@ -77,9 +78,10 @@ router.post("/register", validInfo, async (req, res) => {
 
 //Login endpoint
 router.post("/login", validInfo, async (req, res) => {
-  console.log(req.session.user);
+   console.log("hello");
   try {
     const { userEmail, userPassword } = req.body;
+    console.log(userEmail, userPassword);
     let user = await Connection.query(
       `select * from users where user_email = $1`,
       [userEmail]
@@ -96,7 +98,7 @@ router.post("/login", validInfo, async (req, res) => {
       res.status(401).json({ error: "Password does not match sorry😏 :(" });
     }
    req.session.user = {
-     id: reslust.rows[0].user_id,
+     id: user.rows[0].user_id,
    };
  
     res.status(200).json({
@@ -114,6 +116,7 @@ router.get("/houses", async (req, res) => {
   const results = await Connection.query(query);
   res.json(results.rows);
 });
+  console.log(process.env.GITHUB_CLIENT_ID);
 //Get one by id
 router.get("/house/:id", authorization, async (req, res) => {
   try {
@@ -131,7 +134,7 @@ router.get("/house/:id", authorization, async (req, res) => {
 });
 //Post a new house authorization
 router.post("/house", async (req, res) => {
-  console.log("hello");
+
   const {
     houseType,
     houseDescription,
