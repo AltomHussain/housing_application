@@ -259,12 +259,36 @@ console.log("traaaaaaaaaaaaaa");
     console.log(error.message);
   }
 });
-
-// router.get("/github-client-id", (req, res)=>{
-//   res.json({
-//     github_client_id: process.env.GITHUB_CLIENT_ID,
-//   });
-// });
+router.get("/githubAuth", async(req, res)=>{
+  const {
+    id: githubId,
+    login: githubUserName
+  } = await exchangeGithubCode(req.query.code);
+  try {
+    const user = await Connection.query("select * from users where github_id=$1", [githubId])
+    if(user.rows.length===0){
+      req.session.githubId=githubId;
+      const params = new URLSearchParams({
+        githubUserName,
+        githubId,
+      }).toString()
+      res.redirect(`/signup?${params}`);
+      return;
+    }
+req.session.user = {
+  id: user.rows.user_id,
+  name: user.rows.user_name,
+};
+  } catch (error) {
+   console.log(error.message); 
+    res.status(500).json("Server error auth")
+  }
+})
+router.get("/github-client-id", (req, res)=>{
+  res.json({
+    github_client_id: process.env.GITHUB_CLIENT_ID,
+  });
+});
 router.get("*", function (req, res) {
   res.sendFile(path.resolve(__dirname, "index.html"));
 });
