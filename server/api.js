@@ -3,6 +3,7 @@ import authorization from "./middleware/authorization";
 import validInfo from "./middleware/validInfo";
 import { Connection } from "./db";
 import bcrypt from "bcrypt";
+
 const router = new Router();
 router.get("/", (_, res, next) => {
   Connection.connect((err) => {
@@ -76,7 +77,7 @@ router.post("/register", validInfo, async (req, res) => {
 
 //Login endpoint
 router.post("/login", validInfo, async (req, res) => {
-  console.log(req.session.user);
+   console.log("hello");
   try {
     const { userEmail, userPassword } = req.body;
     let user = await Connection.query(
@@ -130,7 +131,7 @@ router.get("/house/:id", authorization, async (req, res) => {
 });
 //Post a new house authorization
 router.post("/house", async (req, res) => {
-  console.log("hello");
+
   const {
     houseType,
     houseDescription,
