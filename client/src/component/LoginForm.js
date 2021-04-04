@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router-dom";
@@ -11,7 +11,15 @@ import * as yup from "yup";
 import "./LoginForm.css";
 import Header from "./Header";
 export default function LoginForm() {
+  const [clientId, setClientId] = useState()
   let history = useHistory();
+  const githubClientId =()=>{
+    fetch("/api/github-client-id")
+    .then(res =>res.json())
+    .then(data=>setClientId(data.github_client_id))
+  }
+  useEffect(githubClientId, []);
+  console.log(clientId);
   const [data, setData] = useState(null);
   let schema = yup.object().shape({
     email: yup
@@ -55,7 +63,7 @@ export default function LoginForm() {
   return (
     <>
       <div className="container-big">
-      <Header login="Login" signup="Signup" />
+        <Header login="Login" signup="Signup" />
         <div className="login-container">
           <form onSubmit={handleSubmit(onSubmit)} className="form-group">
             <p className="text-center">{data ? data.error : null}</p>
@@ -78,6 +86,9 @@ export default function LoginForm() {
               Submit
             </button>
           </form>
+          <a href={`https://github.com/login/oauth/authorize?client_id=${clientId}`}>
+            <button className="btn btn-dark">login wit github</button>
+          </a>
         </div>
       </div>
     </>
