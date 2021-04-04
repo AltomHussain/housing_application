@@ -66,6 +66,7 @@
   "dependencies": {
     "@babel/runtime": "^7.10.5",
     "@hookform/resolvers": "^1.3.5",
+    "bable-loader": "0.0.1-security",
     "bcrypt": "^5.0.1",
     "bootstrap": "^4.6.0",
     "ci": "^2.0.0",
