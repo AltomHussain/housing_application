@@ -265,7 +265,7 @@ router.get("/githubAuth", async(req, res)=>{
     login: githubUserName
   } = await exchangeGithubCode(req.query.code);
   try {
-    const user = await Connection.query("select * from users where github_id=$1", [githubId])
+    const user = await Connection.query("select * from users where  user_github_id=$1", [githubId])
     if(user.rows.length===0){
       req.session.githubId=githubId;
       const params = new URLSearchParams({
@@ -285,6 +285,7 @@ req.session.user = {
   }
 })
 router.get("/github-client-id", (req, res)=>{
+  console.log(process.env.GITHUB_CLIENT_ID);
   res.json({
     github_client_id: process.env.GITHUB_CLIENT_ID,
   });
