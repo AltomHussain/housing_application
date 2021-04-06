@@ -5,6 +5,7 @@ import validInfo from "./middleware/validInfo";
 import { Connection } from "./db";
 import bcrypt from "bcrypt";
 import exchangeGithubCode from "./utils/exchangeGithubCode"
+import { JavascriptModulesPlugin } from "webpack";
 const router = new Router();
 router.get("/", (_, res, next) => {
   Connection.connect((err) => {
@@ -272,7 +273,13 @@ router.get("/githubAuth", async(req, res)=>{
         githubUserName,
         githubId,
       }).toString()
-      res.redirect(`/signup?${params}`);
+      if (process.env.environment==="local") {
+        res.redirect(
+          `http://localhost:${process.env.localFrontEndPort}/signup?${params}`
+        );
+      }else{
+      res.redirect(`/signup?${params}`)
+      }
       return;
     }
 req.session.user = {
