@@ -162,6 +162,17 @@ router.get("/github-client-id", (req, res) => {
     github_client_id: process.env.GITHUB_CLIENT_ID,
   });
 });
+// google loing endpoint
+router.post("/google-login", async(req, res)=>{
+  try {
+    const { googleId } = req.body;
+    console.log(googleId);
+  } catch (error) {
+    
+  }
+console.log("hello google");
+})
+
 
 //Get all houes  authorization
 router.get("/houses", async (req, res) => {

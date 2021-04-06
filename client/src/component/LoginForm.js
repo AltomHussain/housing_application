@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-
+import LoginWithGoogle from "./LoginWithGoogle";
 import {loginContent} from "./statics/InputsData"
   import {toast } from "react-toastify";
 
@@ -86,9 +86,12 @@ export default function LoginForm() {
               Submit
             </button>
           </form>
-          <a href={`https://github.com/login/oauth/authorize?client_id=${clientId}`}>
+          <a
+            href={`https://github.com/login/oauth/authorize?client_id=${clientId}`}
+          >
             <button className="btn btn-dark">login wit github</button>
           </a>
+          <LoginWithGoogle />
         </div>
       </div>
     </>
