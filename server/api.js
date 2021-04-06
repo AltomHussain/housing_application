@@ -5,6 +5,7 @@ import validInfo from "./middleware/validInfo";
 import { Connection } from "./db";
 import bcrypt from "bcrypt";
 import exchangeGithubCode from "./utils/exchangeGithubCode"
+import { JavascriptModulesPlugin } from "webpack";
 const router = new Router();
 router.get("/", (_, res, next) => {
   Connection.connect((err) => {
@@ -54,7 +55,7 @@ router.post("/register", validInfo, async (req, res) => {
       userSurname,
       userEmail,
       bcryptPassword,
-      userGithubId,
+      req.session.githubId,
       userCity,
       userGoogleId,
       userFacebookId,
@@ -110,6 +111,58 @@ router.post("/login", validInfo, async (req, res) => {
     console.log(error.message);
   }
 });
+//Github login 
+router.get("/githubAuth", async (req, res) => {
+  const { id: githubId, login: githubUserName } = await exchangeGithubCode(
+    req.query.code
+  );
+  try {
+    const user = await Connection.query(
+      "select * from users where  user_github_id=$1",
+      [githubId]
+    );
+    if (user.rows.length === 0) {
+      req.session.githubId = githubId;
+      const params = new URLSearchParams({
+        githubUserName,
+        githubId,
+      }).toString();
+      if (process.env.environment === "local") {
+      await  res.redirect(
+          `http://localhost:${process.env.localFrontEndPort}/signup?${params}`
+        );
+      } else {
+        res.redirect(`/signup?${params}`);
+      }
+   
+    }
+    // console.log("session", req.session.githubId);
+    req.session.user = {
+      id: user.rows.user_id,
+      name: user.rows.user_name,
+    };
+
+    // res.redirect("/home")
+   if (process.env.environment === "local") {
+   await  res.redirect(
+       `http://localhost:${process.env.localFrontEndPort}/home?`
+     );
+   } else {
+   await  res.redirect(`/home?$`);
+   return;
+   }
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json("Server error auth");
+  }
+});
+router.get("/github-client-id", (req, res) => {
+  console.log(process.env.GITHUB_CLIENT_ID);
+  res.json({
+    github_client_id: process.env.GITHUB_CLIENT_ID,
+  });
+});
+
 //Get all houes  authorization
 router.get("/houses", async (req, res) => {
   const query = ` select * from houses ORDER BY house_id;`;
@@ -259,37 +312,8 @@ console.log("traaaaaaaaaaaaaa");
     console.log(error.message);
   }
 });
-router.get("/githubAuth", async(req, res)=>{
-  const {
-    id: githubId,
-    login: githubUserName
-  } = await exchangeGithubCode(req.query.code);
-  try {
-    const user = await Connection.query("select * from users where  user_github_id=$1", [githubId])
-    if(user.rows.length===0){
-      req.session.githubId=githubId;
-      const params = new URLSearchParams({
-        githubUserName,
-        githubId,
-      }).toString()
-      res.redirect(`/signup?${params}`);
-      return;
-    }
-req.session.user = {
-  id: user.rows.user_id,
-  name: user.rows.user_name,
-};
-  } catch (error) {
-   console.log(error.message); 
-    res.status(500).json("Server error auth")
-  }
-})
-router.get("/github-client-id", (req, res)=>{
-  console.log(process.env.GITHUB_CLIENT_ID);
-  res.json({
-    github_client_id: process.env.GITHUB_CLIENT_ID,
-  });
-});
+
+
 router.get("*", function (req, res) {
   res.sendFile(path.resolve(__dirname, "index.html"));
 });
