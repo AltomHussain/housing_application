@@ -89,9 +89,11 @@ export default function LoginForm() {
           <a
             href={`https://github.com/login/oauth/authorize?client_id=${clientId}`}
           >
-            <button className="btn btn-dark">login wit github</button>
+            <button className="btn btn-dark mr-2">login wit github</button>
           </a>
+         
           <LoginWithGoogle />
+
         </div>
       </div>
     </>
