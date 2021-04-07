@@ -1,20 +1,17 @@
 import React from 'react'
+import  {useHistory} from "react-router-dom"
 import  GoogleLogin from "react-google-login";
 
 export default function LoginWithGoogle() {
+  const history = useHistory()
     const responseGoogle = (response) => {
-  console.log(response.googleId);
-  fetch("/api/google-login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      googleId: response.googleId,
-    }),
-  })
-    .then((res) => res.json())
-    .then((data) => console.log(data));
+  if(response.googleId){
+ 
+   history.push("/home");
+  }else{
+    history.push("/signup");
+  }
+ 
 };
 
     return (
