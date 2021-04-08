@@ -4,7 +4,7 @@ import authorization from "./middleware/authorization";
 import validInfo from "./middleware/validInfo";
 import { Connection } from "./db";
 import bcrypt from "bcrypt";
-import exchangeGithubCode from "./utils/exchangeGithubCode"
+import exchangeGithubCode from "./utils/exchangeGithubCode";
 import { JavascriptModulesPlugin } from "webpack";
 const router = new Router();
 router.get("/", (_, res, next) => {
@@ -57,7 +57,7 @@ router.post("/register", validInfo, async (req, res) => {
       bcryptPassword,
       req.session.githubId,
       userCity,
-      userGoogleId,
+      req.session.googleId,
       userFacebookId,
       userPhone,
     ]);
@@ -79,7 +79,7 @@ router.post("/register", validInfo, async (req, res) => {
 
 //Login endpoint
 router.post("/login", validInfo, async (req, res) => {
-   console.log("hello");
+  console.log("hello");
   try {
     const { userEmail, userPassword } = req.body;
     console.log(userEmail, userPassword);
@@ -98,10 +98,10 @@ router.post("/login", validInfo, async (req, res) => {
     if (!validPassword) {
       res.status(401).json({ error: "Password does not match sorry😏 :(" });
     }
-   req.session.user = {
-     id: user.rows[0].user_id,
-   };
- 
+    req.session.user = {
+      id: user.rows[0].user_id,
+    };
+
     res.status(200).json({
       success: "Success",
       id: user.rows[0].user_id,
@@ -111,7 +111,7 @@ router.post("/login", validInfo, async (req, res) => {
     console.log(error.message);
   }
 });
-//Github login 
+//Github login
 router.get("/githubAuth", async (req, res) => {
   const { id: githubId, login: githubUserName } = await exchangeGithubCode(
     req.query.code
@@ -128,29 +128,27 @@ router.get("/githubAuth", async (req, res) => {
         githubId,
       }).toString();
       if (process.env.environment === "local") {
-      await  res.redirect(
+        await res.redirect(
           `http://localhost:${process.env.localFrontEndPort}/signup?${params}`
         );
       } else {
         res.redirect(`/signup?${params}`);
       }
-   
     }
-    // console.log("session", req.session.githubId);
     req.session.user = {
       id: user.rows.user_id,
       name: user.rows.user_name,
     };
 
     // res.redirect("/home")
-   if (process.env.environment === "local") {
-   await  res.redirect(
-       `http://localhost:${process.env.localFrontEndPort}/home?`
-     );
-   } else {
-   await  res.redirect(`/home?$`);
-   return;
-   }
+    if (process.env.environment === "local") {
+      await res.redirect(
+        `http://localhost:${process.env.localFrontEndPort}/home`
+      );
+    } else {
+      await res.redirect(`/home`);
+      return;
+    }
   } catch (error) {
     console.log(error.message);
     res.status(500).json("Server error auth");
@@ -162,14 +160,13 @@ router.get("/github-client-id", (req, res) => {
     github_client_id: process.env.GITHUB_CLIENT_ID,
   });
 });
-
 //Get all houes  authorization
 router.get("/houses", async (req, res) => {
   const query = ` select * from houses ORDER BY house_id;`;
   const results = await Connection.query(query);
   res.json(results.rows);
 });
-  console.log(process.env.GITHUB_CLIENT_ID);
+console.log(process.env.GITHUB_CLIENT_ID);
 //Get one by id
 router.get("/house/:id", authorization, async (req, res) => {
   try {
@@ -187,7 +184,6 @@ router.get("/house/:id", authorization, async (req, res) => {
 });
 //Post a new house authorization
 router.post("/house", async (req, res) => {
-
   const {
     houseType,
     houseDescription,
@@ -203,21 +199,21 @@ router.post("/house", async (req, res) => {
     kitchenImage,
     housePurpose,
   } = req.body;
-console.log(
-  houseType,
-  houseDescription,
-  houseSold,
-  streetName,
-  housePostcode,
-  housePrice,
-  houseCity,
-  houseImage,
-  houseNumber,
-  livingRoomImage,
-  bedRoomImage,
-  kitchenImage,
-  housePurpose
-);
+  console.log(
+    houseType,
+    houseDescription,
+    houseSold,
+    streetName,
+    housePostcode,
+    housePrice,
+    houseCity,
+    houseImage,
+    houseNumber,
+    livingRoomImage,
+    bedRoomImage,
+    kitchenImage,
+    housePurpose
+  );
   try {
     const insertQuery = `INSERT INTO houses(house_type, house_description, house_sold, street_name, house_postcode, house_price, house_city, house_image, house_number,  living_room_image,bed_room_image, kitchen_image,  house_purpose  ) values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *`;
     const results = await Connection.query(insertQuery, [
@@ -234,7 +230,7 @@ console.log(
       bedRoomImage,
       kitchenImage,
       housePurpose,
-    ]);  
+    ]);
     res.json({
       sucess: "Success",
       results: results.rows,
@@ -244,9 +240,8 @@ console.log(
   }
 });
 
-
 //Upate existing house authorization
-router.put("/house/:id",  async (req, res) => {
+router.put("/house/:id", async (req, res) => {
   try {
     const houseId = Number(req.params.id);
     const {
@@ -260,17 +255,17 @@ router.put("/house/:id",  async (req, res) => {
       houseImage,
       houseNumber,
     } = req.body;
-console.log(
-  houseType,
-  houseDescription,
-  houseSold,
-  streetName,
-  housePostcode,
-  housePrice,
-  houseCity,
-  houseImage,
-  houseNumber
-);
+    console.log(
+      houseType,
+      houseDescription,
+      houseSold,
+      streetName,
+      housePostcode,
+      housePrice,
+      houseCity,
+      houseImage,
+      houseNumber
+    );
     let updateQuery = `update houses set house_type=$1, house_description=$2, house_sold=$3, street_name=$4, house_postcode=$5, house_price=$6, house_city=$7, house_image=$8 , house_number=$9 where house_id=$10 `;
     await Connection.query(updateQuery, [
       houseType,
@@ -296,7 +291,7 @@ console.log(
 router.delete("/house/:id", authorization, async (req, res) => {
   try {
     const houseId = Number(req.params.id);
-console.log("traaaaaaaaaaaaaa");
+    console.log("traaaaaaaaaaaaaa");
     const selectQuery = `select * from houses where house_id= $1`;
     const deleteQuery = `delete from houses where house_id=$1`;
 
@@ -312,7 +307,6 @@ console.log("traaaaaaaaaaaaaa");
     console.log(error.message);
   }
 });
-
 
 router.get("*", function (req, res) {
   res.sendFile(path.resolve(__dirname, "index.html"));
