@@ -3,6 +3,7 @@ import {  useHistory } from "react-router-dom";
 import Header from "../component/Header";
 import { GetAllHouses } from "../component/Context/GetAllHouses";
 import "./HomePage.css";
+import SearchInputBar from "../component/SearchInputBar";
 
 
 export default function HomePage() {
@@ -14,8 +15,10 @@ const handleGetone = (e, id)=>{
     history.push(`getonehouse/${id}`);
 }
   return (
+  
     <div>
         <Header home="Home" />
+        <SearchInputBar/>
       <div className="all-houses">
         {allHouses.map(
           ({
