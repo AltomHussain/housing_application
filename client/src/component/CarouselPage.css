@@ -12,3 +12,19 @@ margin: 10px auto;
     background-color: #005A6C;
     border-radius: 3px;
 }
+@media only screen and (max-width: 750px){
+    .carosuel-image{
+    width: 90%;
+    height: 70vw;
+    margin: 10px auto;
+    border-radius: 3px;
+}
+.carosul-container{
+margin: 10px auto;
+    width: 95%;
+    height: 80vw;
+    border: solid #005A6C 3px;
+    background-color: #005A6C;
+    border-radius: 3px;
+}
+}
