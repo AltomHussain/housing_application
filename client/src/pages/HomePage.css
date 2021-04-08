@@ -75,3 +75,13 @@ margin: 0px auto;
   font-weight: 700;
   letter-spacing: 3px;
 }
+@media only screen and (max-width: 750px){
+  .room{
+    width: 700px;
+  }
+  .img-container img {
+  width: 88vw;
+  height: 300px;
+  transition: all 0.3s linear;
+}
+}

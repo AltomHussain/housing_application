@@ -23,14 +23,8 @@ const handleGetone = (e, id)=>{
           ({
             house_id,
             house_type,
-            house_description,
-            house_sold,
-            street_name,
-            house_postcode,
             house_price,
-            house_city,
             house_image,
-            house_number,
           }) => {
             return (
               <article className="room" key={house_id}>
