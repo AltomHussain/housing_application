@@ -17,9 +17,8 @@ export default function HomePage() {
   const handleSearch = (e) => {
     setSearchInput(e.target.value.toLowerCase());
   };
-  const filterHouse = allHouses.filter((item) => item.house_type.toLowerCase().indexOf(searchInput) !== -1 );
-  console.log(allHouses.length, "ori");
-console.log(filterHouse.length, "sedno");
+  const filterHouse = allHouses.filter((item) => item.house_type.toLowerCase().includes(searchInput) );
+
   return (
     <div>
       <Header home="Home" />
