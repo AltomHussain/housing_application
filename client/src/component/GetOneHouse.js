@@ -12,6 +12,7 @@ export default function GetOneHouse() {
       .then((data) => setOneHouse(data))
       .catch((error) => console.log(error));
   };
+  console.log(oneHouse);
   useEffect(() => {
     GetOneHouseDetail();
   }, []);

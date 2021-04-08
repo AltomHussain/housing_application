@@ -10,7 +10,7 @@ export const HousesContextProvider = (props)=>{
  };
 useEffect(() => {
   fetchAllHouse(setAllHouses);
-}, [allHouses]);
+}, []);
 
     return (
       <GetAllHouses.Provider value={{ allHouses, setAllHouses }}>
