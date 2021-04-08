@@ -12,8 +12,8 @@ export default function CarouselPage() {
             alt="First slide"
           />
           <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            <h3>Looking for a house ?</h3>
+            <p>You can bid one!</p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
@@ -24,22 +24,20 @@ export default function CarouselPage() {
           />
 
           <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <h3>Selling a house ?</h3>
+            <p>Add your house from the top!</p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
           <img
             className="d-block carosuel-image"
-            src="https://www.digsdigs.com/photos/the-most-futuristic-house-554x3681.jpg"
+            src="https://www.realestate.com.au/blog/images/1024x576-fit,progressive/2018/11/02140037/capi_b36147142016a1fb8955eaf3912770f4_7a84986150b7717c877032594424fc5e.jpeg"
             alt="Third slide"
           />
 
           <Carousel.Caption>
-            <h3>Third slide label</h3>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
+            <h3>Rating my website please !</h3>
+            <p>You can add review to add houses as well !</p>
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
