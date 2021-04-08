@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext , useState} from "react";
 import {  useHistory } from "react-router-dom";
 import Header from "../component/Header";
 import { GetAllHouses } from "../component/Context/GetAllHouses";
@@ -9,18 +9,27 @@ import SearchInputBar from "../component/SearchInputBar";
 export default function HomePage() {
   const { allHouses } = useContext(GetAllHouses);
   let history = useHistory();
-  console.log(allHouses);
-const handleGetone = (e, id)=>{
+  const handleGetone = (e, id)=>{
     e.stopPropagation();
     history.push(`getonehouse/${id}`);
-}
+  }
+  const [searchInput, setSearchInput] = useState("");
+  const handleSearch = (e) => {
+    setSearchInput(e.target.value.toLowerCase());
+  };
+  const filterHouse = allHouses.filter((item) => item.house_type.toLowerCase().indexOf(searchInput) !== -1 );
+  console.log(allHouses.length, "ori");
+console.log(filterHouse.length, "sedno");
   return (
-  
     <div>
-        <Header home="Home" />
-        <SearchInputBar/>
+      <Header home="Home" />
+      <SearchInputBar
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
+        handleSearch={handleSearch}
+      />
       <div className="all-houses">
-        {allHouses.map(
+        {filterHouse.map(
           ({
             house_id,
             house_type,
