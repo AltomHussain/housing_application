@@ -3,6 +3,7 @@ import {  useHistory } from "react-router-dom";
 import Header from "../component/Header";
 import { GetAllHouses } from "../component/Context/GetAllHouses";
 import "./HomePage.css";
+import CarouselPage from "../component/CarouselPage";
 
 
 export default function HomePage() {
@@ -16,6 +17,7 @@ const handleGetone = (e, id)=>{
   return (
     <div>
         <Header home="Home" />
+        <CarouselPage />
       <div className="all-houses">
         {allHouses.map(
           ({
