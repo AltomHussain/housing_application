@@ -1,62 +1,97 @@
-import React, { useContext } from "react";
-import {  useHistory } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { Card } from "react-bootstrap";
 import Header from "../component/Header";
 import { GetAllHouses } from "../component/Context/GetAllHouses";
 import "./HomePage.css";
-
+import SearchInputBar from "../component/SearchInputBar";
 
 export default function HomePage() {
   const { allHouses } = useContext(GetAllHouses);
   let history = useHistory();
-  console.log(allHouses);
-const handleGetone = (e, id)=>{
+  const handleGetone = (e, id) => {
     e.stopPropagation();
     history.push(`getonehouse/${id}`);
-}
+  };
+  const [searchInput, setSearchInput] = useState("");
+  const filterHouse = allHouses.filter((item) =>
+    item.house_type.toLowerCase().includes(searchInput)
+  );
+  console.log(filterHouse);
+  const noMathes = () => {
+    if (filterHouse.length === 0) {
+      return (
+        <div className="not-match">
+          <Card
+            bg="warning"
+            text={"warning" === "light" ? "dark" : "white"}
+            style={{ width: "18rem" }}
+            className="mb-2 "
+          >
+            <Card.Header className="text-center">No Maches</Card.Header>
+            <Card.Body>
+              <Card.Text>
+                It does not look like there is any matches for your search
+                <span style={{ fontSize: "80px" }} className="text-center">
+                  &#128523;
+                </span>
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </div>
+      );
+    }
+  };
   return (
     <div>
-        <Header home="Home" />
+      <Header home="Home" />
+      <SearchInputBar
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
+      />
       <div className="all-houses">
-        {allHouses.map(
-          ({
-            house_id,
-            house_type,
-            house_description,
-            house_sold,
-            street_name,
-            house_postcode,
-            house_price,
-            house_city,
-            house_image,
-            house_number,
-          }) => {
-            return (
-              <article className="room" key={house_id}>
-                <div className="img-container">
-                  <img
-                    src={
-                      house_image
-                        ? house_image
-                        : "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/primrose-hill-house-1576670230.png?crop=1xw:1xh;center,top&resize=480:*"
-                    }
-                    alt="single-room"
-                  />
-                  <div className="price-top">
-                    <h6>{house_price}</h6>
-                    <p>per night</p>
-                  </div>
-                  <button
-                    onClick={(e) => handleGetone(e, house_id)}
-                    className="btn btn-success room-link"
-                  >
-                    Features
-                  </button>
-                </div>
-                <p className="room-info">Nice {house_type}</p>
-              </article>
-            );
-          }
-        )}
+        {filterHouse.length > 0
+          ? filterHouse.map(
+              ({
+                house_id,
+                house_type,
+                house_description,
+                house_sold,
+                street_name,
+                house_postcode,
+                house_price,
+                house_city,
+                house_image,
+                house_number,
+              }) => {
+                return (
+                  <article className="room" key={house_id}>
+                    <div className="img-container">
+                      <img
+                        src={
+                          house_image
+                            ? house_image
+                            : "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/primrose-hill-house-1576670230.png?crop=1xw:1xh;center,top&resize=480:*"
+                        }
+                        alt="single-room"
+                      />
+                      <div className="price-top">
+                        <h6>{house_price}</h6>
+                        <p>per night</p>
+                      </div>
+                      <button
+                        onClick={(e) => handleGetone(e, house_id)}
+                        className="btn btn-success room-link"
+                      >
+                        Features
+                      </button>
+                    </div>
+                    <p className="room-info">Nice {house_type}</p>
+                  </article>
+                );
+              }
+            )
+          : noMathes()}
       </div>
     </div>
   );

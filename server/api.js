@@ -167,8 +167,8 @@ router.get("/houses", async (req, res) => {
   res.json(results.rows);
 });
 console.log(process.env.GITHUB_CLIENT_ID);
-//Get one by id
-router.get("/house/:id", authorization, async (req, res) => {
+//Get one by id authorization
+router.get("/house/:id",  async (req, res) => {
   try {
     const houseId = Number(req.params.id);
     const selectQuery = `select * from houses where house_id = $1`;
