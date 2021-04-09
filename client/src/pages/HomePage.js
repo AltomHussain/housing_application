@@ -4,7 +4,12 @@ import { Card } from "react-bootstrap";
 import Header from "../component/Header";
 import { GetAllHouses } from "../component/Context/GetAllHouses";
 import "./HomePage.css";
+
+import CarouselPage from "../component/CarouselPage";
+
+
 import SearchInputBar from "../component/SearchInputBar";
+
 
 export default function HomePage() {
   const { allHouses } = useContext(GetAllHouses);
@@ -44,7 +49,9 @@ export default function HomePage() {
   };
   return (
     <div>
+
       <Header home="Home" />
+          <CarouselPage />
       <SearchInputBar
         searchInput={searchInput}
         setSearchInput={setSearchInput}
@@ -92,6 +99,7 @@ export default function HomePage() {
               }
             )
           : noMathes()}
+
       </div>
     </div>
   );
