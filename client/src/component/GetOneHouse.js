@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import DeleteHouse from "./DeleteHouse"
+import { Spinner } from "react-bootstrap";
+import DeleteHouse from "./DeleteHouse";
 import "./GetOneHouse.css";
 import UpdateModal from "./UpdateModal";
 export default function GetOneHouse() {
@@ -85,8 +86,7 @@ export default function GetOneHouse() {
                       GetOneHouseDetail={GetOneHouseDetail}
                     />
                   </h6>
-                  <h6>Delete House
-                  </h6>
+                  <h6>Delete House</h6>
                   <DeleteHouse id={id} />
                 </article>
               </div>
