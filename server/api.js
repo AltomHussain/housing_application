@@ -307,7 +307,31 @@ router.delete("/house/:id", authorization, async (req, res) => {
     console.log(error.message);
   }
 });
-
+//Add review
+router.post("/house/:id/add-review", async(req, res)=>{
+  try {
+    const {reviewerName, ReviewDescription, rating, dataAdded} = req.body;
+    const {id} = req.params
+    console.log(reviewerName, ReviewDescription, rating, dataAdded, id);
+    
+    const postQuery = `insert into biddings(reviewer_name, review_description, 
+      rating, date_added,  house_bid_id ) values($1, $2, $3, $4, $5)RETURNING * `;
+ const ressult = await Connection.query(postQuery, [
+   reviewerName,
+   ReviewDescription,
+   rating,
+   dataAdded,
+   id
+ ]);
+ res.status(200).json({
+   success: "Success",
+   data: ressult.rows
+ })
+ 
+  } catch (error) {
+    console.log(error.message);
+  }
+})
 router.get("*", function (req, res) {
   res.sendFile(path.resolve(__dirname, "index.html"));
 });
