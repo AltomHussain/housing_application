@@ -18,7 +18,6 @@ export default function Reviews() {
   useEffect(() => {
     getReview();
   }, [id]);
-  console.log(allReviews ? allReviews.review : "no");
 
   return (
     <div>
@@ -32,22 +31,21 @@ export default function Reviews() {
               review_description,
               rating,
             }) => {
+                console.log(rating);
               return (
-                <div>
+                <div key={id}>
                   <Card
                     bg="success"
-                    key={id}
                     text="light"
                     style={{ width: "18rem" }}
                     className="mb-2"
                   >
-                    <Card.Header>Header</Card.Header>
+                    <Card.Header>
+                      <h4>{reviewer_name} rating:{rating}</h4>{" "}
+                    </Card.Header>
                     <Card.Body>
-                      <Card.Title> Card Title </Card.Title>
-                      <Card.Text>
-                        Some quick example text to build on the card title and
-                        make up the bulk of the card's content.
-                      </Card.Text>
+                      <Card.Title> {date_added} </Card.Title>
+                      <Card.Text>{review_description}.</Card.Text>
                     </Card.Body>
                   </Card>
                 </div>
