@@ -168,13 +168,25 @@ router.get("/houses", async (req, res) => {
 });
 console.log(process.env.GITHUB_CLIENT_ID);
 //Get one by id authorization
-router.get("/house/:id",  async (req, res) => {
+router.get("/house/:id", async (req, res) => {
   try {
     const houseId = Number(req.params.id);
-    const selectQuery = `select * from houses where house_id = $1`;
+    const selectQuery = `select * from houses left join (select house_bid_id, count(*), trunc(AVG(rating), 1) as average_rating 
+    from biddings group by house_bid_id) biddings on houses.house_id=biddings.house_bid_id where house_id =$1`;
+
+
+    
     const result = await Connection.query(selectQuery, [houseId]);
+    const reviews = await Connection.query(`select * from biddings where house_bid_id = $1`, [houseId])
     if (result.rows.length !== 0) {
-      res.status(200).json(result.rows);
+      res.status(200).json({
+        success: "Sucess",
+        data:  {
+          result: result.rows, 
+          reviews: reviews.rows 
+        }
+       
+      });
     } else {
       res
         .status(404)
@@ -308,30 +320,29 @@ router.delete("/house/:id", authorization, async (req, res) => {
   }
 });
 //Add review
-router.post("/house/:id/add-review", async(req, res)=>{
+router.post("/house/:id/add-review", async (req, res) => {
   try {
-    const {reviewerName, ReviewDescription, rating, dataAdded} = req.body;
-    const {id} = req.params
+    const { reviewerName, ReviewDescription, rating, dataAdded } = req.body;
+    const { id } = req.params;
     console.log(reviewerName, ReviewDescription, rating, dataAdded, id);
-    
+
     const postQuery = `insert into biddings(reviewer_name, review_description, 
       rating, date_added,  house_bid_id ) values($1, $2, $3, $4, $5)RETURNING * `;
- const ressult = await Connection.query(postQuery, [
-   reviewerName,
-   ReviewDescription,
-   rating,
-   dataAdded,
-   id
- ]);
- res.status(200).json({
-   success: "Success",
-   data: ressult.rows
- })
- 
+    const ressult = await Connection.query(postQuery, [
+      reviewerName,
+      ReviewDescription,
+      rating,
+      dataAdded,
+      id,
+    ]);
+    res.status(200).json({
+      success: "Success",
+      data: ressult.rows,
+    });
   } catch (error) {
     console.log(error.message);
   }
-})
+});
 router.get("*", function (req, res) {
   res.sendFile(path.resolve(__dirname, "index.html"));
 });
