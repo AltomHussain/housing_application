@@ -13,6 +13,7 @@ import SearchInputBar from "../component/SearchInputBar";
 
 export default function HomePage() {
   const { allHouses } = useContext(GetAllHouses);
+
   let history = useHistory();
   const handleGetone = (e, id) => {
     e.stopPropagation();

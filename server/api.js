@@ -162,7 +162,7 @@ router.get("/github-client-id", (req, res) => {
 });
 //Get all houes  authorization
 router.get("/houses", async (req, res) => {
-  const query = ` select * from houses ORDER BY house_id;`;
+  const query = ` select * from houses left join (select house_bid_id, count(*), trunc(AVG(rating), 1) as average_rating from biddings group by house_bid_id) biddings on houses.house_id=biddings.house_bid_id order by house_id;`;
   const results = await Connection.query(query);
   res.json(results.rows);
 });
