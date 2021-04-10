@@ -6,6 +6,11 @@ import "./GetOneHouse.css";
 import UpdateModal from "./UpdateModal";
 export default function GetOneHouse() {
   const [oneHouse, setOneHouse] = useState([]);
+const history = useHistory()
+const handleReview = (id)=>{
+history.push(`/review/${id}`)
+}
+
 
   const { id } = useParams();
   const GetOneHouseDetail = () => {
@@ -19,12 +24,7 @@ export default function GetOneHouse() {
   useEffect(() => {
     GetOneHouseDetail();
   }, [id]);
-  console.log(id);
-  console.log(
-    "house",
-    oneHouse.result ? oneHouse.result.map((p) => console.log(p)) : ""
-  );
-  console.log("rev", oneHouse.review);
+
   return (
     <div>
       {oneHouse.result ? (
@@ -97,6 +97,9 @@ export default function GetOneHouse() {
                     </h6>
                     <h6>Delete House</h6>
                     <DeleteHouse id={id} />
+                    <button onClick={() => handleReview(house_id)}>
+                      review
+                    </button>
                   </article>
                 </div>
               </div>
