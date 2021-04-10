@@ -4,6 +4,7 @@ import { Spinner } from "react-bootstrap";
 import DeleteHouse from "./DeleteHouse";
 import "./GetOneHouse.css";
 import UpdateModal from "./UpdateModal";
+import StarRating from "./StarRating"
 export default function GetOneHouse() {
   const [oneHouse, setOneHouse] = useState([]);
 const history = useHistory()
@@ -24,7 +25,7 @@ history.push(`/review/${id}`)
   useEffect(() => {
     GetOneHouseDetail();
   }, [id]);
-
+console.log(oneHouse.result? oneHouse.result: "no" );
   return (
     <div>
       {oneHouse.result ? (
@@ -40,6 +41,8 @@ history.push(`/review/${id}`)
             house_city,
             house_image,
             house_number,
+            average_rating,
+            count,
           }) => {
             return (
               <div className="onehouse-container" key={house_id}>
@@ -97,9 +100,16 @@ history.push(`/review/${id}`)
                     </h6>
                     <h6>Delete House</h6>
                     <DeleteHouse id={id} />
-                    <button onClick={() => handleReview(house_id)}>
-                      review
-                    </button>
+                    <div>
+                      <h4>Show : Rating/Reviews</h4>
+                      <button
+                        onClick={() => handleReview(house_id)}
+                        className="btn btn-success"
+                      >
+                      <StarRating rating={average_rating} /> {`(${count})`}
+                      
+                      </button>
+                    </div>
                   </article>
                 </div>
               </div>
@@ -108,7 +118,7 @@ history.push(`/review/${id}`)
         )
       ) : (
         <>
-          <h3> Loading:</h3>
+          Loading...
           <Spinner animation="border" variant="secondary" />
           <Spinner animation="border" variant="success" />
           <Spinner animation="border" variant="danger" />
