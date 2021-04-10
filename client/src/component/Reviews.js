@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import "./Reviews.css"
 import {Card} from "react-bootstrap"
 export default function Reviews() {
   const [allReviews, setAllReviews] = useState([]);
@@ -20,7 +21,7 @@ export default function Reviews() {
   }, [id]);
 
   return (
-    <div>
+    <div className="reviews-container">
       {allReviews.review
         ? allReviews.review.map(
             ({
@@ -31,9 +32,9 @@ export default function Reviews() {
               review_description,
               rating,
             }) => {
-                console.log(rating);
+              console.log(rating);
               return (
-                <div key={id}>
+                <div key={id} className="reviews">
                   <Card
                     bg="success"
                     text="light"
@@ -41,7 +42,9 @@ export default function Reviews() {
                     className="mb-2"
                   >
                     <Card.Header>
-                      <h4>{reviewer_name} rating:{rating}</h4>{" "}
+                      <h4>
+                        {reviewer_name} rating:{rating}
+                      </h4>{" "}
                     </Card.Header>
                     <Card.Body>
                       <Card.Title> {date_added} </Card.Title>

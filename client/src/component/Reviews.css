@@ -1,0 +1,6 @@
+.reviews-container{
+    display: flex;
+    margin: 10px auto;
+    width: 95%;
+    justify-content: space-evenly;
+}
