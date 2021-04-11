@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {useParams} from "react-router-dom"
 import * as yup from "yup";
+  import { toast } from "react-toastify";
+
 export default function AddReview({ getReview }) {
   const [initalVaue, setInitalVaue] = useState("");
   const scheme = yup.object().shape({
@@ -33,11 +35,16 @@ export default function AddReview({ getReview }) {
           reset();
         }
         getReview();
+         toast.success("Your review has been added Successfully 😄");
         return res.json();
       })
       .then((data) => console.log(data));
   };
+
+
   return (
+      <>
+    
     <div className="add-review-container">
       <h3 className="text-center">Add Review</h3>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -96,5 +103,6 @@ export default function AddReview({ getReview }) {
         <button className="btn btn-success form-control mt-2">Add</button>
       </form>
     </div>
+    </>
   );
 }

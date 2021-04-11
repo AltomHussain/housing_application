@@ -26,7 +26,6 @@ history.push(`/review/${id}`)
   useEffect(() => {
     GetOneHouseDetail();
   }, [id]);
-console.log(oneHouse.result? oneHouse.result: "no" );
 let home = <i className="fas fa-long-arrow-alt-left me-3 text-light"> Home</i>
   return (
     <div>
@@ -81,7 +80,9 @@ let home = <i className="fas fa-long-arrow-alt-left me-3 text-light"> Home</i>
                       <h6>Street Name: {street_name}</h6>
                       <h6>Located In: {house_city}</h6>
                       <h6>Postcode: {house_postcode}</h6>
+                      
                     </article>
+
                     <article className="biddings">
                       <h3>Beddings:</h3>
                       <h6>
@@ -107,12 +108,12 @@ let home = <i className="fas fa-long-arrow-alt-left me-3 text-light"> Home</i>
                       <h6>Delete House</h6>
                       <DeleteHouse id={id} />
                       <div>
-                        <h4>Show : Rating/Reviews</h4>
+                        <h5>Show :Rating/Reviews</h5>
                         <button
                           onClick={() => handleReview(house_id)}
                           className="btn btn-success"
                         >
-                          <StarRating rating={average_rating} /> {`(${count})`}
+                          <StarRating rating={average_rating} /> {`(${count? count: "0 reviews"})`}
                         </button>
                       </div>
                     </article>

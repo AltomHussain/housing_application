@@ -43,10 +43,7 @@ export default function AddNewHouse() {
         }
         
         return res.json()})
-        .then((data)=>{
-      console.log(data);
-     
-  })
+        .then((data)=>console.log(data))
  
 
   };

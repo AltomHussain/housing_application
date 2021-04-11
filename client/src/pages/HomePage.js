@@ -24,7 +24,6 @@ export default function HomePage() {
   const filterHouse = allHouses.filter((item) =>
     item.house_type.toLowerCase().includes(searchInput)
   );
-  console.log(filterHouse);
   const noMathes = () => {
     if (filterHouse.length === 0) {
       return (
@@ -49,10 +48,10 @@ export default function HomePage() {
       );
     }
   };
-  console.log(filterHouse);
+  let addHouse =  <button className="btn btn-success">Add House</button>
   return (
     <div>
-      <Header home="Home" />
+      <Header home="Home" addHouse={addHouse} logout="Logout" />
       <CarouselPage />
       <SearchInputBar
         searchInput={searchInput}
@@ -65,11 +64,10 @@ export default function HomePage() {
                 house_id,
                 house_type,
                 average_rating,
-                 house_price,
+                house_price,
                 count,
                 house_image,
                 house_number,
-                
               }) => {
                 return (
                   <article className="room" key={house_id}>
@@ -93,7 +91,9 @@ export default function HomePage() {
                         Features
                       </button>
                     </div>
-                    <p className="room-info">{house_type} <StarRating rating={average_rating}/></p> 
+                    <p className="room-info">
+                      {house_type} <StarRating rating={average_rating} />
+                    </p>
                   </article>
                 );
               }
