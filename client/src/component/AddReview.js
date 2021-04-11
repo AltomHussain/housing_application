@@ -17,7 +17,6 @@ export default function AddReview() {
   });
 
   const onSubmit = (data) =>{
-      setInitalVaue(" ")
       console.log(data);
   }
   return (
@@ -32,7 +31,9 @@ export default function AddReview() {
           name="name"
           ref={register}
         />
-        <p> {errors.name && errors.name.message}</p>
+        <p className="text-center text-danger">
+          {errors.name && errors.name.message}
+        </p>
         <label>Rating</label>
         <select
           className=" custom-select"
@@ -48,9 +49,11 @@ export default function AddReview() {
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
-          <option value="5">5</option> 
+          <option value="5">5</option>
         </select>
-        <p> {errors.rating && errors.rating.message}</p>
+        <p className="text-center text-danger">
+          {errors.rating && errors.rating.message}
+        </p>
         <label>Date</label>
         <input
           type="date"
@@ -59,7 +62,9 @@ export default function AddReview() {
           name="date"
           ref={register}
         />
-        <p> {errors.date && errors.date.message}</p>
+        <p className="text-center text-danger">
+          {errors.date && errors.date.message}
+        </p>
         <label>Review</label>
         <textarea
           className="form-control"
@@ -67,7 +72,9 @@ export default function AddReview() {
           name="description"
           ref={register}
         ></textarea>
-        <p> {errors.description && errors.description.message}</p>
+        <p className="text-center text-danger">
+          {errors.description && errors.description.message}
+        </p>
         <button className="btn btn-success form-control mt-2">Add</button>
       </form>
     </div>
