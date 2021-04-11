@@ -48,7 +48,7 @@ export default function SignupForm() {
   const onSubmit = (data) => {
     sendData(data);
   };
-  let back = <i className="fas fa-long-arrow-alt-left me-2">Back</i>;
+  let back = <i className="fas fa-long-arrow-alt-left me-2 text-light">Back</i>;
   return (
     <div className="container-big">
       <Header back={back} />

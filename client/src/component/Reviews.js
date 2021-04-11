@@ -23,9 +23,8 @@ export default function Reviews() {
   }, [id]);
 
   return (
-     <div className="review-add-review-container">
-    <div className="reviews-container">
-     
+    <div className="review-add-review-container">
+      <div className="reviews-container">
         {allReviews.review ? (
           allReviews.review.map(
             ({
@@ -66,7 +65,7 @@ export default function Reviews() {
           </>
         )}
       </div>
-        <AddReview />
+      <AddReview getReview={getReview} />
     </div>
   );
 }

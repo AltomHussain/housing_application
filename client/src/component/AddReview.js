@@ -2,23 +2,41 @@ import React, { useState } from "react";
 import "./AddReview.css";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import {useParams} from "react-router-dom"
 import * as yup from "yup";
-export default function AddReview() {
-    const [initalVaue, setInitalVaue] = useState("");
+export default function AddReview({ getReview }) {
+  const [initalVaue, setInitalVaue] = useState("");
   const scheme = yup.object().shape({
     name: yup.string().required("Field is required"),
     rating: yup.string().required("Fied is required"),
     date: yup.string().required("Please select a date"),
     description: yup.string().required("Please add a review"),
   });
-
+  const { id } = useParams();
   const { register, handleSubmit, errors, reset } = useForm({
     resolver: yupResolver(scheme),
   });
 
-  const onSubmit = (data) =>{
-      console.log(data);
-  }
+  const onSubmit = (data) => {
+    fetch(`/api/house/${id}/add-review`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        reviewerName: data.name,
+        ReviewDescription: data.description,
+        rating: data.rating,
+        dataAdded: data.date,
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          reset();
+        }
+        getReview();
+        return res.json();
+      })
+      .then((data) => console.log(data));
+  };
   return (
     <div className="add-review-container">
       <h3 className="text-center">Add Review</h3>
@@ -44,7 +62,7 @@ export default function AddReview() {
           required
         >
           <option disabled>Rating</option>
-          <option value=""></option>
+          <option value="" ></option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
