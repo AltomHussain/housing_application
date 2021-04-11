@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 export default function AddReview() {
-    const [initalVaue, setInitalVaue] = useState("Rating");
+    const [initalVaue, setInitalVaue] = useState("");
   const scheme = yup.object().shape({
     name: yup.string().required("Field is required"),
     rating: yup.string().required("Fied is required"),
@@ -17,6 +17,7 @@ export default function AddReview() {
   });
 
   const onSubmit = (data) =>{
+      setInitalVaue(" ")
       console.log(data);
   }
   return (
@@ -39,15 +40,16 @@ export default function AddReview() {
           ref={register}
           onChange={(e) => setInitalVaue(e.target.value)}
           value={initalVaue}
+          required
         >
           <option disabled>Rating</option>
+          <option value=""></option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
           <option value="5">5</option> 
         </select>
-       <p> {initalVaue==="rating" ? "please select": ""}</p>
         <p> {errors.rating && errors.rating.message}</p>
         <label>Date</label>
         <input
