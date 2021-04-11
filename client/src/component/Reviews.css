@@ -7,4 +7,12 @@
 }
 .review-add-review-container{
     display: flex;
+    /* flex-wrap: wrap; */
+ 
+}
+
+@media only screen and (max-width: 700px){
+    .review-add-review-container{
+   flex-direction: column-reverse;
+    }
 }
