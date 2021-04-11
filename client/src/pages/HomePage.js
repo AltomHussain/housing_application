@@ -9,6 +9,7 @@ import CarouselPage from "../component/CarouselPage";
 
 
 import SearchInputBar from "../component/SearchInputBar";
+import StarRating from "../component/StarRating";
 
 
 export default function HomePage() {
@@ -48,11 +49,11 @@ export default function HomePage() {
       );
     }
   };
+  console.log(filterHouse);
   return (
     <div>
-
       <Header home="Home" />
-          <CarouselPage />
+      <CarouselPage />
       <SearchInputBar
         searchInput={searchInput}
         setSearchInput={setSearchInput}
@@ -63,14 +64,12 @@ export default function HomePage() {
               ({
                 house_id,
                 house_type,
-                house_description,
-                house_sold,
-                street_name,
-                house_postcode,
-                house_price,
-                house_city,
+                average_rating,
+                 house_price,
+                count,
                 house_image,
                 house_number,
+                
               }) => {
                 return (
                   <article className="room" key={house_id}>
@@ -94,13 +93,12 @@ export default function HomePage() {
                         Features
                       </button>
                     </div>
-                    <p className="room-info">Nice {house_type}</p>
+                    <p className="room-info">{house_type} <StarRating rating={average_rating}/></p> 
                   </article>
                 );
               }
             )
           : noMathes()}
-
       </div>
     </div>
   );
