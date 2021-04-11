@@ -45,8 +45,9 @@ export default function AddReview() {
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
-          <option value="5">5</option>
+          <option value="5">5</option> 
         </select>
+       <p> {initalVaue==="rating" ? "please select": ""}</p>
         <p> {errors.rating && errors.rating.message}</p>
         <label>Date</label>
         <input
