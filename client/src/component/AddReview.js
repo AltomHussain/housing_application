@@ -30,6 +30,7 @@ export default function AddReview() {
           name="name"
           ref={register}
         />
+        <p> {errors.name && errors.name.message}</p>
         <label>Rating</label>
         <select className="form-control" name="rating" ref={register}>
           <option value="1">1</option>
@@ -38,6 +39,7 @@ export default function AddReview() {
           <option value="4">4</option>
           <option value="5">5</option>
         </select>
+        <p> {errors.rating && errors.rating.message}</p>
         <label>Date</label>
         <input
           type="date"
@@ -46,6 +48,7 @@ export default function AddReview() {
           name="date"
           ref={register}
         />
+        <p> {errors.date && errors.date.message}</p>
         <label>Review</label>
         <textarea
           className="form-control"
@@ -53,7 +56,7 @@ export default function AddReview() {
           name="description"
           ref={register}
         ></textarea>
-
+        <p> {errors.description && errors.description.message}</p>
         <button className="btn btn-success form-control mt-2">Add</button>
       </form>
     </div>
