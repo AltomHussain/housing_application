@@ -4,7 +4,7 @@ import { GetAllHouses,allHouses, setAllHouses } from "../component/Context/GetAl
  import { toast } from "react-toastify";
 export default function DeleteHouse({id}) {
       const { allHouses, setAllHouses } = useContext(GetAllHouses);
-      console.log(allHouses);
+
  const [show, setShow] = useState(false);
  const handleClose = () => setShow(false);
  const handleShow = () => setShow(true);
