@@ -34,10 +34,15 @@ CREATE TABLE biddings(
     user_bidding_id INTEGER REFERENCES users(user_id),
     house_bid_id INTEGER REFERENCES houses(house_id),
     date_added  varchar(255),
-    bid INT,
     reviewer_name varchar(255),
     review_description varchar(800),
     rating INT NOT null CHECK(rating>= 1 and rating<=5)
+);
+CREATE TABLE bidding_house(
+    id serial primary key,
+    user_id INTEGER REFERENCES users(user_id),
+    house_id INTEGER REFERENCES houses(house_id),
+    bid INT
 );
 INSERT INTO users(user_id, user_name, user_surmane, user_email, user_password, user_github_id, user_city, user_google_id, user_facebook_id, user_phone_number ) values(1, 'Altom', 'Hussain', 'altom@gmail.com', '123456', 123, 'Manchester', 123, 123, 078456516)
 

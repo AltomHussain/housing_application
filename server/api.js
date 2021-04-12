@@ -79,7 +79,7 @@ router.post("/register", validInfo, async (req, res) => {
 
 //Login endpoint
 router.post("/login", validInfo, async (req, res) => {
-  console.log("hello");
+
   try {
     const { userEmail, userPassword } = req.body;
     console.log(userEmail, userPassword);
@@ -101,7 +101,7 @@ router.post("/login", validInfo, async (req, res) => {
     req.session.user = {
       id: user.rows[0].user_id,
     };
-
+  console.log(req.session.user);
     res.status(200).json({
       success: "Success",
       id: user.rows[0].user_id,
@@ -343,6 +343,15 @@ router.post("/house/:id/add-review", async (req, res) => {
     console.log(error.message);
   }
 });
+router.get("/bidding/:id", async(req, res)=>{
+  try {
+    const {id} = req.params;
+    const result = await Connection.query(`select * from bidding_house where user_id= $1 and house_id=$2`, [req.session.id , id]);
+console.log(req.session.user.id);
+  } catch (error) {
+    console.log(error.message);
+  }
+})
 router.get("*", function (req, res) {
   res.sendFile(path.resolve(__dirname, "index.html"));
 });
