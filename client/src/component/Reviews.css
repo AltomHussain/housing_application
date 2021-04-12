@@ -1,0 +1,17 @@
+.reviews-container{
+    display: flex;
+    margin: 10px auto;
+    width: 95%;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.review-add-review-container{
+    display: flex;
+
+}
+
+@media only screen and (max-width: 700px){
+    .review-add-review-container{
+   flex-direction: column-reverse;
+    }
+}

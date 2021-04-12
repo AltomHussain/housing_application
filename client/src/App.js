@@ -16,6 +16,7 @@ import { HousesContextProvider } from "./component/Context/GetAllHouses";
   import { ToastContainer, toast } from "react-toastify";
   import "react-toastify/dist/ReactToastify.css";
 import AddNewHouse from "./component/AddNewHouse";
+import Reviews from "./component/Reviews";
   toast.configure();
 
 export function App() {
@@ -29,6 +30,8 @@ export function App() {
             <Route exact path="/signup" component={SignupForm} />
             <Route exact path="/getonehouse/:id" component={GetOneHouse} />
             <Route exact path="/newhouse" component={AddNewHouse} />
+            <Route exact path="/review/:id" component={Reviews} />
+            
 
           </Switch>
         </Router>

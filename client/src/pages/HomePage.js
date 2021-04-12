@@ -9,10 +9,12 @@ import CarouselPage from "../component/CarouselPage";
 
 
 import SearchInputBar from "../component/SearchInputBar";
+import StarRating from "../component/StarRating";
 
 
 export default function HomePage() {
   const { allHouses } = useContext(GetAllHouses);
+
   let history = useHistory();
   const handleGetone = (e, id) => {
     e.stopPropagation();
@@ -22,7 +24,6 @@ export default function HomePage() {
   const filterHouse = allHouses.filter((item) =>
     item.house_type.toLowerCase().includes(searchInput)
   );
-  console.log(filterHouse);
   const noMathes = () => {
     if (filterHouse.length === 0) {
       return (
@@ -47,11 +48,11 @@ export default function HomePage() {
       );
     }
   };
+  let addHouse =  <button className="btn btn-success">Add House</button>
   return (
     <div>
-
-      <Header home="Home" />
-          <CarouselPage />
+      <Header home="Home" addHouse={addHouse} logout="Logout" />
+      <CarouselPage />
       <SearchInputBar
         searchInput={searchInput}
         setSearchInput={setSearchInput}
@@ -62,12 +63,9 @@ export default function HomePage() {
               ({
                 house_id,
                 house_type,
-                house_description,
-                house_sold,
-                street_name,
-                house_postcode,
+                average_rating,
                 house_price,
-                house_city,
+                count,
                 house_image,
                 house_number,
               }) => {
@@ -93,13 +91,14 @@ export default function HomePage() {
                         Features
                       </button>
                     </div>
-                    <p className="room-info">Nice {house_type}</p>
+                    <p className="room-info">
+                      {house_type} <StarRating rating={average_rating} />
+                    </p>
                   </article>
                 );
               }
             )
           : noMathes()}
-
       </div>
     </div>
   );

@@ -19,7 +19,6 @@ export default function LoginForm() {
     .then(data=>setClientId(data.github_client_id))
   }
   useEffect(githubClientId, []);
-  console.log(clientId);
   const [data, setData] = useState(null);
   let schema = yup.object().shape({
     email: yup
