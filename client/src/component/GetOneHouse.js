@@ -6,6 +6,7 @@ import Header from "./Header"
 import "./GetOneHouse.css";
 import UpdateModal from "./UpdateModal";
 import StarRating from "./StarRating"
+import BiddingBtn from "./BiddingBtn";
 export default function GetOneHouse() {
   const [oneHouse, setOneHouse] = useState([]);
 const history = useHistory()
@@ -84,11 +85,8 @@ let home = <i className="fas fa-long-arrow-alt-left me-3 text-light"> Home</i>
                     </article>
 
                     <article className="biddings">
-                      <h3>Beddings:</h3>
-                      <h6>
-                        Bid This House:
-                        <button className="btn btn-success btn-bid">Bid</button>
-                      </h6>
+                    
+                      <BiddingBtn id={id}/>
                       <h6>
                         Update This House Details:
                         <UpdateModal

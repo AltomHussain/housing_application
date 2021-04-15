@@ -79,7 +79,7 @@ router.post("/register", validInfo, async (req, res) => {
 
 //Login endpoint
 router.post("/login", validInfo, async (req, res) => {
-  console.log("hello");
+
   try {
     const { userEmail, userPassword } = req.body;
     console.log(userEmail, userPassword);
@@ -101,7 +101,7 @@ router.post("/login", validInfo, async (req, res) => {
     req.session.user = {
       id: user.rows[0].user_id,
     };
-
+  console.log(req.session.user);
     res.status(200).json({
       success: "Success",
       id: user.rows[0].user_id,
@@ -343,6 +343,53 @@ router.post("/house/:id/add-review", async (req, res) => {
     console.log(error.message);
   }
 });
+router.get("/bidding/:id", async(req, res)=>{
+  try {
+    const {id} = req.params;
+    const result = await Connection.query(
+      `select * from bidding_house where user_id= $1 and house_id=$2`,
+      [req.session.user.id, id]
+    );
+    res.status(200).json(result.rows)
+  } catch (error) {
+    console.log(error.message);
+  }
+})
+//Inset bidding
+router.post("/bidding/:id", async(req, res)=>{
+  try {
+    console.log("test biddding");
+    const {id} = req.params;
+    const {bid} = req.body;
+    const checkHouse = await Connection.query(
+      `select * from bidding_house where user_id= $1 and house_id=$2`,
+      [req.session.user.id, id]);
+      console.log(checkHouse.rows);
+      if(checkHouse.rows.length===0){
+        const insertQuery = ` insert into bidding_house(bid, user_id, house_id) values($1, $2, $3);`;
+        const result = await Connection.query(insertQuery, [
+          bid,
+          req.session.user.id,
+          id
+        ]);
+        console.log("NO bid");
+        res.status(200).json("inserted")
+}
+let updateQuery = await Connection.query(
+  `update bidding_house set bid =$1 where user_id=$2 and house_id=$3 RETURNING *`,
+  [bid, req.session.user.id, id]
+);
+console.log("yes bid");
+res.status(200).json({
+  success: " updated successfully",
+  result: updateQuery.rows
+});
+
+    
+  } catch (error) {
+    console.log(error.message);
+  }
+})
 router.get("*", function (req, res) {
   res.sendFile(path.resolve(__dirname, "index.html"));
 });
