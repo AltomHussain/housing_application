@@ -346,6 +346,8 @@ router.post("/house/:id/add-review", async (req, res) => {
 router.get("/bidding/:id", async(req, res)=>{
   try {
     const {id} = req.params;
+    console.log(id, req.session.user.id);
+
     const result = await Connection.query(
       `select * from bidding_house where user_id= $1 and house_id=$2`,
       [req.session.user.id, id]
