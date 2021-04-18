@@ -1,53 +1,35 @@
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Card } from "react-bootstrap";
+
 import Header from "../component/Header";
 import { GetAllHouses } from "../component/Context/GetAllHouses";
 import "./HomePage.css";
-
 import CarouselPage from "../component/CarouselPage";
-
-
 import SearchInputBar from "../component/SearchInputBar";
 import StarRating from "../component/StarRating";
-
+import RangeInput from "../component/RangeInput";
+import {noMathes} from "../component/statics/NoMatchResult"
 
 export default function HomePage() {
   const { allHouses } = useContext(GetAllHouses);
-
-  let history = useHistory();
+//Range filter function
+const [priceRange, setPriceRange] = useState(20000);
+ let rangeFilter = allHouses.filter((house) => house.house_price <= priceRange);
+ 
+ //push to getOneHouse funtion 
+ let history = useHistory();
   const handleGetone = (e, id) => {
     e.stopPropagation();
     history.push(`getonehouse/${id}`);
   };
+
+  //Search input Input filter function
   const [searchInput, setSearchInput] = useState("");
-  const filterHouse = allHouses.filter((item) =>
+  const filterHouse = rangeFilter.filter((item) =>
     item.house_type.toLowerCase().includes(searchInput)
   );
-  const noMathes = () => {
-    if (filterHouse.length === 0) {
-      return (
-        <div className="not-match">
-          <Card
-            bg="warning"
-            text={"warning" === "light" ? "dark" : "white"}
-            style={{ width: "18rem" }}
-            className="mb-2 "
-          >
-            <Card.Header className="text-center">No Maches</Card.Header>
-            <Card.Body>
-              <Card.Text>
-                It does not look like there is any matches for your search
-                <span style={{ fontSize: "80px" }} className="text-center">
-                  &#128523;
-                </span>
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        </div>
-      );
-    }
-  };
+  
+  
   let addHouse =  <button className="btn btn-success">Add House</button>
   return (
     <div>
@@ -57,6 +39,7 @@ export default function HomePage() {
         searchInput={searchInput}
         setSearchInput={setSearchInput}
       />
+      <RangeInput priceRange={priceRange} setPriceRange={setPriceRange} />
       <div className="all-houses">
         {filterHouse.length > 0
           ? filterHouse.map(
@@ -98,7 +81,7 @@ export default function HomePage() {
                 );
               }
             )
-          : noMathes()}
+          : noMathes(filterHouse)}
       </div>
     </div>
   );
