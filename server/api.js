@@ -211,23 +211,9 @@ router.post("/house", async (req, res) => {
     kitchenImage,
     housePurpose,
   } = req.body;
-  console.log(
-    houseType,
-    houseDescription,
-    houseSold,
-    streetName,
-    housePostcode,
-    housePrice,
-    houseCity,
-    houseImage,
-    houseNumber,
-    livingRoomImage,
-    bedRoomImage,
-    kitchenImage,
-    housePurpose
-  );
+  
   try {
-    const insertQuery = `INSERT INTO houses(house_type, house_description, house_sold, street_name, house_postcode, house_price, house_city, house_image, house_number,  living_room_image,bed_room_image, kitchen_image,  house_purpose  ) values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *`;
+    const insertQuery = `INSERT INTO houses(house_type, house_description, house_sold, street_name, house_postcode, house_price, house_city, house_image, house_number,  living_room_image,bed_room_image, kitchen_image,  house_purpose, min_price, max_price) values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING *`;
     const results = await Connection.query(insertQuery, [
       houseType,
       houseDescription,
@@ -242,6 +228,8 @@ router.post("/house", async (req, res) => {
       bedRoomImage,
       kitchenImage,
       housePurpose,
+      0,
+      8000
     ]);
     res.json({
       sucess: "Success",
