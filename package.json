@@ -78,8 +78,10 @@
     "morgan": "^1.10.0",
     "pg": "^8.4.1",
     "react-bootstrap": "^1.5.2",
+    "react-facebook-login": "^4.1.1",
     "react-google-login": "^5.2.2",
     "react-hook-form": "^6.15.5",
+    "react-instagram-login": "^1.4.0",
     "react-router-dom": "^5.2.0",
     "react-toastify": "^7.0.3",
     "yup": "^0.32.9"

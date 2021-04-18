@@ -157,6 +157,15 @@ router.get("/github-client-id", (req, res) => {
     github_client_id: process.env.GITHUB_CLIENT_ID,
   });
 });
+
+//facebook login 
+router.get("/facebook-login/:id", async(req, res)=>{
+  try {
+    console.log("hello facebook");
+  } catch (error) {
+    console.log(error.message);
+  }
+})
 //Get all houes  authorization
 router.get("/houses", async (req, res) => {
   const query = ` select * from houses left join (select house_bid_id, count(*), trunc(AVG(rating), 1) as average_rating from biddings group by house_bid_id) biddings on houses.house_id=biddings.house_bid_id order by house_id;`;
