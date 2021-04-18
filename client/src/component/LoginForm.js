@@ -58,7 +58,7 @@ export default function LoginForm() {
       .then((data) => setData(data))
       .catch((error) => console.log(error));
   };
-
+console.log(clientId);
   return (
     <>
       <div className="container-big">
@@ -91,7 +91,7 @@ export default function LoginForm() {
           >
             <button className="btn btn-dark mr-2">
            
-              <i class="fab fa-github mr-2"></i>login wit github
+              <i className="fab fa-github mr-2"></i>login wit github
             </button>
           </a>
 

@@ -30,22 +30,15 @@ router.post("/register", validInfo, async (req, res) => {
       userFacebookId,
       userPhone,
     } = req.body;
-    console.log(
-      userName,
-      userSurname,
-      userEmail,
-      userPassword,
-      userGithubId,
-      userCity,
-      userGoogleId,
-      userFacebookId,
-      userPhone
-    );
+  
     const salt = await bcrypt.genSalt(10);
     const bcryptPassword = await bcrypt.hash(userPassword.toString(), salt);
     let selectEmeilQuery = `select * from users where user_email= $1`;
     const user = await Connection.query(selectEmeilQuery, [userEmail]);
     if (user.rows.length > 0) {
+ req.session.user = {
+   id: user.rows[0].user_id,
+ };
       return res.status(401).json("User email already exist try another email");
     }
 
@@ -123,6 +116,7 @@ router.get("/githubAuth", async (req, res) => {
     );
     if (user.rows.length === 0) {
       req.session.githubId = githubId;
+    
       const params = new URLSearchParams({
         githubUserName,
         githubId,
@@ -135,20 +129,23 @@ router.get("/githubAuth", async (req, res) => {
         res.redirect(`/signup?${params}`);
       }
     }
-    req.session.user = {
-      id: user.rows.user_id,
-      name: user.rows.user_name,
-    };
-
+    
     // res.redirect("/home")
     if (process.env.environment === "local") {
+      
       await res.redirect(
         `http://localhost:${process.env.localFrontEndPort}/home`
-      );
-    } else {
-      await res.redirect(`/home`);
-      return;
-    }
+        );
+         req.session.user = {
+           id: user.rows[0].user_id,
+           name: user.rows[0].user_name,
+         };
+      
+      } else {
+        await res.redirect(`/home`);
+        return;
+      }
+    
   } catch (error) {
     console.log(error.message);
     res.status(500).json("Server error auth");
