@@ -73,6 +73,7 @@
     "ci": "^2.0.0",
     "cookie-session": "^1.4.0",
     "dotenv-webpack": "^7.0.2",
+       "webpack": "^5.34.0",
     "express": "^4.17.1",
     "helmet": "^3.23.3",
     "morgan": "^1.10.0",
