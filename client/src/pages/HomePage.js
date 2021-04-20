@@ -35,11 +35,14 @@ const [priceRange, setPriceRange] = useState(20000);
     <div>
       <Header home="Home" addHouse={addHouse} logout="Logout" />
       <CarouselPage />
-      <SearchInputBar
-        searchInput={searchInput}
-        setSearchInput={setSearchInput}
-      />
-      <RangeInput priceRange={priceRange} setPriceRange={setPriceRange} />
+      <h3 className="text-center my-3">Search Houses</h3>
+      <div className="all-search-container">
+        <SearchInputBar
+          searchInput={searchInput}
+          setSearchInput={setSearchInput}
+        />
+        <RangeInput priceRange={priceRange} setPriceRange={setPriceRange} />
+      </div>
       <div className="all-houses">
         {filterHouse.length > 0
           ? filterHouse.map(

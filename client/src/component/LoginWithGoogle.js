@@ -6,13 +6,10 @@ import  GoogleLogin from "react-google-login";
 export default function LoginWithGoogle() {
   const history = useHistory()
     const responseGoogle = (response) => {
-  // if(response.googleId){
- 
-  //  history.push("/home");
-  // }else{
-  //   history.push("/signup");
-  // }
- 
+    
+   if(response.googleId){
+   history.push("/home");
+  } 
 };
 
     return (
