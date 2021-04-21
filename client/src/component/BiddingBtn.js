@@ -5,13 +5,22 @@ export default function BiddingBtn({id}) {
     const getBidding = () =>{
         fetch(`/api/bidding/${id}`)
           .then((res) => res.json())
-          .then((data) =>setBidding(data))
+          .then((data) =>{
+            console.log(data.length);
+            if(data.length>0){
+               return setBidding(data)
+              }else{
+                return setBidding([{
+                  bid: null
+                }])
+              }
+            }
+         )
           .catch((error) => console.log(error));
     }
     useEffect(()=>{
 getBidding()
     }, [id])
-
 
   const updateBidding = (bid)=>{
       fetch(`/api/bidding/${id}`, {

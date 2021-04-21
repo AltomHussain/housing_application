@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import GoogleLogin from "react-google-login";
 
 export default function LoginWithGoogle() {
+
   const history = useHistory();
   const responseGoogle = (response) => {
     console.log(response.googleId);
@@ -14,10 +15,9 @@ export default function LoginWithGoogle() {
       .then((data) => console.log(data));
     if (response.googleId) {
       history.push("/home");
-    } else {
-      history.push("/signup");
-    }
+    } 
   };
+
 
   return (
     <GoogleLogin

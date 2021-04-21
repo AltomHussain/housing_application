@@ -30,22 +30,15 @@ router.post("/register", validInfo, async (req, res) => {
       userFacebookId,
       userPhone,
     } = req.body;
-    console.log(
-      userName,
-      userSurname,
-      userEmail,
-      userPassword,
-      userGithubId,
-      userCity,
-      userGoogleId,
-      userFacebookId,
-      userPhone
-    );
+  
     const salt = await bcrypt.genSalt(10);
     const bcryptPassword = await bcrypt.hash(userPassword.toString(), salt);
     let selectEmeilQuery = `select * from users where user_email= $1`;
     const user = await Connection.query(selectEmeilQuery, [userEmail]);
     if (user.rows.length > 0) {
+ req.session.user = {
+   id: user.rows[0].user_id,
+ };
       return res.status(401).json("User email already exist try another email");
     }
 
@@ -132,6 +125,7 @@ router.get("/githubAuth", async (req, res) => {
     );
     if (user.rows.length === 0) {
       req.session.githubId = githubId;
+    
       const params = new URLSearchParams({
         githubUserName,
         githubId,
@@ -144,20 +138,23 @@ router.get("/githubAuth", async (req, res) => {
         res.redirect(`/signup?${params}`);
       }
     }
-    req.session.user = {
-      id: user.rows.user_id,
-      name: user.rows.user_name,
-    };
-
+    
     // res.redirect("/home")
     if (process.env.environment === "local") {
+      
       await res.redirect(
         `http://localhost:${process.env.localFrontEndPort}/home`
-      );
-    } else {
-      await res.redirect(`/home`);
-      return;
-    }
+        );
+         req.session.user = {
+           id: user.rows[0].user_id,
+           name: user.rows[0].user_name,
+         };
+      
+      } else {
+        await res.redirect(`/home`);
+        return;
+      }
+    
   } catch (error) {
     console.log(error.message);
     res.status(500).json("Server error auth");
@@ -169,6 +166,16 @@ router.get("/github-client-id", (req, res) => {
     github_client_id: process.env.GITHUB_CLIENT_ID,
   });
 });
+
+//facebook login 
+router.get("/facebook-login", async(req, res)=>{
+  try {
+    console.log("hello facebook");
+    req.redirect("/home")
+  } catch (error) {
+    console.log(error.message);
+  }
+})
 //Get all houes  authorization
 router.get("/houses", async (req, res) => {
   const query = ` select * from houses left join (select house_bid_id, count(*), trunc(AVG(rating), 1) as average_rating from biddings group by house_bid_id) biddings on houses.house_id=biddings.house_bid_id order by house_id;`;
@@ -220,23 +227,9 @@ router.post("/house", async (req, res) => {
     kitchenImage,
     housePurpose,
   } = req.body;
-  console.log(
-    houseType,
-    houseDescription,
-    houseSold,
-    streetName,
-    housePostcode,
-    housePrice,
-    houseCity,
-    houseImage,
-    houseNumber,
-    livingRoomImage,
-    bedRoomImage,
-    kitchenImage,
-    housePurpose
-  );
+  
   try {
-    const insertQuery = `INSERT INTO houses(house_type, house_description, house_sold, street_name, house_postcode, house_price, house_city, house_image, house_number,  living_room_image,bed_room_image, kitchen_image,  house_purpose  ) values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *`;
+    const insertQuery = `INSERT INTO houses(house_type, house_description, house_sold, street_name, house_postcode, house_price, house_city, house_image, house_number,  living_room_image,bed_room_image, kitchen_image,  house_purpose, min_price, max_price) values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING *`;
     const results = await Connection.query(insertQuery, [
       houseType,
       houseDescription,
@@ -251,6 +244,8 @@ router.post("/house", async (req, res) => {
       bedRoomImage,
       kitchenImage,
       housePurpose,
+      0,
+      8000
     ]);
     res.json({
       sucess: "Success",
@@ -354,7 +349,9 @@ router.post("/house/:id/add-review", async (req, res) => {
 });
 router.get("/bidding/:id", async (req, res) => {
   try {
+
     const { id } = req.params;
+
     const result = await Connection.query(
       `select * from bidding_house where user_id= $1 and house_id=$2`,
       [req.session.user.id, id]

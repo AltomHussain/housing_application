@@ -10,6 +10,7 @@ import {loginContent} from "./statics/InputsData"
 import * as yup from "yup";
 import "./LoginForm.css";
 import Header from "./Header";
+import FacebookLoing from "./FacebookLoing";
 export default function LoginForm() {
   const [clientId, setClientId] = useState()
   let history = useHistory();
@@ -58,7 +59,7 @@ export default function LoginForm() {
       .then((data) => setData(data))
       .catch((error) => console.log(error));
   };
-
+console.log(clientId);
   return (
     <>
       <div className="container-big">
@@ -96,6 +97,7 @@ export default function LoginForm() {
           </a>
 
           <LoginWithGoogle />
+          
         </div>
       </div>
     </>
