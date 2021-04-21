@@ -119,6 +119,10 @@ return
     console.log(error.message);
   }
 });
+//all social login
+router.get("/social/login", (req, res)=>{
+  res.redirect("/home")
+})
 //Github login
 router.get("/githubAuth", async (req, res) => {
   const { id: githubId, login: githubUserName } = await exchangeGithubCode(
