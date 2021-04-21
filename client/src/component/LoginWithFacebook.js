@@ -7,10 +7,10 @@ export default function LoginWithFacebook() {
     return (
       <div>
         <FacebookLogin
-          appId="1088597931155576"
+          appId="766695197364835"
           autoLoad={true}
           fields="name,email,picture"
-          onClick={componentClicked}
+          onClick={responseFacebook}
           callback={responseFacebook}
         />
         ,

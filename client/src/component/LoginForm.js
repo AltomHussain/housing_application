@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import LoginWithGoogle from "./LoginWithGoogle";
 import {loginContent} from "./statics/InputsData"
   import {toast } from "react-toastify";
-
 import * as yup from "yup";
 import "./LoginForm.css";
 import Header from "./Header";
-import FacebookLoing from "./FacebookLoing";
+import LoginWithFacebook from "./LoginWithFacebook";
 export default function LoginForm() {
   const [clientId, setClientId] = useState()
   let history = useHistory();
@@ -97,7 +95,7 @@ console.log(clientId);
           </a>
 
           <LoginWithGoogle />
-          
+          <LoginWithFacebook />
         </div>
       </div>
     </>
