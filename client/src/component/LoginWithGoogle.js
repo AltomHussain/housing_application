@@ -7,8 +7,16 @@ export default function LoginWithGoogle() {
 
   const history = useHistory();
   const responseGoogle = (response) => {
-    console.log(response.googleId);
-    fetch(`/api/google-login/${response.googleId}`)
+    console.log(response.profileObj.email);
+    fetch(`/api/google-login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: response.googleId,
+        name: response.profileObj.name,
+        email: response.profileObj.email,
+      }),
+    })
       .then((res) => {
         return res.json();
       })

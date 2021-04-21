@@ -93,7 +93,7 @@ router.post("/login", validInfo, async (req, res) => {
     req.session.user = {
       id: user.rows[0].user_id,
     };
-    console.log(req.session.user);
+  
     res.status(200).json({
       success: "Success",
       id: user.rows[0].user_id,
@@ -104,11 +104,16 @@ router.post("/login", validInfo, async (req, res) => {
   }
 });
 //Login with google
-router.get("/google-login/:id", async (req, res) => {
+router.post("/google-login", async (req, res) => {
   try {
-    const { id } = req.params;
-    req.session.googleId = id
-res.status(200).json("Got google id successfully")
+    const { id, name, email,  } =  req.body;
+   req.session.user = {
+      id: id,
+      name: name,
+      email: email
+    }
+res.status(200).json("Got google id successfully");
+return
   } catch (error) {
     console.log(error.message);
   }
@@ -161,7 +166,6 @@ router.get("/githubAuth", async (req, res) => {
   }
 });
 router.get("/github-client-id", (req, res) => {
-  console.log(process.env.GITHUB_CLIENT_ID);
   res.json({
     github_client_id: process.env.GITHUB_CLIENT_ID,
   });
