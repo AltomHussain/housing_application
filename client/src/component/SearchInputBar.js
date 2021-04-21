@@ -6,7 +6,7 @@ export default function SearchInputBar({ searchInput, setSearchInput }) {
   };
   return (
     <div className="search-bar-container">
-      <h6>Search for house type</h6>
+      <h6 className="">Search for house type</h6>
       <input
         className="form-control"
         type="text"

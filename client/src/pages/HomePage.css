@@ -76,7 +76,6 @@ margin: 0px auto;
   letter-spacing: 3px;
 }
 .all-search-container{
-  /* background-color: green; */
   display: flex;
   flex-wrap:wrap;
   justify-content: space-evenly;
