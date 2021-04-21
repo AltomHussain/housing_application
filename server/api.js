@@ -159,9 +159,10 @@ router.get("/github-client-id", (req, res) => {
 });
 
 //facebook login 
-router.get("/facebook-login/:id", async(req, res)=>{
+router.get("/facebook-login", async(req, res)=>{
   try {
     console.log("hello facebook");
+    req.redirect("/home")
   } catch (error) {
     console.log(error.message);
   }

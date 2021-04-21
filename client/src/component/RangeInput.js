@@ -1,11 +1,12 @@
 import React from 'react'
-
+import "./RangeInput.css"
 export default function RangeInput({ priceRange, setPriceRange }) {
   return (
-    <div>
-      <label>Filter by price</label>
-      {` price of house ${priceRange}`}
+    <div className="rainge-container">
+      <label>House Price</label>
+      {` £${priceRange}`}
       <input
+      className="range-input"
         type="range"
         name="price"
         min={0}

@@ -1,0 +1,8 @@
+.search-bar-container{
+   
+    width: 300px;
+    padding: 4px;
+}
+.search-bar-container input{
+     box-shadow: 3px 3px grey;
+}
