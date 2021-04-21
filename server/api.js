@@ -106,11 +106,12 @@ router.post("/login", validInfo, async (req, res) => {
 //Login with google
 router.post("/google-login", async (req, res) => {
   try {
-    const { id, name, email,  } =  req.body;
+    const { id, name, email, image  } =  req.body;
    req.session.user = {
       id: id,
       name: name,
-      email: email
+      email: email,
+      image: image
     }
 res.status(200).json("Got google id successfully");
 return
