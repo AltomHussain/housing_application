@@ -25,7 +25,7 @@ export default function LoginWithFacebook() {
     };
     return (
         <FacebookLogin
-          className="face-book"
+          className="face-book pt-2"
           appId="766695197364835"
           autoLoad={true}
           fields="name,email,picture"

@@ -84,12 +84,13 @@ console.log(clientId);
               Submit
             </button>
           </form>
+          <h6 className="text-center">Or</h6>
           <div className="social-container">
             <a
               href={`https://github.com/login/oauth/authorize?client_id=${clientId}`}
             >
               <button className="btn btn-dark mr-2">
-                <i className="fab fa-github mr-2"></i>login wit github
+                <i className="fab fa-github mr-2 p-3"></i>login wit github
               </button>
             </a>
 
