@@ -84,18 +84,18 @@ console.log(clientId);
               Submit
             </button>
           </form>
+          <div className="social-container">
+            <a
+              href={`https://github.com/login/oauth/authorize?client_id=${clientId}`}
+            >
+              <button className="btn btn-dark mr-2">
+                <i className="fab fa-github mr-2"></i>login wit github
+              </button>
+            </a>
 
-          <a
-            href={`https://github.com/login/oauth/authorize?client_id=${clientId}`}
-          >
-            <button className="btn btn-dark mr-2">
-           
-              <i className="fab fa-github mr-2"></i>login wit github
-            </button>
-          </a>
-
-          <LoginWithGoogle />
-          <LoginWithFacebook />
+            <LoginWithGoogle />
+            <LoginWithFacebook />
+          </div>
         </div>
       </div>
     </>

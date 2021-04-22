@@ -1,6 +1,7 @@
 import React from 'react'
 import FacebookLogin from "react-facebook-login";
 import {useHistory} from "react-router-dom"
+import "./LoginSocialStyling.css"; 
 export default function LoginWithFacebook() {
     const history = useHistory()
     const handleData =(data)=>{
@@ -23,16 +24,14 @@ export default function LoginWithFacebook() {
       }
     };
     return (
-      <div>
         <FacebookLogin
+          className="face-book"
           appId="766695197364835"
-        //   client_secrect="703053617a2ab44d2be9e4abd9ce9091"
           autoLoad={true}
           fields="name,email,picture"
           onClick={handleData}
           callback={responseFacebook}
         />
         
-      </div>
     );
 }
