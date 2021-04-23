@@ -11,7 +11,7 @@ export const HousesContextProvider = (props)=>{
 useEffect(() => {
   fetchAllHouse(setAllHouses);
 }, []);
-console.log(allHouses);
+
     return (
       <GetAllHouses.Provider value={{ allHouses, setAllHouses }}>
         {props.children}

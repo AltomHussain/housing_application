@@ -27,8 +27,6 @@ const [priceRange, setPriceRange] = useState(20000);
   };
 
   //Search input Input filter function
-  // const filterSelect = allHouses.filter((item)=> select !== "Select All" && item.house_purpose !== null ?item.house_purpose.includes(select): item )
-  // allHouses.map(p=> console.log(p.house_purpose))
   const [searchInput, setSearchInput] = useState("");
   const filterHouse = rangeFilter.filter((item) =>
     searchInput.length > 0
@@ -38,7 +36,6 @@ const [priceRange, setPriceRange] = useState(20000);
       : item
       );
       
-      console.log(filterHouse, "test me man");
       
       let addHouse =  <button className="btn btn-success">Add House</button>
       return (
@@ -50,9 +47,20 @@ const [priceRange, setPriceRange] = useState(20000);
             <SearchInputBar
               searchInput={searchInput}
               setSearchInput={setSearchInput}
+              filterHouse={filterHouse}
+              allHouses={allHouses}
             />
-            <RangeInput priceRange={priceRange} setPriceRange={setPriceRange} />
-            <SelectDropdown setSelect={setSelect} filterHouse={filterHouse} allHouses={allHouses}/>
+            <RangeInput
+              priceRange={priceRange}
+              setPriceRange={setPriceRange}
+              filterHouse={filterHouse}
+              allHouses={allHouses}
+            />
+            <SelectDropdown
+              setSelect={setSelect}
+              filterHouse={filterHouse}
+              allHouses={allHouses}
+            />
           </div>
           <div className="all-houses">
             {filterHouse.length > 0
