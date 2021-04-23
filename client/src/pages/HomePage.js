@@ -15,6 +15,8 @@ export default function HomePage() {
 //Range filter function
 const [priceRange, setPriceRange] = useState(20000);
  let rangeFilter = allHouses.filter((house) => house.house_price <= priceRange);
+ //select dropdown
+ const [select, setSelect] = useState()
  
  //push to getOneHouse funtion 
  let history = useHistory();
