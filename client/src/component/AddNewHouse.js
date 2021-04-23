@@ -49,6 +49,7 @@ export default function AddNewHouse() {
   };
   return (
     <div className="new-house-container">
+      <h5 className="my-3 "> <a href="/home"> Back Home</a></h5>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <label>Write a description about the house.</label>
