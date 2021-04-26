@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import "./SearchInputBar.css"
-export default function SearchInputBar({ searchInput, setSearchInput }) {
+export default function SearchInputBar({ searchInput, setSearchInput, filterHouse, allHouses }) {
   const handleSearch = (e) => {
     setSearchInput(e.target.value.toLowerCase());
   };
@@ -14,6 +14,7 @@ export default function SearchInputBar({ searchInput, setSearchInput }) {
         value={searchInput}
         onChange={handleSearch}
       />
+      <p>{`${filterHouse.length}/${allHouses.length} houses`}</p>
     </div>
   );
 }

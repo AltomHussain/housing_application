@@ -49,6 +49,7 @@ export default function AddNewHouse() {
   };
   return (
     <div className="new-house-container">
+      <h5 className="my-3 "> <a href="/home"> Back Home</a></h5>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <label>Write a description about the house.</label>
@@ -61,19 +62,19 @@ export default function AddNewHouse() {
             {errors.houseDescription && errors.houseDescription.message}
           </p>
           <label>Is the house is been sold</label>
-          <select className="form-control" name="houseSold"  ref={register}>
-            <option disabled>
-              Select
-            </option>
+          <select
+            name="houseSold"
+            ref={register}
+            className="custom-select"
+          >
+            <option disabled>Select</option>
             <option value="true">Yes</option>
             <option value="false">No</option>
           </select>
-          <p className="text-center">
-          
-          </p>
+          <p className="text-center"></p>
 
           <label>What is purpose of your house</label>
-          <select className="form-control" name="housePurpose" ref={register}>
+          <select className="custom-select" name="housePurpose" ref={register}>
             <option>Select</option>
             <option value="rent">Rent</option>
             <option value="for sale">For Sale</option>
@@ -83,9 +84,11 @@ export default function AddNewHouse() {
             return (
               <div key={id}>
                 <label>{label}</label>
-                <select name={name} className="form-control" ref={register}>
+                <select name={name} className="custom-select" ref={register}>
                   {values.map((val, index) => (
-                    <option key={index} value={val}>{val}</option>
+                    <option key={index} value={val}>
+                      {val}
+                    </option>
                   ))}
                 </select>
                 <p className="text-center">{errors[name]?.message}</p>
