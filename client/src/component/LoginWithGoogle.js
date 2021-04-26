@@ -22,7 +22,7 @@ export default function LoginWithGoogle() {
   return (
     <GoogleLogin
       className="bg-danger text-white"
-      clientId="946125261635-npql908rnqqpuest0r0p05p631v9oc1i.apps.googleusercontent.com"
+      clientId="900593144901-6g5jcn66ldibgdi20lqmaksb87ufdac6.apps.googleusercontent.com"
       buttonText="Login with google"
       onSuccess={responseGoogle}
       onFailure={responseGoogle}
