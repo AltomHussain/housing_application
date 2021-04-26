@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import LoginWithGoogle from "./LoginWithGoogle";
 import {loginContent} from "./statics/InputsData"
   import {toast } from "react-toastify";
-
 import * as yup from "yup";
 import "./LoginForm.css";
 import Header from "./Header";
-import FacebookLoing from "./FacebookLoing";
+import LoginWithFacebook from "./LoginWithFacebook";
 export default function LoginForm() {
   const [clientId, setClientId] = useState()
   let history = useHistory();
@@ -86,18 +84,19 @@ console.log(clientId);
               Submit
             </button>
           </form>
+          <h6 className="text-center">Or</h6>
+          <div className="social-container">
+            <a
+              href={`https://github.com/login/oauth/authorize?client_id=${clientId}`}
+            >
+              <button className="btn btn-dark mr-2">
+                <i className="fab fa-github mr-2 p-3"></i>login wit github
+              </button>
+            </a>
 
-          <a
-            href={`https://github.com/login/oauth/authorize?client_id=${clientId}`}
-          >
-            <button className="btn btn-dark mr-2">
-           
-              <i className="fab fa-github mr-2"></i>login wit github
-            </button>
-          </a>
-
-          <LoginWithGoogle />
-          
+            <LoginWithGoogle />
+            <LoginWithFacebook />
+          </div>
         </div>
       </div>
     </>

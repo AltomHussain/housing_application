@@ -113,6 +113,18 @@ res.status(200).json("Got google id successfully")
     console.log(error.message);
   }
 });
+//Facebook login
+router.post("/facebook-login", async(req, res)=>{
+  try {
+    const {id, name, email} = req.body;
+    console.log(id, name, email);
+    req.session.user = {id, name, email
+    }
+    console.log("facd", req.session.user);
+  } catch (error) {
+    console.log(error.message);
+  }
+})
 //Github login
 router.get("/githubAuth", async (req, res) => {
   const { id: githubId, login: githubUserName } = await exchangeGithubCode(
