@@ -9,6 +9,7 @@
 1-Hooks-form for validation: https://jasonwatmore.com/post/2020/10/04/react-form-validation-example-with-react-hook-form
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+##Successfully deployed to heroku
 
  - [x] Full stack ES8+ with [Babel]
  - [x] [Node] LTS support (verified working on 10.x, 12.x and 14.x LTS releases)
