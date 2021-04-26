@@ -24,6 +24,8 @@ export default function LoginWithGoogle() {
       className="bg-danger text-white"
       clientId="900593144901-6g5jcn66ldibgdi20lqmaksb87ufdac6.apps.googleusercontent.com"
       buttonText="Login with google"
+      uxMode="redirect"
+      redirectUri="https://housing-application.herokuapp.com/home/"
       onSuccess={responseGoogle}
       onFailure={responseGoogle}
       cookiePolicy={"single_host_origin"}
