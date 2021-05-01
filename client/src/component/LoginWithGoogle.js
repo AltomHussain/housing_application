@@ -7,7 +7,7 @@ export default function LoginWithGoogle() {
 
   const history = useHistory();
   const responseGoogle = (response) => {
-    console.log(response.googleId);
+    console.log(response);
     fetch(`/api/google-login/${response.googleId}`)
       .then((res) => {
         return res.json();
@@ -22,10 +22,10 @@ export default function LoginWithGoogle() {
   return (
     <GoogleLogin
       className="bg-danger text-white"
-      clientId="900593144901-6g5jcn66ldibgdi20lqmaksb87ufdac6.apps.googleusercontent.com"
+      clientId="900593144901-q3g2dsg7ib6nhj447ser6vqk149e2os1.apps.googleusercontent.com"
       buttonText="Login with google"
-      uxMode="redirect"
-      redirectUri="https://housing-application.herokuapp.com/home/"
+      // uxMode="redirect"
+      // redirectUri="https://housing-application.herokuapp.com/home/"
       onSuccess={responseGoogle}
       onFailure={responseGoogle}
       cookiePolicy={"single_host_origin"}

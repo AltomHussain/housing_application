@@ -8,6 +8,7 @@ export default function LoginWithFacebook() {
         console.log(data);
     }
     const responseFacebook = (response) => {
+      console.log(response);
       fetch("/api/facebook-login", {
           method: "POST",
           headers: {"Content-Type": "application/json"},
@@ -27,7 +28,7 @@ export default function LoginWithFacebook() {
       <FacebookLogin
         className="face-book pt-2"
         appId="1291524107911042"
-        autoLoad={true}
+        autoLoad={false}
         fields="name,email,picture"
         onClick={handleData}
         callback={responseFacebook}
