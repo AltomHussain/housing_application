@@ -100,7 +100,7 @@ const [priceRange, setPriceRange] = useState(20000);
                             <p>
                               {house_purpose === "for sale"
                                 ? "Selling Price"
-                                : "Per Month"}
+                                :(house_price* 0.15).toFixed(2) < 300 ? "Per Month":  "Per Three Month"}
                             </p>
                           </div>
                           <button
