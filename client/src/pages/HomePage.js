@@ -71,7 +71,15 @@ const [priceRange, setPriceRange] = useState(20000);
                     average_rating,
                     house_price,
                     house_image,
+                    house_purpose,
                   }) => {
+                    {
+                      console.log(
+                        house_purpose === "for sale"
+                          ? "per night"
+                          : "Selling Price"
+                      );
+                    }
                     return (
                       <article className="room" key={house_id}>
                         <div className="img-container">
@@ -84,8 +92,16 @@ const [priceRange, setPriceRange] = useState(20000);
                             alt="single-room"
                           />
                           <div className="price-top">
-                            <h6>{house_price}</h6>
-                            <p>per night</p>
+                            <h6>
+                              {house_purpose === "for sale"
+                                ? house_price
+                                : (house_price* 0.15).toFixed(2)}
+                            </h6>
+                            <p>
+                              {house_purpose === "for sale"
+                                ? "Selling Price"
+                                : "Per Month"}
+                            </p>
                           </div>
                           <button
                             onClick={(e) => handleGetone(e, house_id)}
